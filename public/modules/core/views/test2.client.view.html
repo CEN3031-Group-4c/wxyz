@@ -1,0 +1,20 @@
+<section data-ng-controller="Test2Controller">
+	<h1 class="page-header">Test Page 2</h1>
+	
+	<div class="jumbotron text-center">
+		<h1>The Hierarchy Page</h1>
+		<p>This page demonstrates the idea of a hierarchy created using buttons.</p>  
+
+		<a ui-sref=".course" class="btn btn-primary">Course</a>
+		<a ui-sref=".topic" class="btn btn-danger">Topic</a>
+		<a ui-sref=".lesson" class="btn btn-warning">Lesson</a>
+		
+	</div>
+	
+	<div class ="row">
+		<div class="col-sm-6">
+			<div ui-view="columnOne"></div>
+		</div>
+	</div>
+	
+</section>

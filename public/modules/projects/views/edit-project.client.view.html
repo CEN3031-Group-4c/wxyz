@@ -1,0 +1,45 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Edit Project</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="projectForm" class="form-horizontal" data-ng-submit="update(projectForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid}">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<input name="title" type="text" data-ng-model="project.title" id="title" class="form-control" placeholder="Title" required>
+					</div>
+					<div ng-show="submitted && projectForm.title.$invalid" class="help-block">
+						<p ng-show="projectForm.title.$error.required" class="text-danger">Title is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-if="project.level == 1" ng-class="{ 'has-error' : submitted && projectForm.content.$invalid}">
+					<label class="control-label" for="content">Content</label>
+					<div class="controls">
+						<textarea name="content" data-ng-model="project.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
+					</div>
+					<div ng-show="submitted && projectForm.content.$invalid" class="help-block">
+						<p ng-show="projectForm.content.$error.required" class="text-danger">Content is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-if="project.level == 7" ng-class="{ 'has-error' : submitted && projectForm.content.$invalid}">
+					<label class="control-label" for="content">Introduction</label>
+					<div class="controls">
+						<textarea name="intro" data-ng-model="project.content" id="intro" class="form-control" cols="30" rows="4" placeholder="Intro to the quiz goes here..." required></textarea>
+					</div>
+					<div ng-show="submitted && projectForm.content.$invalid" class="help-block">
+						<p ng-show="projectForm.content.$error.required" class="text-danger">Content is required</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Save" tooltip="Save changes made" class="btn btn-default">&nbsp;&nbsp;&nbsp;
+					<a class="btn btn-default" tooltip="Do not save changes" href="/#!/projects/{{project._id}}">Cancel</a>
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

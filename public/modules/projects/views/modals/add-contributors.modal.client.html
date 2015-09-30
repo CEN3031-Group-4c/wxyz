@@ -1,0 +1,20 @@
+<div class="modal-header">
+	<h3 class="modal-title">Add {{message}} Permissions</h3>
+</div>
+<div class="modal-body">
+	<h4 data-ng-if="emails.length">Emails Added: </h4>
+	<ul>
+		<div data-ng-repeat="email in emails"
+		<li data-ng-bind="email"></li>
+		</div>
+	</ul>
+	<div class = "form-group">
+		<input type="text" class="form-control" data-ng-model="email" name="emailAddress" placeholder="example@wxyz.com">
+	</div>
+	<button class="btn btn-success" name="addEmailButton" data-ng-click="addEmail()">Add</button>
+	
+</div>
+<div class="modal-footer">
+	<button class="btn btn-warning" name="confirmSubmitButton" ng-click="modal_yes()">Confirm</button>
+	<button class="btn btn-primary" ng-click="modal_no()">Cancel</button>
+</div>

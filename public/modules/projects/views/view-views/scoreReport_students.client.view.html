@@ -1,0 +1,24 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne_report()">
+	<div class="page-header">
+		<div align="center">
+			<h1 style="display:inline">Score Report for </h1><h1 data-ng-bind="project.title" style="display:inline"></h1>
+			<h4>Sorted by Students</h4>
+		</div>
+		<a class="btn btn-primary" tooltip="Return to Score Report Menu" href="/#!/projects/{{project._id}}/scoreReport"> 
+			<div class="text-center">
+				<i class="glyphicon glyphicon-chevron-left" style="font-size:13px"></i>
+				Back
+			</div>
+		</a>
+	</div>
+	<accordion close-others="oneAtATime">
+		<accordion-group heading="{{rep}}" ng-repeat="rep in getUniqueUsers(project.reports)" tooltip-popup-delay='700' tooltip-placement="left" tooltip="Click to expand">
+			<div data-ng-repeat="report in project.reports">
+				<div data-ng-if="report.student == rep">
+					{{report.question}}:	{{printAnswers(report.selectedAnswers)}} --- {{printResult(report.isCorrect)}}<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Correct Answer(s): {{printAnswers(report.correctAnswers)}}<br><br>
+				</div>
+			</div>
+		</accordion-group>
+	</accordion>
+</section>

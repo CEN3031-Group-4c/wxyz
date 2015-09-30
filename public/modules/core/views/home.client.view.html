@@ -1,0 +1,61 @@
+<section data-ng-controller="HomeController" data-ng-init="find(); getProjectId(); setPreviewStatus(false)">
+
+
+	<div class = "row">
+		<div class = "col-md-3">
+			<!-- &nbsp; provides spaces to make the hierarchy menu indented -->
+			<h1 class="page-header" >Navigation</h1>
+			<div class="custom-acc">
+			<accordion close-others="true">
+				<accordion-group data-ng-repeat="project in projects.slice().reverse()" name="proj_title" data-ng-if="project.level==1" heading="{{project.title}}" data-ng-click="accordian_stuff(project)" is-open="isProjectOpen(project) && project.children.length">
+					<div ng-if="course.level == 2 && course.parent == project._id && canView(course)" name="course_title" ng-repeat="course in projects.slice().reverse()" close="projects.splice(index,1)">
+							
+							<div class="side-a"  data-ng-bind="course.title" data-ng-click="link(course._id)"></div>
+							<div ng-if="topic.level == 3 && topic.parent == course._id && canView(topic)" name="topic_title" ng-repeat="topic in projects.slice().reverse()" close="projects.splice(index,1)">
+									
+									<div class="side-a"  data-ng-click="link(topic._id)">&nbsp;&nbsp;&nbsp;{{topic.title}}</div>
+									
+									<div ng-repeat="concept in projects.slice().reverse()" name="concept_title" ng-if="concept.level == 4 && concept.parent == topic._id" close="projects.splice(index,1)">
+											<div class="side-a" data-ng-click="link(concept._id)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{concept.title}}</div>
+											<div ng-repeat="section in projects.slice().reverse()" name="section_title" ng-if="section.level == 5 && section.parent == concept._id && canView(section)" close="projects.splice(index,1)">
+													
+													<div class="side-a"  data-ng-click="link(section._id)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{section.title}}</div>
+													<div ng-repeat="subsection in projects.slice().reverse()" name="subsection_title" ng-if="subsection.level == 6 && subsection.parent == section._id && canView(subsection)" close="projects.splice(index,1)">
+															<div class="side-a"  data-ng-click="link(subsection._id)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{subsection.title}}</div>
+															<div ng-repeat="quiz in projects.slice().reverse()" name="quiz_title" ng-if="quiz.level == 7 && quiz.parent == subsection._id && canView(quiz)" close="projects.splice(index,1)">
+																<div class="side-a"  data-ng-click="link(quiz._id)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{quiz.title}}</div>
+																	
+														</div>
+													</div>
+											</div>
+									</div>	
+							</div>
+					</div>
+				</div>
+			</accordion-group>
+			
+		</accordion>
+		</div>
+		
+		<div class="col-md-9">
+
+			<!--JSON printing-->
+			<div ng-if="frame1 == true">
+				<h3 ng-if="projectPage()" align="center"><strong>JSON Database</strong></h3>
+				<div ui-view="mainFrame2"></div>
+			</div>
+			
+			<!--HTML printing-->
+			<div ng-if="frame2 == true">
+				<h3 ng-if="projectPage()" align="center"><strong>HTML View</strong></h3>
+				<div ui-view="mainFrame3"></div>
+			</div>		
+			
+			<!--Preview-->
+			<div>
+				<h3 ng-if="projectPage() && frame1 == true" align="center"><strong>Page View</strong></h3>
+				<div name="pageViewPane" ui-view="mainFrame"></div>
+			</div>
+		</div>
+	</div>
+</section>

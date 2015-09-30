@@ -1,0 +1,93 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Add Graph</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4>Graph Type</h4>
+			<input type="radio" name="type" id="graph1" value="columnChart" data-ng-click="setGraphType('ColumnChart')" checked="checked">Column Graph &nbsp;&nbsp;&nbsp;
+			<input type="radio" name="type" id="graph2" value="lineChart" data-ng-click="setGraphType('LineChart')">Line Graph<br><br>
+
+			<fieldset>
+				<h4>Graph Labels</h4>
+				<div class="form-group">
+					<label for="GraphTitle">Graph Heading</label>
+					<input type="text" id="title" name="title" class="form-control" data-ng-model="graphTitle">
+				</div>
+				<div class="form-group">
+					<label for="dataTitle">Data Title</label>
+					<input type="text" id="dataTitle" name="dataTitle" class="form-control" data-ng-model="dataTitle">
+				</div>
+				<div class="form-group">
+					<label for="xTitle">X Axis Title</label>
+					<input type="text" id="x-title" name="x-title" class="form-control" data-ng-model="xTitle">
+				</div>
+				<div class="form-group">
+					<label for="yTitle">Y Axis Title</label>
+					<input type="text" id="y-title" name="y-title" class="form-control" data-ng-model="yTitle">
+				</div>
+
+				<hr>
+
+				<div>
+					<h4>Add Point</h4>
+					<label>X coordinate:</label>
+					<input type="text" name="xToAppend" data-ng-model="xToAppend"><br>
+					<label>Y coordinate:</label>
+					<input type="text" name="yToAppend" data-ng-model="yToAppend"><br>
+				</div><br>
+				<div>
+					<button class="btn btn-success" name="addPoint" data-ng-click="addGraphPoint()">Add Point</button>
+
+				</div>
+
+				<div class="text-center form-group">
+					<button data-ng-click="appendGraph()" name="signUpSubmit" class="btn btn-large btn-primary">Submit</button>&nbsp;
+
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</div>
+
+		<div class="col-md-6">
+			<h4>Graph Preview</h4>
+			<div data-ng-init="drawGraphPreview()">
+				<div>
+					<div google-chart chart="chart" style="{{chart.cssStyle}}"></div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+
+	</div>
+
+
+
+
+	<!--div class="col-md-12">
+		<form name="projectForm" class="form-horizontal" data-ng-submit="appendText(projectForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="heading">Heading</label>
+					<div class="controls">
+						<input name="heading" type="text" ng-model="heading" class="form-control" placeholder="Heading" required>
+					</div>
+					<label class="control-label" for="text">Text</label>
+					<div class="controls">
+						<textarea type="textToAppend" ng-model="textToAppend" name="inputText" class="form-control" placeholder="Content" cols="30" rows="10" required></textarea>
+					</div>
+				</div>
+				<div>
+					<input name="submit" type="submit" value="Insert" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div-->
+</section>
+

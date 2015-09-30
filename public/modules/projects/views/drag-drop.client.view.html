@@ -1,0 +1,97 @@
+<section data-ng-controller="DragController">
+	<div class="page-header">
+		<h1>Drag Drop Demo</h1>
+	</div>
+	
+	<style>
+		* {
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		[ng-drag] {
+			-moz-user-select: -moz-none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		[ng-drag] {
+			width: 100px;
+			height: 100px;
+			background: rgba(255, 0, 0, 0.5);
+			color: white;
+			text-align: center;
+			padding-top: 40px;
+			display: block;
+			cursor: move;
+		}
+		[ng-drag].one {
+			background: rgba(255, 0, 0, 0.5);
+		}
+		[ng-drag].two {
+			background: rgba(0, 255, 0, 0.5);
+		}
+		[ng-drag].three {
+			background: rgba(0, 0, 255, 0.5);
+		}
+		[ng-drag].four {
+			background: rgba(255, 0, 0, 0.5);
+		}
+		[ng-drag].five {
+			background: rgba(0, 255, 0, 0.5);
+		}
+		[ng-drag].six {
+			background: rgba(0, 0, 255, 0.5);
+		}
+		[ng-drag].drag-over {
+			border: solid 1px red;
+		}
+		[ng-drag].dragging {
+			opacity: 0.5;
+		}
+		[ng-drop] {
+			background: rgba(0, 0, 0, 0.25);
+			text-align: center;
+			display: block;
+			position: relative;
+			padding: 20px;
+			width: 140px;
+			height: 140px;
+			float: left;
+		}
+		[ng-drop].drag-enter {
+			border: solid 5px red;
+		}
+		[ng-drop] span.title {
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 200px;
+			height: 20px;
+			margin-left: -100px;
+			margin-top: -10px;
+		}
+		[ng-drop] div {
+			position: relative;
+			z-index: 2;
+		}
+		.draglist {
+			display: inline-block;
+			margin: 0 auto;
+		}
+	</style>
+	
+	<div class="row text-center">
+		<ul class="draglist">
+			<li ng-repeat="obj in draggableObjects" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+				<div ng-drag="true" ng-drag-data="obj" ng-class="obj.name">
+					{{obj.name}}
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+	
+</section>

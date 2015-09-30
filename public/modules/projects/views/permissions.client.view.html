@@ -1,0 +1,81 @@
+<section id="view_project" data-ng-controller="ProjectsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Project Configuration</h1>
+		<h5 data-ng-bind="project.title"></h5><br>
+		<a class="btn btn-primary" tooltip="Return to project page" href="/#!/projects/{{project._id}}"> 
+			<div class="text-center">
+				<i class="glyphicon glyphicon-chevron-left" style="font-size:13px"></i>
+				Back
+			</div>
+		</a>
+	</div>
+	<div class ="row">
+		<div class ="col-md-6"> 
+		
+			<!-- Single button -->
+			<button class="btn btn-warning dropdown" tooltip="Change who can view this project" name="viewPermissionsButton" data-ng-show="project.viewPermission == 'public'" dropdown data-toggle="dropdown" dropdown-toggle>
+				<div class="dropdown-toggle" name="userDropDown">
+					<span ><h3>View Permissions: <b>Public</b></span> <b class="caret"></b></h3>
+				</div>
+				<ul class="dropdown-menu">
+					<li>
+						<a data-ng-click="changePermission('view', 'private')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Make other users unable to view" name="changeViewPrivate"><h2>Private</h2></a>
+					</li>
+				</ul>
+			</button>
+			<button class="btn btn-success dropdown" tooltip="Change who can view this project" name="viewPermissionsButton2" data-ng-show="project.viewPermission == 'private'" dropdown data-toggle="dropdown" dropdown-toggle>
+				<div class="dropdown-toggle" name="userDropDown">
+					<span ><h3>View Permissions: <b>Private</b></span> <b class="caret"></b></h3>
+				</div>
+				<ul class="dropdown-menu">
+					<li>
+						<a data-ng-click="changePermission('view', 'public')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Make other users able to view" name="changeViewPublic"><h2>Public</h2></a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a data-ng-click="openAddContributorsModal(true, 'View')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Add users who can view" name="addContributorsView"><h4>Add Permissions</h4></a>
+					</li>
+					<li>
+						<a data-ng-click="openViewContributorsModal(true, 'View')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="List users who can view" name="viewContributorsView"><h4>View Permsission</h4></a>
+					</li>
+					<li>
+						<a data-ng-click="openRemoveContributorsModal(true, 'View')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Remove users who can view" name="removeContributorsView"><h4>Remove Permsission</h4></a>
+					</li>
+				</ul>
+			</button>
+			
+		</div>
+		<div class ="col=md-6"> 
+			<button class="btn btn-warning dropdown" tooltip="Change who can edit this project" name="editPermissionsButton" data-ng-show="project.editPermission == 'public'" dropdown data-toggle="dropdown" dropdown-toggle>
+				<div class="dropdown-toggle" name="userDropDown">
+					<span ><h3>Edit Permissions: <b>Public</b></span> <b class="caret"></b></h3>
+				</div>
+				<ul class="dropdown-menu">
+					<li>
+						<a data-ng-click="changePermission('edit', 'private')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Make other users unable to edit" name="changeEditPrivate"><h2>Private</h2></a>
+					</li>
+				</ul>
+			</button>
+			<button class="btn btn-success dropdown" tooltip="Change who can edit this project" name="editPermissionsButton2" data-ng-show="project.editPermission == 'private'" dropdown data-toggle="dropdown" dropdown-toggle>
+				<div class="dropdown-toggle" name="userDropDown">
+					<span ><h3>Edit Permissions: <b>Private</b></span> <b class="caret"></b></h3>
+				</div>
+				<ul class="dropdown-menu">
+					<li>
+						<a data-ng-click="changePermission('edit', 'public')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Make other users able to edit" name="changeEditPublic"><h2>Public</h2></a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a data-ng-click="openAddContributorsModal(false, 'Edit')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Add users who can edit" name="addContributorsEdit"><h4>Add Contributor</h4></a>
+					</li>
+					<li>
+						<a data-ng-click="openViewContributorsModal(false, 'Edit')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="List users who can edit" name="viewContributorsEdit"><h4>View Contributors</h4></a>
+					</li>
+					<li>
+						<a data-ng-click="openRemoveContributorsModal(false, 'Edit')" tooltip-popup-delay='500' tooltip-placement="right" tooltip="Remove users who can edit" name="removeContributorsEdit"><h4>Remove Contributors</h4></a>
+					</li>
+				</ul>
+			</button>
+		</div>
+	</div>
+</section>

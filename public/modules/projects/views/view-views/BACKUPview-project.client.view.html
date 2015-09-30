@@ -1,0 +1,113 @@
+<section id="view_project" data-ng-controller="ProjectsController" data-ng-init="findOne()">
+	<div class="page-header">
+	<div class="pull-right" data-ng-show="authentication.user._id == project.user._id">
+		<a class="btn btn-primary" name="editButton" href="/#!/projects/{{project._id}}/editProject">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" name="deleteButton" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+
+</script>
+		<h1 data-ng-bind="project.title"></h1>
+		<small data-ng-bind="project.content"></small>
+
+		<div text-angular ta-toolbar="[
+		['h1','h2','h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],
+		['bold','italics','underline', 'strikeThrough', 'insertLink', 'ul', 'ol', 'undo', 'redo','clear'],
+		['justifyLeft','justifyCenter','justifyRight','indent','outdent']
+		]" ng-model="htmlVar"></div>
+		
+		<div data-ng-bind-html="htmlVar"></div>
+		
+	</div>
+	
+	
+	<div  style="height:500px; overflow-y: scroll;">
+		<div data-ng-repeat="element in project.elements">
+			<div ng-switch on="element.tag">
+				<div class="pull-right" data-ng-show="authentication.user._id == project.user._id">
+					<a class="btn btn-primary" name="elementEditButton" data-ng-click="toggleEdit(element);">
+						<i class="glyphicon glyphicon-edit"></i>
+					</a>
+					<a class="btn btn-primary" name="elementDeleteButton" data-ng-click="deleteElement(element);">
+						<i class="glyphicon glyphicon-trash"></i>
+					</a>
+					
+					
+					
+					
+					
+				</div>
+				
+				<div ng-switch-when="text">
+					<div data-ng-hide="element.isEditing">
+						<h3 id='text' data-ng-bind="element.heading"></h3>
+						<p data-ng-bind="element.value"></p>
+					</div>
+					<div data-ng-show="element.isEditing">
+						<!-- This is for editing text in line editing, dont worry about it for adding graps/equations-->
+						
+						<div class="page-header">
+							<h3>Edit Text</h3>
+						</div>
+						<div class="col-md-12">
+							<form name="projectForm" class="form-horizontal" data-ng-submit="update(projectForm.$valid)" novalidate>
+								<fieldset>
+									<div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.title.$invalid}">
+										<label class="control-label" for="title">Title</label>
+										<div class="controls">
+											<input name="title" type="text" data-ng-model="element.heading" id="title" class="form-control" placeholder="Title" required>
+										</div>
+										<div ng-show="submitted && projectForm.title.$invalid" class="help-block">
+											<p ng-show="projectForm.title.$error.required" class="text-danger">Title is required</p>
+										</div>
+									</div>
+									<div class="form-group" ng-class="{ 'has-error' : submitted && projectForm.content.$invalid}">
+										<label class="control-label" for="content">Content</label>
+										<div class="controls">
+											<textarea name="content" data-ng-model="element.value" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
+										</div>
+										<div ng-show="submitted && projectForm.content.$invalid" class="help-block">
+											<p ng-show="projectForm.content.$error.required" class="text-danger">Content is required</p>
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="submit" name="submit" value="Save" data-ng-click="toggleEdit(element)" class="btn btn-primary">
+										<input type="submit" name="cancel" value="Cancel" data-ng-click="toggleEdit(element); cancelEdit(element)" class="btn btn-danger">
+									</div>
+									<div data-ng-show="error" class="text-danger">
+										<strong data-ng-bind="error"></strong>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+				<div ng-switch-when="image">
+					<img id='image' alt= "what?" src = "{{element.value}}">
+					<div data-ng-show="element.isEditing">
+						<div class="page-header">
+							<input type="file" data-ng-click="setActiveElement(element)" onchange="angular.element(this).scope().editFile(this.files)" >
+						</div>
+					</div>
+				</div>
+				<div ng-switch-when="video">
+					<video id='video' width="320" height="240" controls>
+						<source src="{{element.value}}" type="video/mp4">
+					</video>
+				</div>
+				<div ng-switch-when="audio">
+					<audio id='audio' controls>
+					  <source src="{{element.value}}" type="audio/mpeg">
+					</audio>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+
+</section>

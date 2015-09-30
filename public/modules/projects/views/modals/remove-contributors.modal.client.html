@@ -1,0 +1,20 @@
+<div class="modal-header">
+	<h3 class="modal-title">Remove {{message}} Permissions</h3>
+</div>
+<div class="modal-body">
+	<h4 data-ng-if="emails.length">Users Removed: </h4>
+	<ul>
+		<div data-ng-repeat="email in emails"
+		<li data-ng-bind="email"></li>
+		</div>
+	</ul>
+	<div class = "form-group">
+		<input type="text" class="form-control" data-ng-model="email" placeholder="example@wxyz.com">
+	</div>
+	<button class="btn btn-success" data-ng-click="addEmail()">Remove</button>
+	
+</div>
+<div class="modal-footer">
+	<button class="btn btn-warning" name="confirmDeleteButton" ng-click="modal_yes()">Confirm</button>
+	<button class="btn btn-primary" ng-click="modal_no()">Cancel</button>
+</div>
