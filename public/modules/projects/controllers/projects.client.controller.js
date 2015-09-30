@@ -52,7 +52,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			if (current.parent === undefined)
 			{
 				$scope.topProject = current;
-				$scope.foundTop === true;
+				$scope.foundTop = true;
 				return true;
 			}
 			return false;
@@ -373,6 +373,12 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}	
 		};
 		
+		function removeProjects() {
+			$scope.project.$remove(function() {
+				$location.path('projects');
+			});
+		}
+		
 		$scope.remove = function() {
 			$scope.addContributer();
 			var proj = $scope.project;
@@ -389,9 +395,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 						}
 					}
 				} else {
-					$scope.project.$remove(function() {
-						$location.path('projects');
-					});
+					removeProjects();
 				}
 			}
 			$location.path('projects');
@@ -1084,12 +1088,13 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			var length = elements.length;
 			for (var i = 0; i !== length; ++i)
 			{
-				if (elements[i].index === index)
+				if (elements[i].index === index) {
 					return elements[i];
+				}
 			}
 			
 			return false;
-		};
+		}
 		
 		$scope.canDrag = function(element)
 		{

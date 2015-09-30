@@ -68,7 +68,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		}
 		if (current.parent === undefined)
 		{
-			$scope.foundTop === true;
+			$scope.foundTop = true;
 			return current;
 		}
 		return false;
@@ -105,11 +105,13 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 			if (document.getElementById('view_project'))
 			{
 				var text = document.getElementById('view_project').innerHTML;
+				
+				if (document.getElementById('html_display'))
+				{
+					document.getElementById('html_display').innerHTML = text;
+				}	
 			}
-			if (document.getElementById('html_display'))
-			{
-				document.getElementById('html_display').innerHTML = text;
-			}
+			
 			//*************************
 
 			var pathArray = $location.path().split('/');

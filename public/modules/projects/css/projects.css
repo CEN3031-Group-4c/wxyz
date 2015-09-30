@@ -12,7 +12,9 @@
     text-align: right;
     filter: alpha(opacity=1);
     opacity: 0;
-    outline: none;
+    :focus {
+		outline: 0;
+	}
     background: red;
     background-image: linear-gradient(to bottom, #337ab7 0%, #265a88 100%) !important;
     cursor: inherit;
