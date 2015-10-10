@@ -143,7 +143,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 	$scope.previewInit = function() {
 		$scope.previewTop = $scope.resolveTop($scope.lookup($scope.getProjectId()));
 	};
-	$scope.link = function(id) {
+	$scope.link = function($event, id) {
 		$event.stopPropagation();
 		$scope.state.go('home.viewProject', {projectId:id});
 	};
