@@ -14,8 +14,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 	// runs from accordion ng-init or on first page load
 	$scope.checkOpenInit = function() {
 		var currProjectId = $stateParams.projectId;
-		var parentProject = $scope.resolveTop(lookup(currProjectId));
-		console.log(JSON.stringify(parentProjectId));
+		var parentProject = $scope.resolveTop($scope.lookup(currProjectId));
 		for(var i = 0; i < $scope.projects.length; i++) {
 			if($scope.projects[i].children.length && $scope.projects[i]._id === parentProject._id) {
 				$scope.projects[i].isOpenAcc = true;
@@ -145,7 +144,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 	$scope.previewInit = function() {
 		$scope.previewTop = $scope.resolveTop($scope.lookup($scope.getProjectId()));
 	};
-	$scope.link = function(id) {
+	$scope.link = function($event, id) {
 		$event.stopPropagation();
 		$scope.state.go('home.viewProject', {projectId:id});
 	};
