@@ -39,16 +39,20 @@ exports.read = function(req, res) {
 
 
 exports.addImage = function(req, res) {
-	console.log('*************WE ALMOST MADE IT');
+	console.log('add image');
 	console.log(req.files);
-	res.json({data: req.files.file.path});
+    // The correct place to correct the image upload path issue is in
+    // wxyz\node_modules\multer\index.js:90 but the node_modules folder
+    // is not monitored by git, so I corrected the issue here.
+    var newPath = req.files.file.path.replace('\\', '/');
+	res.json({data: newPath});
 };
 
 /**
  * Update a project
  */
 exports.update = function(req, res) {
-	console.log('we in update');
+	console.log('we are in update');
 	var project = req.project;
 
 	project = _.extend(project, req.body);
