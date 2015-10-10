@@ -1,13 +1,14 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Authentication', 'Projects', '$location',
-	function($scope, $rootScope, Authentication, Projects, $location) {
+angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Authentication', 'Projects', '$location', '$state', '$stateParams',
+	function($scope, $rootScope, Authentication, Projects, $location, $state, $stateParams) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 		$scope.foundTop = false;
 		$scope.previewTop = {};
 		$rootScope.inPreview = false;
+		$scope.state = $state;
 
 	// sets isOpenAcc var which controls whether the accordion should be open
 	// runs from accordion ng-init or on first page load
