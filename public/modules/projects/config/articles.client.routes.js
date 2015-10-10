@@ -33,7 +33,6 @@ angular.module('projects').config(['$stateProvider',
 		state('home.editProject', {
 			url: 'projects/:projectId/editProject',
 			views: {
-
 				'mainFrame': { templateUrl: 'modules/projects/views/edit-project.client.view.html' }
 			}
 		}).

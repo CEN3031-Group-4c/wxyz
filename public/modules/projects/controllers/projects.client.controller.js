@@ -9,8 +9,8 @@ MathJax.Hub.Config({
 });
 MathJax.Hub.Configured();
 
-var myApp = angular.module('projects').controller('ProjectsController', ['$scope', '$rootScope', '$http', '$stateParams', '$location', '$upload', '$modal', '$sce', 'Authentication', 'Projects',
-	function($scope, $rootScope, $http, $stateParams, $location, $upload, $modal, $sce, Authentication, Projects) {
+var myApp = angular.module('projects').controller('ProjectsController', ['$scope','$rootScope', '$http', '$stateParams', '$location', '$upload', '$modal', '$sce', 'Authentication', 'Projects','$state',
+	function($scope, $rootScope, $http, $stateParams, $location, $upload, $modal, $sce, Authentication, Projects, $state) {
 
 
 		$scope.authentication = Authentication;
@@ -42,7 +42,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			//var project = $scope.project;
 			var projects = $scope.projects;
 			if ($scope.foundTop) return true;
-			
+
 			var current = project;
 			while (current.parent !== undefined)
 			{
@@ -116,7 +116,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 			modalInstance.result.then(function (response) {
 				console.log(response);
-				
+
 
 				return response;
 				}, function () {
@@ -154,9 +154,10 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 						$scope.addEditContributer(response[i]);
 					}
 				}
-				
+
 				$scope.project.$update(function() {
-					$location.path('projects/' + $scope.project._id + '/permissions');
+					//$location.path('projects/' + $scope.project._id + '/permissions');
+          	$state.go('home.viewProject',{projectId:r$scope.project._id},{reload:true});
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
@@ -203,9 +204,10 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 						}
 					}
 				}
-				
+
 				$scope.project.$update(function() {
-					$location.path('projects/' + $scope.project._id + '/permissions');
+					//$location.path('projects/' + $scope.project._id + '/permissions');
+          $state.go('home.viewProject',{projectId:$scope.project._id},{reload:true});
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
@@ -215,7 +217,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
-		
+
 		$scope.changePermission = function (permission, state)
 		{
 			var project = $scope.project;
@@ -228,22 +230,23 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				project.viewPermission = state;
 			}
 			project.$update(function() {
-				$location.path('projects/' + project._id + '/permissions');
+				//$location.path('projects/' + project._id + '/permissions');
+        $state.go('home.permissionsProject',{projectId:project._id},{reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
-		
-		$scope.addContributer = function () {	
+
+
+		$scope.addContributer = function () {
 			var project = $scope.project;
 			if (project.contributers.indexOf($scope.authentication.user._id) === -1)
 			{
 				project.contributers.push($scope.authentication.user._id);
 			}
 		};
-			
+
 		$scope.isContributer = function (project) {
 			if (project.contributers.indexOf(Authentication.user._id) !== -1)
 			{
@@ -254,9 +257,9 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				return false;
 			}
 		};
-				
-			
-		
+
+
+
 		//This will open a delete modal
 		//	put no_element if the object is a project, msg will be displayed, size =['sm','lg'] or default
 		$scope.openDeleteModal = function (element, msg, size) {
@@ -287,7 +290,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
-		
+
 		$scope.openDeleteQuestionModal = function (question, msg, size) {
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/confirmation-modal.client.view.html',
@@ -309,16 +312,16 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
-		
-		
+
+
 		$scope.toggleEdit = function(element){
 			element.isEditing = !element.isEditing;
 		};
-		
+
 		$scope.cancelEdit = function(element) {
 			$scope.findOne();
 		};
-			
+
 		$scope.setActiveElement = function(element) {
 			$scope.activeElementIndex = $scope.project.elements.indexOf(element);
 		};
@@ -330,52 +333,54 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				contributers: [Authentication.user._id],
 				level: 1
 			});
-			
+
 			project.$save(function(response) {
-				$location.path('projects/' + response._id);
-				
-				$scope.title = '';
+				$state.go('home.viewProject',{projectId:response._id},{reload:true});
+        $scope.title = '';
 				$scope.content = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
-		
+
+
 		$scope.deleteElement = function(element) {
 			$scope.addContributer();
 			var project = $scope.project;
-			
+
 			project.elements.splice(project.elements.indexOf(element),1);
-				
+
 			project.$update(function() {
-				$location.path('projects/' + project._id);
+				//$location.path('projects/' + project._id);
+        $state.go('home.viewProject',{projectId:project_.id}, {reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
+
 		//this is a legacy function. Can remove if you want
 		$scope.edit_element = function(element) {
 			$scope.addContributer();
 			var project = $scope.project;
 			$scope.activeElementIndex = project.elements.indexOf(element);
-		
+
 			console.log(element);
 			console.log('index: ' + $scope.activeElementIndex);
-		
+
 			if (element.tag === 'text') {
-				$location.path('projects/' + project._id + '/edit-text/' + project.elements.indexOf(element));
+				//$location.path('projects/' + project._id + '/edit-text/' + project.elements.indexOf(element));
+        $state.go('home.editTextProject', {projectId:project._id, elementIndex:project.elements.indexOf(element)},{reload:true});
 			}
 			if (element.tag === 'image' || element.tag === 'video' || element.tag === 'audio') {
-				$location.path('projects/' + project._id + '/edit-file/' + project.elements.indexOf(element));
-			}	
+				//$location.path('projects/' + project._id + '/edit-file/' + project.elements.indexOf(element));
+        $state.go('home.editFileProject', {projectId:project._id, elementIndex:project.elements.indexOf(element)},{reload:true});
+			}
 		};
-		
+
 		function removeProjects() {
 			$scope.project.$remove(function() {
-				$location.path('projects');
+				$state.go('home.viewProject', {}, {reload:true});
 			});
 		}
 
@@ -385,7 +390,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			var arr = new Array(proj);
 			delete_func(proj._id, arr, proj.level, proj.title);
 			for(var index = 0; index < arr.length; index++){
-				
+
 				if (arr[index]) {
 					arr[index].$remove();
 
@@ -398,9 +403,9 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					removeProjects();
 				}
 			}
-			$location.path('projects');
+			$state.go('home.openProject',{},{reload:true});
 		};
-		
+
 		function delete_func(del_id, arr, level, del_title){
 			for (var i = 0; i < $scope.projects.length; i++){
 				//console.log($scope.projects[i].title);
@@ -418,24 +423,25 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			}
 		}
-		
+
 		$scope.appendText = function() {
 			$scope.addContributer();
 			var project = $scope.project;
-			
+
 			var my_index = get_insert_index(project);
-			
+
 			project.elements.push({tag: 'text', value: $scope.textToAppend, index: my_index});
-			
+
 			project.$update(function() {
-				$location.path('projects/' + project._id);
+				//$location.path('projects/' + project._id);
+        $state.go('home.viewProject', {projectId:project._id}, {reload:true});
 				$scope.textToAppend = '';
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
+
 		$scope.setGraphType = function(label){
 			$scope.graphType = label;
 			$scope.drawGraphPreview();
@@ -488,9 +494,11 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
                                     graph_points: $scope.graphPoints });
 
 
-            project.$update(function() {
-				$location.path('projects/' + project._id);
-				},
+            project.$update(function()
+            {
+				        //$location.path('projects/' + project._id);
+        	       $state.go('home.viewProject',{projectId:response._id},{reload:true});
+            },
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -681,30 +689,32 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				feedbacks = [document.getElementById('tfFeedback1').value];
 				feedbacks.push(document.getElementById('tfFeedback2').value);
 			}
-			
-			project.questions.push({tag: questionType, explanation: $scope.explanation, query: $scope.query, choices: answerChoices, 
+
+			project.questions.push({tag: questionType, explanation: $scope.explanation, query: $scope.query, choices: answerChoices,
 									answers: correctAnswers, result: false, answered: false, responses: [], checked: false, feedback: feedbacks});
-			
+
 			project.$update(function() {
-				$location.path('projects/' + project._id);
+				//$location.path('projects/' + project._id);
+        $state.go('home.viewProject', {projectId:project._id}, {reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
+
 		$scope.deleteQuestion = function(question) {
 			var project = $scope.project;
 			project.questions.splice(project.questions.indexOf(question),1);
-				
+
 			project.$update(function() {
-				$location.path('projects/' + project._id);
+				//$location.path('projects/' + project._id);
+        	$state.go('home.viewProject',{projectId:response._id},{reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
+
 		$scope.setAnswer = function(selection, question) {
 			question.responses = [selection];
 			if(selection === question.answers[0]){
@@ -716,7 +726,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = false;
 			question.checked = true;
 		};
-		
+
 		$scope.setMultipleAnswer = function(selection, question) {
 			for(var i = 0; i < question.responses.length; ++i){
 				if(question.responses[i] === selection){
@@ -744,7 +754,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = false;
 			question.checked = true;
 		};
-		
+
 		function compareAnswers(arr1, arr2){
 			arr1.sort();
 			arr2.sort();
@@ -756,7 +766,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return true;
 		}
-		
+
 		$scope.checkAnswer = function(question) {
 			var proj = $scope.project;
 			var tally = 0;
@@ -767,7 +777,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			$scope.score = tally;
 			$scope.numQuestions = proj.questions.length;
-			proj.reports.push({quizTitle: proj.title, question: question.explanation, selectedAnswers: [], 
+			proj.reports.push({quizTitle: proj.title, question: question.explanation, selectedAnswers: [],
 								correctAnswers: question.answers, isCorrect: question.result, student: Authentication.user.displayName});
 			for(i = 0; i < question.responses.length; ++i){
 				proj.reports[proj.reports.length-1].selectedAnswers.push(question.responses[i]);
@@ -776,7 +786,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = true;
 			$scope.displayFeedback = true;
 		};
-		
+
 		$scope.displayFeedbackFunc = function(){
 			var proj = $scope.project;
 			for(var i = 0; i < proj.questions.length; ++i){
@@ -784,7 +794,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				proj.questions[i].answered = false;
 			}
 			proj.$update(function() {
-				$location.path('projects/' + proj._id);
+				//$location.path('projects/' + proj._id);
+        $state.go('home.viewProject',{projectId:proj._id},{reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -792,7 +803,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			$scope.displayFeedback = true;
 			$scope.displayScore = true;
 		};
-		
+
 		$scope.showFeedback = function(question, i) {
 			for(var j = 0; j < question.responses.length; ++j){
 				if(question.responses[j] === question.choices[i]){
@@ -802,50 +813,51 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return false;
 		};
-		
+
 		$scope.appendEquation = function() {
 			$scope.addContributer();
 			var project = $scope.project;
 			var my_index = get_insert_index(project);
-			
+
 			project.elements.push({tag: 'equation', value: $scope.textToAppend, index: my_index});
-			
+
 			project.$update(function() {
-				$location.path('projects/' + project._id);
+				//$location.path('projects/' + project._id);
+        	$state.go('home.viewProject',{projectId:project._id},{reload:true});
 				$scope.textToAppend = '';
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
+
 		$scope.questionTypeSelected = function(type) {
 			$scope.questionType = type;
 		};
-		
+
 		$scope.numberMultipleChoices = function(num) {
 			$scope.numChoices = num;
 			$scope.pickedMC = true;
 			$scope.pickedMS = false;
 		};
-		
+
 		$scope.numberMultipleSelections = function(num) {
 			$scope.numSelections = num;
 			$scope.pickedMS = true;
 			$scope.pickedMC = false;
 		};
-		
+
 		$scope.editFile = function(files) {
 			$scope.addContributer();
 			var project = $scope.project;
 			var fd = new FormData();
-			
+
 			console.log('*****************');
 			console.log($scope.activeElementIndex);
 			console.log(project.elements[$scope.activeElementIndex]);
 			//Take the first selected file
 			fd.append('file', files[0]);
-			
+
 			$http.post('/public/uploads', fd, {
 				withCredentials: true,
 				headers: {'Content-Type': undefined },
@@ -856,15 +868,16 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				var filepath = data;
 				project.elements[$scope.activeElementIndex] = {tag: project.elements[$scope.activeElementIndex].tag, value: filepath.data.replace('public/', '')};
 				project.$update(function() {
-					$location.path('projects/' + project._id);
+					//$location.path('projects/' + project._id);
+          $state.go('home.viewProject',{projectId:project._id},{reload:true});
 					},
 				function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 					});
-				} 
+				}
 			);
 		};
-		
+
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -874,7 +887,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			fd.append('file', files[0]);
 			console.log(files[0].name);
 			console.log(files[0].type);
-			
+
 			$http.post('/public/uploads', fd, {
 				withCredentials: true,
 				headers: {'Content-Type': undefined },
@@ -892,15 +905,16 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					tag_type = 'audio';
 				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', ''), isEditing: false, index: my_index});
 				project.$update(function() {
-					$location.path('projects/' + project._id);
+					//$location.path('projects/' + project._id);
+          $state.go('home.viewProject',{projectId:project._id},{reload:true});
 					},
 				function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 					});
-				} 
+				}
 			);
 		};
-		
+
 		//Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy
 		//Project-1, Course-2, Topic-3, etc.
 		$scope.addLevel = function(curr_level) {
@@ -931,10 +945,11 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				});
 			}
 			parent_proj.children.push(curr_proj);
-			
+
 			parent_proj.$update(function(){
 				curr_proj.$save(function(response) {
-					$location.path('projects/' + response._id);
+					//$location.path('projects/' + response._id);
+          $state.go('home.viewProject',{projectId:response._id},{reload:true});
 
 					$scope.title = '';
 					$scope.content = '';
@@ -943,7 +958,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 			});
 		};
-		
+
 		function get_hierarchy_name(level){
 			if(level === 1)
 				return 'Project';
@@ -960,18 +975,19 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			else if(level === 7)
 				return 'Quiz';
 		}
-		
+
 		$scope.update = function() {
 			$scope.addContributer();
 			var project = $scope.project;
-			
+
 			project.$update(function() {
-				$location.path('projects/' + project._id);
+				//$location.path('projects/' + project._id);
+        $state.go('home.viewProject',{projectId:project._id},{reload:true});
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		
+
 		$scope.find = function() {
 			$scope.projects = Projects.query();
 		};
@@ -981,13 +997,13 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				projectId: $stateParams.projectId
 			});
 		};
-		
+
 		$scope.findOne_report = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
 		};
-		
+
 		$scope.getUniqueUsers = function(report){
 			var ret = [report[0].student];
 			for(var i = 1; i < report.length; ++i){
@@ -1002,16 +1018,16 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return ret;
 		};
-		
+
 		$scope.findElement = function() {
 			var url = $location.path();
 			$scope.activeElementIndex = url.substring(url.lastIndexOf('/') + 1, url.length);
 		};
-		
+
 		$scope.to_string = function(proj){
 			return JSON.stringify(proj, null, 2);
 		};
-		
+
 		$scope.printAnswers = function(answers){
 			var ret = answers[0];
 			for(var i = 1; i < answers.length; ++i){
@@ -1020,25 +1036,25 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return ret;
 		};
-		
+
 		$scope.printResult = function(result){
 			if(result)
 				return 'Correct';
 			else
 				return 'Incorrect';
 		};
-		
+
 		$scope.onDropComplete = function (start_element, end_element, evt) {
-			
+
 			//console.log(start_element);
 			//console.log(end_element);
-			
+
 			var elements = $scope.project.elements;
 			var const_elements = $scope.project.elements;
-			
+
 			var start_index = start_element.index;
 			var end_index = end_element.index;
-			
+
 			/*
 			console.log(start_index);
 			console.log(end_index);
@@ -1046,11 +1062,11 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			console.log(start_element);
 			console.log(end_element);
 			*/
-			
+
 			console.log('\n\npre');
 			console.log(elements[0].value + ' :: index: ' + elements[0].index);
 			console.log(elements[1].value + ' :: index: ' + elements[1].index);
-			
+
 			for (var i = 0; i !== elements.length; ++i)
 			{
 				if (start_index < end_index)
@@ -1068,21 +1084,22 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					}
 				}
 			}
-			
+
 			start_element.index = end_index;
-			
+
 			$scope.project.$update(function() {
-				$location.path('projects/' + $scope.project._id);
+				//$location.path('projects/' + $scope.project._id);
+        $state.go('home.viewProject',{projectId:$scope.project._id},{reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-			
+
 			console.log('\npost');
 			console.log(elements[0].value + ' :: index: ' + elements[0].index);
 			console.log(elements[1].value + ' :: index: ' + elements[1].index);
 		};
-		
+
 		function get_element(elements, index)
 		{
 			var length = elements.length;
@@ -1092,10 +1109,10 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					return elements[i];
 				}
 			}
-			
+
 			return false;
 		}
-		
+
 		$scope.canDrag = function(element)
 		{
 			return $scope.canEdit() && !element.isEditing;
@@ -1117,6 +1134,3 @@ myApp.directive('mathjaxBind', function() {
         }]
     };
 });
-
-
-
