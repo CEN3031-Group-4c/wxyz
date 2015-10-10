@@ -1,3 +1,6 @@
+.q{
+	padding-bottom: 25px;
+}
 .content {
 	margin-top: 50px;
 }
@@ -8,8 +11,7 @@
 	color: #FFFFFF;
 	background-color: #000080;
 	margin: 2px;
-	margin-top: 4px
-	
+	margin-top: 4px;
 }
 .custom-navbar {
 	background-image: linear-gradient(to bottom, #337ab7 0%, #265a88 100%) !important;
@@ -82,7 +84,6 @@ div.custom .panel-default>.panel-heading {
 	border-top-right-radius: 1px;
 	border-top-left-radius: 1px;
 }
-
 div.custom-acc .panel-default>.panel-heading {
 	background-image: linear-gradient(to bottom, #337ab7 0%, #265a88 100%) !important;
 }
@@ -93,19 +94,15 @@ div.custom .panel-title {
 	color: #ffffff;
 	font-weight: bold;
 }
-
 div.custom .panel-body {
 	padding: 5px 0;
 	box-sizing: initial !important;
 	display: inline;
-	
 }
 div.custom .panel {
 	border: 0;
 	padding: 8px 0;
 }
-
-
 .preview-side {
 	border-style: solid;
 	border-width: 3px;
@@ -127,8 +124,7 @@ div.custom .panel {
 	border-color: #78FA89;
 }
 .browsehappy.jumbotron.hide,
-body.ng-cloak
-{
+body.ng-cloak{
 	display: block;
 }
 .main { 

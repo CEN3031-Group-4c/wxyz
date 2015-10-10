@@ -38,85 +38,52 @@
 		
 		<div data-ng-show="pickedMC == true && questionType == 'multipleChoice'">
 			<label class="control-label" for="trueFalse">Type and select the correct answer, providing explanations if necessary, then click "Save"</label><br>
+			<div ng-repeat="i in getNumber(numChoices) track by $index" class="q">
+				<input type="radio" name="tfAnswer" id="mc{{$index+1}}" value="true">
+				<input type="text" id="mcAnswer{{$index+1}}" class="form-control" placeholder="Answer {{$index+1}}" required><br>
+				<textarea id="mcFeedback{{$index+1}}" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea>
+			</div>
 			<button class="btn btn-primary" id="saveButtonMC" name="saveButtonMC" data-ng-click="insertQuestion()">Save</button><br><br>
-			
-			<input type="radio" name="tfAnswer" id="mc1" value="true">
-				<input type="text" id="mcAnswer1" class="form-control" placeholder="Answer 1" required><br>
-				<textarea id="mcFeedback1" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-				
-			<input type="radio" name="tfAnswer" id="mc2" value="true">
-				<input type="text" id="mcAnswer2" class="form-control" placeholder="Answer 2" required><br>
-				<textarea id="mcFeedback2" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-				
-			<input type="radio" name="tfAnswer" id="mc3" value="true">
-				<input type="text" id="mcAnswer3" class="form-control" placeholder="Answer 3" required><br>
-				<textarea id="mcFeedback3" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-				
-			<input type="radio" name="tfAnswer" id="mc4" value="true" data-ng-show="numChoices >= 4">
-				<input type="text" id="mcAnswer4" class="form-control" placeholder="Answer 4" data-ng-show="numChoices >= 4" required><br>
-				<textarea id="mcFeedback4" class="form-control" rows="3" data-ng-show="numChoices >= 4" placeholder="This answer is right/wrong because..."></textarea><br><br>
-	
-				
-			<input type="radio" name="tfAnswer" id="mc5" value="true" data-ng-show="numChoices >= 5">
-				<input type="text" id="mcAnswer5" class="form-control" placeholder="Answer 5" data-ng-show="numChoices >= 5" required><br>
-				<textarea id="mcFeedback5" class="form-control" rows="3" data-ng-show="numChoices >= 5" placeholder="This answer is right/wrong because..."></textarea><br><br>
-				
-			<input type="radio" name="tfAnswer" id="mc6" value="true" data-ng-show="numChoices >= 6">
-				<input type="text" id="mcAnswer6" class="form-control" placeholder="Answer 6" data-ng-show="numChoices >= 6" required><br>
-				<textarea id="mcFeedback6" class="form-control" rows="3" data-ng-show="numChoices >= 6" placeholder="This answer is right/wrong because..."></textarea><br><br>
 		</div>
 				
-		
 		<!-- Multiple Selection Display-->
 		<div data-ng-show="questionType == 'multipleSelection'">
 			<div data-ng-show="questionType == 'multipleSelection'">
 				<label class="control-label" for="multipleSelection">How many answer choices should there be?</label><br>
+
 				<input type="radio" name="msNumber" id="msN3" value=3 data-ng-click="numberMultipleSelections(3);">3<br>
 				<input type="radio" name="msNumber" id="msN4" value=4 data-ng-click="numberMultipleSelections(4);">4<br>
 				<input type="radio" name="msNumber" id="msN5" value=5 data-ng-click="numberMultipleSelections(5);">5<br>
 				<input type="radio" name="msNumber" id="msN6" value=6 data-ng-click="numberMultipleSelections(6);">6
 			</div>
+		</div>
+
+		<div data-ng-show="pickedMS == true && questionType == 'multipleSelection'">
+			<label class="control-label" for="trueFalse">Type and select the correct answers, providing explanations if necessary, then click "Save"</label><br>
+			{{msNumber}}
 			
-			<div data-ng-show="pickedMS == true && questionType == 'multipleSelection'">
-				<label class="control-label" for="trueFalse">Type and select the correct answers, providing explanations if necessary, then click "Save"</label><br>
-				<button class="btn btn-primary" id="saveButtonMS" name="saveButtonMS" data-ng-click="insertQuestion()">Save</button><br><br>
-				<input type="checkbox" name="tfAnswer" id="ms1" value="true">
-					<input type="text" id="msAnswer1" class="form-control" placeholder="Answer 1" required><br>
-					<textarea id="msFeedback1" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-					
-				<input type="checkbox" name="tfAnswer" id="ms2" value="true">
-					<input type="text" id="msAnswer2" class="form-control" placeholder="Answer 2" required><br>
-					<textarea id="msFeedback2" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-					
-				<input type="checkbox" name="tfAnswer" id="ms3" value="true">
-					<input type="text" id="msAnswer3" class="form-control" placeholder="Answer 3" required><br>
-					<textarea id="msFeedback3" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-					
-				<input type="checkbox" name="tfAnswer" id="ms4" value="true" data-ng-show="numSelections >= 4">
-					<input type="text" id="msAnswer4" class="form-control" placeholder="Answer 4" data-ng-show="numSelections >= 4" required><br>
-					<textarea id="msFeedback4" class="form-control" rows="3" data-ng-show="numSelections >= 4" placeholder="This answer is right/wrong because..."></textarea><br><br>
-					
-				<input type="checkbox" name="tfAnswer" id="ms5" value="true" data-ng-show="numSelections >= 5">
-					<input type="text" id="msAnswer5" class="form-control" placeholder="Answer 5" data-ng-show="numSelections >= 5" required><br>
-					<textarea id="msFeedback5" class="form-control" rows="3" data-ng-show="numSelections >= 5" placeholder="This answer is right/wrong because..."></textarea><br><br>
-					
-				<input type="checkbox" name="tfAnswer" id="ms6" value="true" data-ng-show="numSelections >= 6">
-					<input type="text" id="msAnswer6" class="form-control" placeholder="Answer 6" data-ng-show="numSelections >= 6" required><br>
-					<textarea id="msFeedback6" class="form-control" rows="3" data-ng-show="numSelections >= 6" placeholder="This answer is right/wrong because..."></textarea><br><br>
+			<div ng-repeat="i in getNumber(numSelections) track by $index" class="q">
+			<input type="checkbox" name="tfAnswer" id="ms{{$index+1}}" value="true">
+				<input type="text" id="msAnswer{{$index+1}}" class="form-control" placeholder="Answer {{$index+1}}" required><br>
+				<textarea id="msFeedback{{$index+1}}" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea>
 			</div>
+			<button class="btn btn-primary" id="saveButtonMS" name="saveButtonMS" data-ng-click="insertQuestion()">Save</button><br><br>
 		</div>
 		
 		
 		<!--True/False Display-->
 		<div data-ng-show="questionType == 'trueFalse'">
 			<label class="control-label" for="trueFalse">Select the correct answer, providing explanations if necessary, then click "Save"</label><br>
-			<button class="btn btn-primary" id="saveButtonTF" name="saveButtonTF" data-ng-click="insertQuestion()">Save</button><br><br>
-			<input type="radio" name="tfAnswer" id="tf1" value="True" checked>True<br>
-			<textarea id="tfFeedback1" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-			<input type="radio" name="tfAnswer" id="tf2" value="False" >False
-			<textarea id="tfFeedback2" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea><br><br>
-		</div><br><br><br>
-
+			<div style="padding-bottom: 25px">
+				<input type="radio" name="tfAnswer" id="tf1" value="True">True<br>
+				<textarea id="tfFeedback1" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea>
+			</div>
+			<div style="padding-bottom: 25px">
+				<input type="radio" name="tfAnswer" id="tf2" value="False" >False
+				<textarea id="tfFeedback2" class="form-control" rows="3" placeholder="This answer is right/wrong because..."></textarea>
+			</div>
+			<button class="btn btn-primary" id="saveButtonMS" name="saveButtonMS" data-ng-click="insertQuestion()">Save</button><br><br>
+		</div>
 
 	</div>
 </section>
