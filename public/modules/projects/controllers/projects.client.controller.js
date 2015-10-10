@@ -378,7 +378,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$location.path('projects');
 			});
 		}
-		
+
 		$scope.remove = function() {
 			$scope.addContributer();
 			var proj = $scope.project;

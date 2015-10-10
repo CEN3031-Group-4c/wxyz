@@ -95,6 +95,34 @@ describe('Project CRUD tests', function() {
 			});
 	});
 
+	it('should not be able to save an project if no title is provided', function(done) {
+		// Invalidate title field
+		project.title = '';
+
+		agent.post('/auth/signin')
+			.send(credentials)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// Get the userId
+				var userId = user.id;
+
+				// Save a new project
+				agent.post('/projects')
+					.send(project)
+					.expect(400)
+					.end(function(projectSaveErr, projectSaveRes) {
+						// Set message assertion
+						(projectSaveRes.body.message).should.match('Title cannot be blank');
+						
+						// Handle project save error
+						done(projectSaveErr);
+					});
+			});
+	});
+
 	it('should be able to update an project if signed in', function(done) {
 		agent.post('/auth/signin')
 			.send(credentials)
@@ -184,6 +212,42 @@ describe('Project CRUD tests', function() {
 			});
 	});
 
+	it('should be able to delete an project if signed in', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+
+				// Get the userId
+				var userId = user.id;
+
+				// Save a new project
+				agent.post('/projects')
+					.send(project)
+					.expect(200)
+					.end(function(projectSaveErr, projectSaveRes) {
+						// Handle project save error
+						if (projectSaveErr) done(projectSaveErr);
+
+						// Delete an existing project
+						agent.delete('/projects/' + projectSaveRes.body._id)
+							.send(project)
+							.expect(200)
+							.end(function(projectDeleteErr, projectDeleteRes) {
+								// Handle project error error
+								if (projectDeleteErr) done(projectDeleteErr);
+
+								// Set assertions
+								(projectDeleteRes.body._id).should.equal(projectSaveRes.body._id);
+
+								// Call the assertion callback
+								done();
+							});
+					});
+			});
+	});
 
 	it('should not be able to delete an project if not signed in', function(done) {
 		// Set project user 
