@@ -847,9 +847,9 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			$scope.pickedMS = false;
 		};
 
-		$scope.getNumChoices = function(num) {
+		/*$scope.getNumChoices = function(num) {
 		    return numChoices;   
-		};
+		};*/
 
 		$scope.numberMultipleSelections = function(num) {
 			$scope.numSelections = num;
@@ -857,7 +857,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			$scope.pickedMC = false;
 		};
 
-		$scope.number = 0;
+		//$scope.number = 0;
 		$scope.getNumber = function(num) {
 		    return new Array(num);   
 		};
