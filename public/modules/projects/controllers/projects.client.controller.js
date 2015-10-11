@@ -19,12 +19,12 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		$scope.obj={};
 		$scope.activeElementIndex = -1;
 		$scope.foundTop = false;
-        $scope.chart ={};
-        $scope.graphTitle = '';
-        $scope.xTitle = '';
-        $scope.yTitle = '';
-        $scope.graphPoints = [];
-        $scope.chartArray = [];
+    $scope.chart ={};
+    $scope.graphTitle = '';
+    $scope.xTitle = '';
+    $scope.yTitle = '';
+    $scope.graphPoints = [];
+    $scope.chartArray = [];
 
 
 
@@ -434,7 +434,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        $state.go('home.viewProject', {projectId:project._id}, {reload:true});
+        $state.go('home.viewProject', {projectId:project._id});
 				$scope.textToAppend = '';
 				},
 			function(errorResponse) {
