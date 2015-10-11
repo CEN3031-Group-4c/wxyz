@@ -906,7 +906,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', ''), isEditing: false, index: my_index});
 				project.$update(function() {
 					//$location.path('projects/' + project._id);
-          $state.go('home.viewProject',{projectId:project._id},{reload:true});
+          $state.go('home.viewProject',{projectId:project._id});
 					},
 				function(errorResponse) {
 					$scope.error = errorResponse.data.message;
