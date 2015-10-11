@@ -157,7 +157,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 				$scope.project.$update(function() {
 					//$location.path('projects/' + $scope.project._id + '/permissions');
-          	$state.go('home.viewProject',{projectId:r$scope.project._id},{reload:true});
+          			$state.go('home.permissionsProject',{projectId:$scope.project._id},{reload:true});
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
@@ -207,7 +207,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 				$scope.project.$update(function() {
 					//$location.path('projects/' + $scope.project._id + '/permissions');
-          $state.go('home.viewProject',{projectId:$scope.project._id},{reload:true});
+        			$state.go('home.permissionsProject',{projectId:$scope.project._id},{reload:true});
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
@@ -231,7 +231,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			project.$update(function() {
 				//$location.path('projects/' + project._id + '/permissions');
-        $state.go('home.permissionsProject',{projectId:project._id},{reload:true});
+        		$state.go('home.permissionsProject',{projectId:project._id},{reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -352,7 +352,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        $state.go('home.viewProject',{projectId:project_.id}, {reload:true});
+        		$state.go('home.viewProject',{projectId:project._id}, {reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -370,11 +370,11 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			if (element.tag === 'text') {
 				//$location.path('projects/' + project._id + '/edit-text/' + project.elements.indexOf(element));
-        $state.go('home.editTextProject', {projectId:project._id, elementIndex:project.elements.indexOf(element)},{reload:true});
+        		$state.go('home.editTextProject', {projectId:project._id, elementIndex:project.elements.indexOf(element)},{reload:true});
 			}
 			if (element.tag === 'image' || element.tag === 'video' || element.tag === 'audio') {
 				//$location.path('projects/' + project._id + '/edit-file/' + project.elements.indexOf(element));
-        $state.go('home.editFileProject', {projectId:project._id, elementIndex:project.elements.indexOf(element)},{reload:true});
+        		$state.go('home.editFileProject', {projectId:project._id, elementIndex:project.elements.indexOf(element)},{reload:true});
 			}
 		};
 
@@ -434,9 +434,9 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        $state.go('home.viewProject', {projectId:project._id});
+        		$state.go('home.viewProject', {projectId:project._id});
 				$scope.textToAppend = '';
-				},
+			},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -496,8 +496,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
             project.$update(function()
             {
-				        //$location.path('projects/' + project._id);
-        	       $state.go('home.viewProject',{projectId:response._id},{reload:true});
+				//$location.path('projects/' + project._id);
+        	    $state.go('home.viewProject',{projectId:project._id},{reload:true});
             },
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -695,7 +695,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        $state.go('home.viewProject', {projectId:project._id}, {reload:true});
+        		$state.go('home.viewProject', {projectId:project._id}, {reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -708,8 +708,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        	$state.go('home.viewProject',{projectId:response._id},{reload:true});
-				},
+        		$state.go('home.viewProject',{projectId:project._id},{reload:true});
+			},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -795,7 +795,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			proj.$update(function() {
 				//$location.path('projects/' + proj._id);
-        $state.go('home.viewProject',{projectId:proj._id},{reload:true});
+        		$state.go('home.viewProject',{projectId:proj._id},{reload:true});
 				},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -823,9 +823,9 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        	$state.go('home.viewProject',{projectId:project._id},{reload:true});
+        		$state.go('home.viewProject',{projectId:project._id},{reload:true});
 				$scope.textToAppend = '';
-				},
+			},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -869,8 +869,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				project.elements[$scope.activeElementIndex] = {tag: project.elements[$scope.activeElementIndex].tag, value: filepath.data.replace('public/', '')};
 				project.$update(function() {
 					//$location.path('projects/' + project._id);
-          $state.go('home.viewProject',{projectId:project._id},{reload:true});
-					},
+          			$state.go('home.viewProject',{projectId:project._id},{reload:true});
+				},
 				function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 					});
@@ -906,8 +906,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', ''), isEditing: false, index: my_index});
 				project.$update(function() {
 					//$location.path('projects/' + project._id);
-          $state.go('home.viewProject',{projectId:project._id});
-					},
+          			$state.go('home.viewProject',{projectId:project._id});
+				},
 				function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 					});
@@ -949,7 +949,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			parent_proj.$update(function(){
 				curr_proj.$save(function(response) {
 					//$location.path('projects/' + response._id);
-          $state.go('home.viewProject',{projectId:response._id},{reload:true});
+          			$state.go('home.viewProject',{projectId:response._id},{reload:true});
 
 					$scope.title = '';
 					$scope.content = '';
@@ -982,7 +982,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        $state.go('home.viewProject',{projectId:project._id});
+        		$state.go('home.viewProject',{projectId:project._id});
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -1089,8 +1089,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			$scope.project.$update(function() {
 				//$location.path('projects/' + $scope.project._id);
-        $state.go('home.viewProject',{projectId:$scope.project._id},{reload:true});
-				},
+        		$state.go('home.viewProject',{projectId:$scope.project._id},{reload:true});
+			},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
