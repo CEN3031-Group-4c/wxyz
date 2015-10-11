@@ -10,16 +10,16 @@
 		<a class="btn btn-primary" name="deleteButton" tooltip="Delete" data-ng-click="openDeleteModal('no_element', 'Are you sure you want to permanently delete this page?')">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
-		
+
 	</div>
 
 </script>
-		
+
 		<h1 data-ng-bind="project.title"></h1>
 		<small data-ng-bind="project.content"></small>
-		
+
 	</div>
-	
+
 	<!--Showing questions on a quiz-->
 	<div data-ng-repeat="question in project.questions">
 		<div class="pull-right" data-ng-show="canEdit()">
@@ -29,7 +29,7 @@
 		</div>
 		<div><h4 data-ng-bind="question.explanation"></h4></div>
 		<div data-ng-bind="question.query"></div>
-		
+
 		<!-- Multiple Choice Display -->
 		<div data-ng-show="question.tag == 'multipleChoice'">
 			<div data-ng-repeat="choice in question.choices">
@@ -37,7 +37,7 @@
 				<label data-ng-bind="choice"></label>
 			</div>
 		</div>
-		
+
 		<!-- Multiple Selection Display -->
 		<div data-ng-show="question.tag == 'multipleSelection'">
 			<div data-ng-repeat="choice in question.choices">
@@ -45,7 +45,7 @@
 				<label data-ng-bind="choice"></label>
 			</div>
 		</div>
-		
+
 		<!-- True/False Display -->
 		<div data-ng-show="question.tag == 'trueFalse'">
 			<div data-ng-repeat="choice in question.choices">
@@ -53,7 +53,7 @@
 				<label data-ng-bind="choice"></label>
 			</div>
 		</div>
-		
+
 	<!-- Submit button and score reporting -->
 		<div>
 			<a class="btn btn-default" name="answerCheckButton" data-ng-click="checkAnswer(question); showFeedback(question);">
@@ -70,14 +70,14 @@
 			<hr>
 		</div>
 	</div>
-	
+
 	<a class="btn btn-primary" tooltip="Submit Quiz" name="answerSubmitButton" data-ng-show="project.isQuiz==true" data-ng-click="displayFeedbackFunc()">
 		<i class="glyphicon glyphicon-ok" style="font-size:13px"></i> Submit</a>
 		<br data-ng-show="project.isQuiz==true" >
 		<br data-ng-show="project.isQuiz==true" >
 		<br data-ng-show="project.isQuiz==true" >
 		<br data-ng-show="project.isQuiz==true" >
-	
+
 
 	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)">
 		<div ng-switch on="element.tag">
@@ -86,17 +86,17 @@
 					<div ng-drag="canDrag(element)" ng-drag-data="element" ng-class="element.index">
 						<div ng-switch-when="text">
 							<div data-ng-hide="element.isEditing">
-								<div ta-bind ng-model="element.value"></div><br>
+								<div ng-bind-html="sc.trustAsHtml(element.value)"></div><br>
 
 							</div>
-							<div data-ng-show="element.isEditing"> 
-								<!-- This is for editing text in line editing, dont worry about it for adding graps-->
-								<div text-angular ta-toolbar="[
-									['h1','h2','h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'], ['insertImage','insertLink', 'insertVideo'],
-									['bold','italics','underline', 'strikeThrough',  'ul', 'ol', 'undo', 'redo','clear'],
-									['justifyLeft','justifyCenter','justifyRight','indent','outdent']
-									]" ng-model="element.value">
+							<div data-ng-show="element.isEditing">
+								<!-- Create a textarea that is then replaced by the ckEditor. Any text entered is bound
+							       to element.value, which is then used to edit existing project content.-->
+								<div>
+									<textarea ck-editor ng-model="element.value"></textarea>
 								</div><br>
+								<!--Pushing the save button calls update() and adds/edits to the project any text entered
+								    in the textarea above-->
 								<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button>
 							</div>
 
@@ -155,7 +155,7 @@
 									<button class="btn btn-primary" tooltip="Save Equation" data-ng-click="toggleEdit(element); update()">Save</button>
 								</div>
 							</div><br>
-							
+
 						</div>
 					</div>
 				</div>
@@ -168,12 +168,12 @@
 							<i class="glyphicon glyphicon-trash"></i>
 						</a>
 					</div>
-				
+
 				</div>
 			</div>
 		</div>
 	</div>
-		
+
 	<!-- QUIZ SCORE REPORT -->
 	<div data-ng-show="hasQuestions == true && displayFeedback==true && displayScore==true">
 		Score: <font size="3" data-ng-bind="score"></font> / <font size="3" data-ng-bind="numQuestions"></font><br><br>

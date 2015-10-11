@@ -3,34 +3,14 @@
 		<h1>Add Text Box</h1>
 	</div>
 
-	<div text-angular ta-toolbar="[
-		['h1','h2','h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'], ['insertImage','insertLink', 'insertVideo'],
-		['bold','italics','underline', 'strikeThrough', 'insertLink', 'ul', 'ol', 'undo', 'redo','clear'],
-		['justifyLeft','justifyCenter','justifyRight','indent','outdent']
-		]" name="inputText" ng-model="textToAppend">
+  <!-- Create a textarea that is then replaced by the ckEditor. Any text entered is bound
+       to textToAppend, which is then used to add content to a project when saved.-->
+	<div>
+		<textarea ck-editor ng-model="textToAppend"></textarea>
 	</div>
-	
+
+  <!--Pushing the save button calls appendText() and adds to the project any text entered
+	    in the textarea above-->
 	<button class="btn btn-default" name="submit" data-ng-click="appendText()">Save</button>
-	<!--div class="col-md-12">
-		<form name="projectForm" class="form-horizontal" data-ng-submit="appendText(projectForm.$valid)" novalidate>
-			<fieldset>
-				<div class="form-group">
-					<label class="control-label" for="heading">Heading</label>
-					<div class="controls">
-						<input name="heading" type="text" ng-model="heading" class="form-control" placeholder="Heading" required>
-					</div>
-					<label class="control-label" for="text">Text</label>
-					<div class="controls">
-						<textarea type="textToAppend" ng-model="textToAppend" name="inputText" class="form-control" placeholder="Content" cols="30" rows="10" required></textarea>
-					</div>
-				</div>
-				<div>
-					<input name="submit" type="submit" value="Insert" class="btn btn-default">
-				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
-	</div-->
+
 </section>
