@@ -622,12 +622,21 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				answerChoices = [document.getElementById('mcAnswer1').value];
 				answerChoices.push(document.getElementById('mcAnswer2').value);
 				answerChoices.push(document.getElementById('mcAnswer3').value);
-				if($scope.numChoices >= 4)
+				feedbacks = [document.getElementById('mcFeedback1').value];
+				feedbacks.push(document.getElementById('mcFeedback2').value);
+				feedbacks.push(document.getElementById('mcFeedback3').value);
+				if($scope.numChoices >= 4){
 					answerChoices.push(document.getElementById('mcAnswer4').value);
-				if($scope.numChoices >= 5)
+					feedbacks.push(document.getElementById('mcFeedback4').value);
+				}
+				if($scope.numChoices >= 5){
 					answerChoices.push(document.getElementById('mcAnswer5').value);
-				if($scope.numChoices >= 6)
+					feedbacks.push(document.getElementById('mcFeedback5').value);
+				}
+				if($scope.numChoices >= 6){
 					answerChoices.push(document.getElementById('mcAnswer6').value);
+					feedbacks.push(document.getElementById('mcFeedback6').value);
+				}
 				if (document.getElementById('mc1').checked)
 					correctAnswers = [document.getElementById('mcAnswer1').value];
 				else if(document.getElementById('mc2').checked)
@@ -640,24 +649,27 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					correctAnswers = [document.getElementById('mcAnswer5').value];
 				else if(document.getElementById('mc6').checked)
 					correctAnswers = [document.getElementById('mcAnswer6').value];
-				feedbacks = [document.getElementById('mcFeedback1').value];
-				feedbacks.push(document.getElementById('mcFeedback2').value);
-				feedbacks.push(document.getElementById('mcFeedback3').value);
-				feedbacks.push(document.getElementById('mcFeedback4').value);
-				feedbacks.push(document.getElementById('mcFeedback5').value);
-				feedbacks.push(document.getElementById('mcFeedback6').value);
 			}
 			else if (document.getElementById('r2').checked) {	/* Multiple Selection */
 				questionType = document.getElementById('r2').value;
 				answerChoices = [document.getElementById('msAnswer1').value];
 				answerChoices.push(document.getElementById('msAnswer2').value);
 				answerChoices.push(document.getElementById('msAnswer3').value);
-				if($scope.numSelections >= 4)
+				feedbacks = [document.getElementById('msFeedback1').value];
+				feedbacks.push(document.getElementById('msFeedback2').value);
+				feedbacks.push(document.getElementById('msFeedback3').value);
+				if($scope.numSelections >= 4){
 					answerChoices.push(document.getElementById('msAnswer4').value);
-				if($scope.numSelections >= 5)
+					feedbacks.push(document.getElementById('msFeedback4').value);
+				}
+				if($scope.numSelections >= 5){
 					answerChoices.push(document.getElementById('msAnswer5').value);
-				if($scope.numSelections >= 6)
+					feedbacks.push(document.getElementById('msFeedback5').value);
+				}
+				if($scope.numSelections >= 6){
 					answerChoices.push(document.getElementById('msAnswer6').value);
+					feedbacks.push(document.getElementById('msFeedback6').value);
+				}
 				correctAnswers = [];
 				if (document.getElementById('ms1').checked)
 					correctAnswers.push(document.getElementById('msAnswer1').value);
@@ -665,18 +677,12 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					correctAnswers.push(document.getElementById('msAnswer2').value);
 				if(document.getElementById('ms3').checked)
 					correctAnswers.push(document.getElementById('msAnswer3').value);
-				if(document.getElementById('ms4').checked)
+				if($scope.numSelections >= 4 && document.getElementById('ms4').checked)
 					correctAnswers.push(document.getElementById('msAnswer4').value);
-				if(document.getElementById('ms5').checked)
+				if($scope.numSelections >= 5 && document.getElementById('ms5').checked)
 					correctAnswers.push(document.getElementById('msAnswer5').value);
-				if(document.getElementById('ms6').checked)
+				if($scope.numSelections >= 6 && document.getElementById('ms6').checked)
 					correctAnswers.push(document.getElementById('msAnswer6').value);
-				feedbacks = [document.getElementById('msFeedback1').value];
-				feedbacks.push(document.getElementById('msFeedback2').value);
-				feedbacks.push(document.getElementById('msFeedback3').value);
-				feedbacks.push(document.getElementById('msFeedback4').value);
-				feedbacks.push(document.getElementById('msFeedback5').value);
-				feedbacks.push(document.getElementById('msFeedback6').value);
 			}
 			else if (document.getElementById('r3').checked) {	/* True/False */
 				questionType = document.getElementById('r3').value;
@@ -841,11 +847,20 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			$scope.pickedMS = false;
 		};
 
+		$scope.getNumChoices = function(num) {
+		    return numChoices;   
+		}
+
 		$scope.numberMultipleSelections = function(num) {
 			$scope.numSelections = num;
 			$scope.pickedMS = true;
 			$scope.pickedMC = false;
 		};
+
+		$scope.number = 0;
+		$scope.getNumber = function(num) {
+		    return new Array(num);   
+		}
 
 		$scope.editFile = function(files) {
 			$scope.addContributer();
