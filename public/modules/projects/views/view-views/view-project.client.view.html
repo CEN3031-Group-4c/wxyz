@@ -10,10 +10,9 @@
 		<a class="btn btn-primary" name="deleteButton" tooltip="Delete" data-ng-click="openDeleteModal('no_element', 'Are you sure you want to permanently delete this page?')">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
-		
 	</div>
 
-</script>
+
 		
 		<h1 data-ng-bind="project.title"></h1>
 		<small data-ng-bind="project.content"></small>
@@ -57,7 +56,7 @@
 	<!-- Submit button and score reporting -->
 		<div>
 			<a class="btn btn-default" name="answerCheckButton" data-ng-click="checkAnswer(question); showFeedback(question);">
-				<i class="glyphicon glyphicon-pencil" style="font-size:13px"></i> Check Answer</a>&nbsp;&nbsp;&nbsp;
+				<i class="glyphicon glyphicon-pencil" style="font-size:13px"></i> Check Answer</a>
 			<font size="4" color="grean" data-ng-show="question.result==true && question.answered==true && displayFeedback==true">Correct!</font>
 			<font size="4" color="red" data-ng-show="question.result==false && question.answered==true && question.checked==true && displayFeedback==true">Incorrect!</font>
 			<font size="3" color="red" data-ng-show="question.answered==true && question.checked==false && displayFeedback==true">Please select an answer!</font><br>
