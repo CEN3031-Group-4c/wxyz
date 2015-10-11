@@ -849,7 +849,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 		$scope.getNumChoices = function(num) {
 		    return numChoices;   
-		}
+		};
 
 		$scope.numberMultipleSelections = function(num) {
 			$scope.numSelections = num;
@@ -860,7 +860,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		$scope.number = 0;
 		$scope.getNumber = function(num) {
 		    return new Array(num);   
-		}
+		};
 
 		$scope.editFile = function(files) {
 			$scope.addContributer();
