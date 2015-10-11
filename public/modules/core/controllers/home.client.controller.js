@@ -1,22 +1,41 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Authentication', 'Projects', '$location',
-	function($scope, $rootScope, Authentication, Projects, $location) {
+angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Authentication', 'Projects', '$location', '$state', '$stateParams',
+	function($scope, $rootScope, Authentication, Projects, $location, $state, $stateParams) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 		$scope.foundTop = false;
 		$scope.previewTop = {};
 		$rootScope.inPreview = false;
+		$scope.state = $state;
+
+	// sets isOpenAcc var which controls whether the accordion should be open
+	// runs from accordion ng-init or on first page load
+	$scope.checkOpenInit = function() {
+		var currProjectId = $stateParams.projectId;
+		var parentProject = $scope.resolveTop($scope.lookup(currProjectId));
+		for(var i = 0; i < $scope.projects.length; i++) {
+			if($scope.projects[i].children.length && $scope.projects[i]._id === parentProject._id) {
+				$scope.projects[i].isOpenAcc = true;
+			} else {
+				$scope.projects[i].isOpenAcc = false;
+			}
+		}
+	};
+
+	// need to move variables and delete the function
 	$scope.find = function() {
 		$scope.projects = Projects.query();
 		$scope.frame1 = $rootScope.frame1;
 		$scope.frame2 = $rootScope.frame2;
 	};
+	/*
 	$scope.accordian_stuff = function(project)
 	{
 		$location.path('projects/' + project._id);
 	};
+	*/
 	$scope.preview_stuff = function(project)
 	{
 		$location.path('projects/' + project._id + '/preview');
@@ -33,13 +52,14 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		if (reduced_path.indexOf('/') === -1) return reduced_path;
 		return reduced_path.substring(0,reduced_path.indexOf('/'));
 	};
-	$scope.isProjectOpen = function(project)
+	/*$scope.isProjectOpen = function(project)
 	{
 		if (!$scope.getProjectId()) return false;
 		var top = $scope.resolveTop($scope.lookup($scope.getProjectId()));
 		if (top._id === project._id) return true;
 		return false;
-	};
+	};*/
+	// need to look into this function
 	$scope.isCourseOpen = function(project)
 	{
 		if (!$scope.getProjectId()) return false;
@@ -59,7 +79,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 	$scope.resolveTop = function(project)
 	{
 		var projects = $scope.projects;
-		if ($scope.foundTop) return true;
+		//if ($scope.foundTop) return true;
 		
 		var current = project;
 		while (current.parent !== undefined)
@@ -124,9 +144,9 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 	$scope.previewInit = function() {
 		$scope.previewTop = $scope.resolveTop($scope.lookup($scope.getProjectId()));
 	};
-	$scope.link = function(id) {
-		console.log('in link');
-		$location.path('/projects/' + id);
+	$scope.link = function($event, id) {
+		$event.stopPropagation();
+		$scope.state.go('home.viewProject', {projectId:id});
 	};
 	}
 	
