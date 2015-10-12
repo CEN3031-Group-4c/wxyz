@@ -15,6 +15,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 		$scope.authentication = Authentication;
 		$scope.textToAppend = '';
+    $scope.sc = $sce;
 		$scope.heading= '';
 		$scope.obj={};
 		$scope.activeElementIndex = -1;
@@ -336,7 +337,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$save(function(response) {
 				$state.go('home.viewProject',{projectId:response._id},{reload:true});
-        $scope.title = '';
+        		$scope.title = '';
 				$scope.content = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -1147,5 +1148,34 @@ myApp.directive('mathjaxBind', function() {
                 MathJax.Hub.Queue(['Reprocess', MathJax.Hub, $element[0]]);
             });
         }]
+    };
+});
+
+
+//ckEditor custom directive. Allows for using ck-editor to replace
+//a textarea with the nice rich text editor. Still need to figure
+//out how to customize the type of buttons available on the editor
+//so we can reuse this for the equations editor as well.
+myApp.directive('ckEditor', function() {
+    return {
+        require : '?ngModel',
+        link : function($scope, elm, attr, ngModel) {
+
+            var ck = CKEDITOR.replace(elm[0]);
+
+            ck.on('instanceReady', function() {
+                ck.setData(ngModel.$viewValue);
+            });
+
+            ck.on('change', function() {
+                $scope.$apply(function() {
+                    ngModel.$setViewValue(ck.getData());
+                    });
+            });
+
+            ngModel.$render = function(value) {
+                ck.setData(ngModel.$modelValue);
+            };
+        }
     };
 });
