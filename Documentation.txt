@@ -1,0 +1,312 @@
+WXYZ
+
+app
+   controllers
+      users
+	 users.authentication.server.controller
+	     (#! in path)
+	 users.authorization.server.controller
+	     (#! in path)
+	 users.password.server.controller
+	 users.profile.server.controller
+      articles.server.controller
+      core.server.controller
+      errors.server.controller
+      projects.server.controller
+      users.server.controller
+   models
+      article.server.model
+	 (File that has 5 different schemas, needs to be broken up.)
+      user.server.model
+   routes
+      articles.server.routes
+      core.server.routes
+      projects.server.routes
+      users.server.routes
+   tests
+      article.server.model.test
+      article.server.routes.test
+      project.server.model.test
+      project.server.routes.test
+      user.server.model.test
+   views (html files)
+      templates
+	 reset-password-confirm-email.server.view
+	 reset-password-email.server.view
+      404.server.view
+      500.server.view
+      index.server.view
+      layout.server.view
+
+
+public
+
+	dist
+	  application.js
+		(should be separated into different files.Deals with everything involving the       strucutre on the webiste inlcude, menus,creating new menus,routes, user authentication etc.)
+          application.min
+		(simple CSS file for the structre of the website)
+	  application.min
+		(java script file dealing once again with the overall structure of the website as with the one above).
+	lib
+	  angular
+		.bower.json
+		angular.js
+		angular.min
+		angular.min.js.gzip
+		angular-csp
+		bower.json
+		index.js
+		package.json
+		README.md
+          anuglar-animate
+		.bower.json
+		angular-animate
+		angular-animate.js
+		angular-animate.min.js
+		bower.json
+		index.js
+		package.json
+		README.md
+		
+	  angular-bootstrap
+		.bower.json
+		bower.json
+		ui-bootstrap.js
+		ui-bootstrap.min
+		ui-bootstrap-tpls
+		ui-bootstrap-tpls.min
+	  angular-google-chart
+		partials
+		   annotation.html
+		   annotation.js
+		   fat.html
+		   generic.html
+		   generic.js
+		.bower.json
+		bower.json
+		index.html
+		ng-google-cahrt.js
+		package.json
+		README.md
+		sample.js
+		style.css
+	  angular-mocks
+		.bower.json
+		angular-mocks.js
+		ngAnimateMock.js
+		ngMock.js
+		ngMockE2E.js
+		package.json
+		README.md
+          angular-resources
+		.bower.json
+		angular-resource.js
+		angular-resource.min
+		angular-resouce.min.js
+		bower.json
+		index.js
+		package.json
+		README.md	
+	  angular-ui-router
+		api
+		  angular-ui-router.d  
+		release
+		  angular-ui-router
+		  angular-ui-router.min
+		src
+		  common.js
+		  resolve.js
+		  state.js
+		  stateDirectives.js
+		  stateFilters.js
+		  templateFactory.js
+		  urlMatcherFactory.js
+		  urlRouter.js
+		  view.js
+		  viewDirective.js
+		  viewScroll.js
+		.bower.json
+		CHANGELOG.md
+		CONTRIBUTING.md
+		LICENSE
+		README.md
+          angular-ui-utils
+		.bower.json
+		.travis.yml
+		 bower.json
+		 CHANGELOG.MD
+		 ui-utils.js
+		 ui-utils.min
+		 ui-utils-ieshiv
+		 ui-utils-ieshiv.min
+          bootstrap
+	  bootstrap-css-only
+	  components-font-awesome
+	  flow.js
+          font-awesome
+          jquery
+          ng-ckeditor
+          ngDialog
+          ngDraggable
+	  ng-file-upload
+          ng-file-upload-shim
+	  ng-flow
+          protractor
+          rangy
+          textAngular
+          	
+	modules
+	  core
+	      config
+		 core.client.routes.js
+		 (java script file that does exactly as it states routes you to different pages of the website include home,lesson,topic etc)
+              controllers
+		 header.client.controller.js
+		 (contains controller called HeaderController which has parameters including location, authentication and menu for a user.
+		 home.client.controller.js
+		(home controller which has parmeters such as projects,frame, authentication,course and projects)
+		 test1.client.controller.js
+                 (controller which has one scope which is authentication)
+		 test2.client.controller.js
+		  (controller which has one scope which is authentication)
+	      css
+		 core.css
+		(basic css file which contains styles for the preview,nav-bar,body,hover etc)
+	      img
+		 brand
+		   dog.img
+                   favicon.img
+		   logo.img
+		 loaders
+		   loader.img
+	      services
+                 menus.client.service.js
+		 (java script file which handles the menu including adding new menu item, creating sub menu, removing item from menu etc)
+	      tests
+		 header.client.controller.test
+		 (controller which test to see if the system asks for user authentication)
+		 home.client.controller.test
+		 (controller which practically tests the permissions on the home page to see if user authentication is asked for in the proper instances)
+	      views
+		 header.client.view.html
+		 (html file which shows the layour of the main page including nav-bar  and features such as the drop down menu)
+		 home.client.view.html
+		 (html file which gives the layout of the home page including page header,project page etc.)
+		 homeView.client.view.html
+		 (html file which simply displays the header text)
+		 test1.client.view.html
+		 (simple HTML test page which does nothing)
+		 test2.client.view.html
+		 (simple HTML test page which does nothing)
+	      core.client.module.js
+	      (simply registers a new model)
+	   projects
+	      config
+		 articles.client.config
+		 articles.client.routes
+	      controllers
+		 articles.client.controller
+		 courses.client.controller
+		 drag.client.controller
+		 modal.client.controller
+		 projects.client.controller
+	      css
+		 projects.css
+	      services
+		 articles.client.service
+		 projects.client.service
+	      tests
+		 articles.client.controller.test
+  		 elements.client.controller.test
+		 project.client.controller.test
+		 suuport-functions.client.controller.test 
+	      views
+		 create-views
+		 edit-element-views
+		 modals
+		 views-views
+animation-project.client.view.html
+		 (self explanatory html which contains a controller which allows the user to add an animation)
+		 audio-project.client.view.html
+		 (self explanatory html allows the user to add an audio file)
+		 chart-project.client.view.html
+		 (self explanaorty html which allows the user to add a data chart)
+		 drag-drop.client.view.html
+		 (slef explanatory allows the user to drag and drop an object)
+		 edit-article.client.view.html
+		 (slef explanatory allows the user to add an equation to the text)
+		 edit-project.client.view.html
+		 (self explanatory html allows the user to edit a project)
+		 equation-project.client.view.html
+		 (allows the user to add an equation)
+		 image-project.client.view.html
+		 (allows the user to add an image)
+		 list-articles.client.view.html
+		 (html file which simply listd the articles created by the user and allows the user to create a new article)
+		 list-projects.client.view.html
+		 (lists the user porjects and allows them to create ne projects)
+		 list-recent-projects.client.view.html
+		 (self explanatory lists the users projects)
+		 modal-test.view.html
+		 (simple test html)
+		 permissions.client.view
+		 (as stated in the title changes permissions as to whan can view certain projects)
+		 quiz-project.client.view
+		 (very large html file which deals with multiple choice quizzes and also grading of quiz)
+		 text-project.client.view
+		 (creates a text project which allows the user to insert image,link video, also to make text bold italic etc)
+		 video-project.client.view
+		 (allows the user to create a video project)
+
+			 
+		 
+	      projects.client.module
+	      
+	   users
+	      config
+		 users.client.config
+		    (Config HTTP Error Handling)
+		 users.client.routes
+	      controllers
+		 authentication.client.controller
+		     (Parameters: $scope, $http, $location, Authentication)
+		 password.client.controller
+		     (Parameters: $scope, $stateParams, $http, $location, Authentication)
+		 settings.client.controller
+		     (Parameters: $scope, $http, $location, Users, Authentication)
+	      css
+		 users.css
+		     (.nav-users, .remove-account-container, -.btn-remove-account)
+	      img
+		 buttons
+		     facebook
+		     github
+		     google
+		     linkedin
+		     twitter
+	      services
+		 authentication.client.service
+		 users.client.service
+	      tests
+		 authentication.client.controller.test
+		     
+	      views
+		 authentication
+		     signin.client.view
+		     signup.client.view
+		 password
+		     forgot-password.client.view
+		     reset-password.client.view
+		     reset-password-invalid.client.view
+	   	     reset-password-success.client.view
+		 settings
+		     change-password.client.view
+	 	     edit-profile.client.view
+		     social-accounts.client.view
+	      users.client.module.js
+	 uploads
+	 application.js
+	 config.js
+	 humans.txt
+	 robots.txt
