@@ -277,7 +277,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					}
 				}
 			});
-			modalInstance.result.then(function (response) {
+      modalInstance.result.then(function (response) {
 				if (element === 'no_element')
 				{
 					$scope.remove();
@@ -291,6 +291,15 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
+
+    $scope.openProjectModal = function (size) {
+			var modalInstance = $modal.open({
+				templateUrl: 'modules/projects/views/list-recent-projects.client.view.html',
+				controller: 'ProjectsController',
+				size: size,
+				}
+			});
+    };
 
 		$scope.openDeleteQuestionModal = function (question, msg, size) {
 			var modalInstance = $modal.open({
@@ -849,7 +858,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		};
 
 		/*$scope.getNumChoices = function(num) {
-		    return numChoices;   
+		    return numChoices;
 		};*/
 
 		$scope.numberMultipleSelections = function(num) {
@@ -860,7 +869,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 		//$scope.number = 0;
 		$scope.getNumber = function(num) {
-		    return new Array(num);   
+		    return new Array(num);
 		};
 
 		$scope.editFile = function(files) {
@@ -998,7 +1007,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        		$state.go('home.viewProject',{projectId:project._id});
+        		$state.go('home.viewProject',{projectId:project._id},{reload:true});
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
