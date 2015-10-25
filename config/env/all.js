@@ -73,11 +73,7 @@ module.exports = {
 				'public/lib/mathquill-0.9.4/mathquill.js',
 				'public/lib/mathquill-0.9.4/mathquill-main.js',
 				'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured&dummy=.js',
-				'public/ckeditor/ckeditor.js',           //
-				'public/ckeditor/build-config.js',       //
-				'public/ckeditor/config.js',             //Added these references for ckeditor
-				'public/ckeditor/styles.js'              //
-
+				'public/ckeditor/*.js'
 			]
 		},
 		css: [

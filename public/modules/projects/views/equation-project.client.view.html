@@ -2,40 +2,15 @@
 	<div class="page-header">
 		<h1>Add Equation</h1>
 	</div>
-	<h3>Preview: </h3>
-	<div class="well">
-		
-		<span mathjax-bind="textToAppend"></span>
+	<!-- Create a textarea that is then replaced by a ckEditor configuration
+       used specifically for adding equations to the project-->
+	<div>
+		<textarea eq-editor ng-model="textToAppend"></textarea>
 	</div>
-	<div>
-		<h3>Input:</h3>
-		<input type="text" data-ng-model="textToAppend"><br>
-		<h4>For help with commands, visit this <a href="http://martinkeefe.com/math/mathjax3" target="_blank">page</a>.</h4>
-	</div><br>
-	<div>
 
+  <!--Pushing the save button calls appendEquation() and adds to the project any
+	    equation entered in the textarea above-->
+	<div>
 		<button class="btn btn-primary" data-ng-click="appendEquation()">Save</button>
 	</div>
-	<!--div class="col-md-12">
-		<form name="projectForm" class="form-horizontal" data-ng-submit="appendText(projectForm.$valid)" novalidate>
-			<fieldset>
-				<div class="form-group">
-					<label class="control-label" for="heading">Heading</label>
-					<div class="controls">
-						<input name="heading" type="text" ng-model="heading" class="form-control" placeholder="Heading" required>
-					</div>
-					<label class="control-label" for="text">Text</label>
-					<div class="controls">
-						<textarea type="textToAppend" ng-model="textToAppend" name="inputText" class="form-control" placeholder="Content" cols="30" rows="10" required></textarea>
-					</div>
-				</div>
-				<div>
-					<input name="submit" type="submit" value="Insert" class="btn btn-default">
-				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
-	</div-->
 </section>
