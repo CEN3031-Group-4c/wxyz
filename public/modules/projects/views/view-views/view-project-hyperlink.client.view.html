@@ -1,0 +1,179 @@
+<section id="view_project" ng-init="findProjectByID(targetID)">
+	<div class="page-header">
+	<div class="pull-right">
+		<a data-ng-show="authentication.user._id == project.user._id && project.level == 1" class="btn btn-primary" tooltip="Permissions" name="permissionButton" href="/#!/projects/{{project._id}}/permissions">
+			<i class="glyphicon glyphicon-wrench"></i>
+		</a>
+		<a class="btn btn-primary" name="editButton" tooltip="Edit" href="/#!/projects/{{project._id}}/editProject">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" name="deleteButton" tooltip="Delete" data-ng-click="openDeleteModal('no_element', 'Are you sure you want to permanently delete this page?')">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+
+		<h1 data-ng-bind="project.title"></h1>
+		<small data-ng-bind="project.content"></small>
+
+	</div>
+
+	<!--Showing questions on a quiz-->
+	<div data-ng-repeat="question in project.questions">
+		<div class="pull-right">
+			<a class="btn btn-primary" name="questionDeleteButton" tooltip="Delete" data-ng-click="openDeleteQuestionModal(question, 'Are you sure you want to permanently delete this element?')">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<div><h4 data-ng-bind="question.explanation"></h4></div>
+		<div data-ng-bind="question.query"></div>
+
+		<!-- Multiple Choice Display -->
+		<div data-ng-show="question.tag == 'multipleChoice'">
+			<div data-ng-repeat="choice in question.choices">
+				<input type="radio" name="mcAnswerChoice" id="mcAnswerChoice" data-ng-click="setAnswer(choice, question)" style="display:inline;">
+				<label data-ng-bind="choice"></label>
+			</div>
+		</div>
+
+		<!-- Multiple Selection Display -->
+		<div data-ng-show="question.tag == 'multipleSelection'">
+			<div data-ng-repeat="choice in question.choices">
+				<input type="checkbox" name="msAnswerChoice" id="msAnswerChoice" data-ng-click="setMultipleAnswer(choice, question);" style="display:inline;">
+				<label data-ng-bind="choice"></label>
+			</div>
+		</div>
+
+		<!-- True/False Display -->
+		<div data-ng-show="question.tag == 'trueFalse'">
+			<div data-ng-repeat="choice in question.choices">
+				<input type="radio" name="tfAnswerChoice" id="tfAnswerChoice" style="display:inline;" data-ng-click="setAnswer(choice, question)">
+				<label data-ng-bind="choice"></label>
+			</div>
+		</div>
+
+	<!-- Submit button and score reporting -->
+		<div>
+			<a class="btn btn-default" name="answerCheckButton" data-ng-click="checkAnswer(question); showFeedback(question);">
+				<i class="glyphicon glyphicon-pencil" style="font-size:13px"></i> Check Answer</a>
+			<font size="4" color="grean" data-ng-show="question.result==true && question.answered==true && displayFeedback==true">Correct!</font>
+			<font size="4" color="red" data-ng-show="question.result==false && question.answered==true && question.checked==true && displayFeedback==true">Incorrect!</font>
+			<font size="3" color="red" data-ng-show="question.answered==true && question.checked==false && displayFeedback==true">Please select an answer!</font><br>
+			<div><font size="2" data-ng-bind="question.choices[0] + ': ' + question.feedback[0]" data-ng-show="showFeedback(question, 0) && question.answered==true"></font></div>
+			<div><font size="2" data-ng-bind="question.choices[1] + ': ' + question.feedback[1]" data-ng-show="showFeedback(question, 1) && question.answered==true"></font></div>
+			<div><font size="2" data-ng-bind="question.choices[2] + ': ' + question.feedback[2]" data-ng-show="showFeedback(question, 2) && question.answered==true"></font></div>
+			<div><font size="2" data-ng-bind="question.choices[3] + ': ' + question.feedback[3]" data-ng-show="showFeedback(question, 3) && question.answered==true"></font></div>
+			<div><font size="2" data-ng-bind="question.choices[4] + ': ' + question.feedback[4]" data-ng-show="showFeedback(question, 4) && question.answered==true"></font></div>
+			<div><font size="2" data-ng-bind="question.choices[5] + ': ' + question.feedback[5]" data-ng-show="showFeedback(question, 5) && question.answered==true"></font></div>
+			<hr>
+		</div>
+	</div>
+
+	<a class="btn btn-primary" tooltip="Submit Quiz" name="answerSubmitButton" data-ng-show="project.isQuiz==true" data-ng-click="displayFeedbackFunc()">
+		<i class="glyphicon glyphicon-ok" style="font-size:13px"></i> Submit</a>
+		<br data-ng-show="project.isQuiz==true" >
+		<br data-ng-show="project.isQuiz==true" >
+		<br data-ng-show="project.isQuiz==true" >
+		<br data-ng-show="project.isQuiz==true" >
+
+
+	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)">
+		<div ng-switch on="element.tag">
+			<div class="row">
+				<div class="col-md-10">
+					<div ng-drag="canDrag(element)" ng-drag-data="element" ng-class="element.index">
+						<div ng-switch-when="text">
+							<div data-ng-hide="element.isEditing">
+								<div ng-bind-html="sc.trustAsHtml(element.value)"></div><br>
+
+							</div>
+							<div data-ng-show="element.isEditing">
+								<!-- Create a textarea that is then replaced by the ckEditor. Any text entered is bound
+							       to element.value, which is then used to edit existing project content.-->
+								<div>
+									<textarea ck-editor ng-model="element.value"></textarea>
+								</div><br>
+								<!--Pushing the save button calls update() and adds/edits to the project any text entered
+								    in the textarea above-->
+								<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button>
+							</div>
+
+						</div>
+						<div ng-switch-when="graph" data-ng-init="drawGraph(element)">
+							<div>
+								<div google-chart chart="element.graph" style="{{chart.cssStyle}}"></div>
+							</div>
+						</div>
+						<div ng-switch-when="image">
+							<img id='image' alt= "what?" ng-src = "{{element.value}}"><br>
+							<div data-ng-show="element.isEditing">
+								<div class="page-header">
+									<span class="btn btn-primary btn-file"> Change Image
+										<input type="file" name="file" data-ng-click="setActiveElement(element)" onchange="angular.element(this).scope().editFile(this.files, 0)" >
+									</span>
+								</div>
+							</div><br>
+						</div>
+						<div ng-switch-when="video">
+							<video id='video' width="320" height="240" controls>
+								<source ng-src="{{element.value}}" type="video/mp4">
+							</video><br>
+							<div data-ng-show="element.isEditing">
+								<div class="page-header">
+									<span class="btn btn-primary btn-file"> Change Video
+										<input type="file" name="file" data-ng-click="setActiveElement(element)" onchange="angular.element(this).scope().editFile(this.files, 0)" >
+									</span>
+								</div>
+							</div>
+						</div>
+						<div ng-switch-when="audio">
+							<audio id='audio' controls>
+							  <source ng-src="{{element.value}}" type="audio/mpeg">
+							</audio><br>
+							<div data-ng-show="element.isEditing">
+								<div class="page-header">
+									<span class="btn btn-primary btn-file"> Change Audio
+										<input type="file" name="file" data-ng-click="setActiveElement(element)" onchange="angular.element(this).scope().editFile(this.files, 0)" >
+									</span>
+								</div>
+							</div>
+						</div>
+						<div ng-switch-when="equation">
+							<div data-ng-hide="element.isEditing">
+								<span mathjax-bind="element.value"></span>
+							</div><br>
+							<div data-ng-show="element.isEditing">
+								<br>
+								<div class="well">
+									<span mathjax-bind="element.value"></span>
+								</div>
+								<h3>New Equation:</h3>
+								<input type="text" data-ng-model="element.value"><br>
+								<div><br>
+									<button class="btn btn-primary" tooltip="Save Equation" data-ng-click="toggleEdit(element); update()">Save</button>
+								</div>
+							</div><br>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="pull-right">
+						<a class="btn btn-primary" tooltip="Edit" name="elementEditButton" data-ng-click="toggleEdit(element);">
+							<i class="glyphicon glyphicon-edit"></i>
+						</a>
+						<a class="btn btn-primary" tooltip="Delete" name="elementDeleteButton" data-ng-click="openDeleteModal(element, 'Are you sure you want to permanently delete this element?')">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- QUIZ SCORE REPORT -->
+	<div data-ng-show="hasQuestions == true && displayFeedback==true && displayScore==true">
+		Score: <font size="3" data-ng-bind="score"></font> / <font size="3" data-ng-bind="numQuestions"></font><br><br>
+	</div>
+
+</section>

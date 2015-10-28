@@ -26,6 +26,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
     $scope.yTitle = '';
     $scope.graphPoints = [];
     $scope.chartArray = [];
+    $scope.targetID = '561e72cc7d1ad032173b0dab' ;
 
 
 
@@ -218,6 +219,18 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
+    $scope.openProjectModal = function (projectID) {
+      $scope.targetID = projectID;
+      console.log('This is targetID, inScope');
+      console.log($scope.targetID);
+      console.log('This is our projectID parameter');
+      console.log(projectID);
+			var modalInstance = $modal.open({
+				templateUrl: 'modules/projects/views/view-views/view-project-hyperlink.client.view.html',
+				size: 'lg',
+        controller: "ProjectsController"
+      });
+  }
 
 		$scope.changePermission = function (permission, state)
 		{
@@ -292,14 +305,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				});
 		};
 
-    $scope.openProjectModal = function (size) {
-			var modalInstance = $modal.open({
-				templateUrl: 'modules/projects/views/list-recent-projects.client.view.html',
-				controller: 'ProjectsController',
-				size: size,
-				}
-			});
-    };
+
 
 		$scope.openDeleteQuestionModal = function (question, msg, size) {
 			var modalInstance = $modal.open({
@@ -1028,6 +1034,15 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				projectId: $stateParams.projectId
 			});
 		};
+
+    $scope.findProjectByID = function(){
+      console.log($scope.targetID);
+      $scope.project = Projects.get({
+          projectId: $scope.targetID
+
+      });
+
+    }
 
 		$scope.getUniqueUsers = function(report){
 			var ret = [report[0].student];
