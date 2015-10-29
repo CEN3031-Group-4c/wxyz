@@ -2,23 +2,19 @@
 
 var myApp = angular.module('projects').controller('ProjectsController', ['$scope','$rootScope', '$http', '$stateParams', '$location', '$upload', '$modal', '$sce', 'Authentication', 'Projects','$state',
 	function($scope, $rootScope, $http, $stateParams, $location, $upload, $modal, $sce, Authentication, Projects, $state) {
-
-
 		$scope.authentication = Authentication;
 		$scope.textToAppend = '';
-    $scope.sc = $sce;
+    	$scope.sc = $sce;
 		$scope.heading= '';
 		$scope.obj={};
 		$scope.activeElementIndex = -1;
 		$scope.foundTop = false;
-    $scope.chart ={};
-    $scope.graphTitle = '';
-    $scope.xTitle = '';
-    $scope.yTitle = '';
-    $scope.graphPoints = [];
-    $scope.chartArray = [];
-
-
+    	$scope.chart ={};
+    	$scope.graphTitle = '';
+    	$scope.xTitle = '';
+    	$scope.yTitle = '';
+    	$scope.graphPoints = [];
+    	$scope.chartArray = [];
 
 		$scope.lookup = function(id)
 		{

@@ -111,9 +111,16 @@
 									</span>
 								</div>
 							</div><br>
-						</div>  <!--//image end//-->
-						<div ng-switch-when="video">  <!--//video start//-->
-							<video id='video' width="320" height="240" controls>
+						</div>
+						<div ng-switch-when="video">
+							<script>
+								var showVideo = false;
+							</script>
+							<div class="pull-left">
+								<button class="btn btn-primary" ng-click="showVideo = !showVideo">
+									<i class="glyphicon glyphicon-facetime-video"></i></button>
+							</div>
+							<video ng-show="showVideo" id='video' width="320" height="240" controls>
 								<source ng-src="{{element.value}}" type="video/mp4">
 							</video><br>
 							<div data-ng-show="element.isEditing">
@@ -123,9 +130,17 @@
 									</span>
 								</div>
 							</div>
-						</div>  <!--//video end//-->
-						<div ng-switch-when="audio">  <!--//audio start//-->
-							<audio id='audio' controls>
+						</div>
+						<div ng-switch-when="audio">
+							<script>
+								var showAudio = false;
+							</script>
+							<div class="pull-left">
+								<button class="btn btn-primary" ng-click="showAudio = !showAudio">
+									<i class="glyphicon glyphicon-volume-up"></i>
+								</button>
+							</div>
+							<audio ng-show="showAudio" id='audio' controls>
 							  <source ng-src="{{element.value}}" type="audio/mpeg">
 							</audio><br>
 							<div data-ng-show="element.isEditing">
