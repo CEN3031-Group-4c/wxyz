@@ -81,10 +81,9 @@
 			<div class="row">
 				<div class="col-md-10">
 					<div ng-drag="canDrag(element)" ng-drag-data="element" ng-class="element.index">
-						<div ng-switch-when="text">
+						<div ng-switch-when="text">   <!--text start-->
 							<div data-ng-hide="element.isEditing">
 								<div ng-bind-html="sc.trustAsHtml(element.value)"></div><br>
-
 							</div>
 							<div data-ng-show="element.isEditing">
 								<!-- Create a textarea that is then replaced by the ckEditor. Any text entered is bound
@@ -97,13 +96,13 @@
 								<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button>
 							</div>
 
-						</div>
-						<div ng-switch-when="graph" data-ng-init="drawGraph(element)">
+						</div>   <!--text end-->
+						<div ng-switch-when="graph" data-ng-init="drawGraph(element)">  <!--graph start-->
 							<div>
 								<div google-chart chart="element.graph" style="{{chart.cssStyle}}"></div>
 							</div>
-						</div>
-						<div ng-switch-when="image">
+						</div>  <!--graph end-->
+						<div ng-switch-when="image">  <!--//image start//-->
 							<img id='image' alt= "what?" ng-src = "{{element.value}}"><br>
 							<div data-ng-show="element.isEditing">
 								<div class="page-header">
@@ -137,7 +136,9 @@
 								var showAudio = false;
 							</script>
 							<div class="pull-left">
-							<button class="btn btn-primary" ng-click="showAudio = !showAudio"><i class="glyphicon glyphicon-volume-up"></i></button>
+								<button class="btn btn-primary" ng-click="showAudio = !showAudio">
+									<i class="glyphicon glyphicon-volume-up"></i>
+								</button>
 							</div>
 							<audio ng-show="showAudio" id='audio' controls>
 							  <source ng-src="{{element.value}}" type="audio/mpeg">
@@ -149,24 +150,21 @@
 									</span>
 								</div>
 							</div>
-						</div>
-						<div ng-switch-when="equation">
+						</div> <!--//audio end//-->
+						<div ng-switch-when="equation">  <!--//equation start//-->
 							<div data-ng-hide="element.isEditing">
-								<span mathjax-bind="element.value"></span>
+								<div ng-bind-html="sc.trustAsHtml(element.value)"></div><br>
 							</div><br>
 							<div data-ng-show="element.isEditing">
-								<br>
-								<div class="well">
-									<span mathjax-bind="element.value"></span>
-								</div>
-								<h3>New Equation:</h3>
-								<input type="text" data-ng-model="element.value"><br>
-								<div><br>
-									<button class="btn btn-primary" tooltip="Save Equation" data-ng-click="toggleEdit(element); update()">Save</button>
-								</div>
+								<div>
+									<textarea eq-editor ng-model="element.value"></textarea>
+								</div><br>
+								<!--Pushing the save button calls update() and adds/edits to the project any equation entered
+								    in the textarea above-->
+								<button class = "btn btn-primary" tooltip="Save Equation" data-ng-click="toggleEdit(element); update();">Save</button>
 							</div><br>
 
-						</div>
+						</div>  <!--//equation end//-->
 					</div>
 				</div>
 				<div class="col-md-2" data-ng-show="canEdit()">
