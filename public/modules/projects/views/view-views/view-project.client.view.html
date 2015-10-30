@@ -75,7 +75,11 @@
 		<br data-ng-show="project.isQuiz==true" >
 		<br data-ng-show="project.isQuiz==true" >
 
-
+	<!-- ********************************************** 
+		 Temporary link to open the modal, which has a hardcoded link; second parameter is unused for now
+	-->
+	<a ng-click="openProjectModal('561ad6064b0ed9700b5fb5dd', 'testing')">Open Modal</a>
+	<!-- ********************************************** -->
 	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)">
 		<div ng-switch on="element.tag">
 			<div class="row">

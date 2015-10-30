@@ -1120,5 +1120,22 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		{
 			return $scope.canEdit() && !element.isEditing;
 		};
+
+		// the function with the magic
+		$scope.openProjectModal  = function (projectId, elementId, size) {
+			var modalInstance = $modal.open({
+				templateUrl: 'modules/projects/views/modals/project-modal.client.view.html',
+				controller: 'LinkModalController',
+				size: size,
+				resolve: {
+					prjId: function() {
+						return projectId;
+					},
+					eleId: function() {
+						return elementId;
+					}
+				}
+			});
+		};
 	}
 ]);
