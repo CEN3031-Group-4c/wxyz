@@ -849,7 +849,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		};
 
 		/*$scope.getNumChoices = function(num) {
-		    return numChoices;   
+		    return numChoices;
 		};*/
 
 		$scope.numberMultipleSelections = function(num) {
@@ -860,7 +860,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 		//$scope.number = 0;
 		$scope.getNumber = function(num) {
-		    return new Array(num);   
+		    return new Array(num);
 		};
 
 		$scope.editFile = function(files) {
@@ -998,7 +998,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
-        		$state.go('home.viewProject',{projectId:project._id});
+        		$state.go('home.viewProject',{projectId:project._id},{reload:true});
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
