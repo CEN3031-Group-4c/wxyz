@@ -103,14 +103,14 @@
 						</div>   <!--text end-->
 						<div ng-switch-when="linkButton">   <!--text start-->
 							<div data-ng-hide="element.isEditing">
-								<div class='button' data-ng-click="openProjectModal(element.value)"> Open Project Modal </div>
+								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value)"> Open Project Modal </div>
 							</div>
 							<div data-ng-show="element.isEditing">
 								<!-- Create a textarea that is then replaced by the ckEditor. Any text entered is bound
 							       to element.value, which is then used to edit existing project content.-->
 							</div>
 								<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button>
-							</div>
+						</div>
 
 
 

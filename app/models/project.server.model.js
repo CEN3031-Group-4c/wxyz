@@ -24,7 +24,7 @@ var GraphSchema = new Schema({
 	y: Number
 
 });
- 
+
  var QuestionSchema = new Schema({
 	tag: {
 		type: String,
@@ -52,7 +52,7 @@ var GraphSchema = new Schema({
 var ElementSchema = new Schema({
 	tag: {
 		type: String,
-		enum: ['text', 'image', 'audio', 'video', 'equation', 'graph'],
+		enum: ['text', 'image', 'audio', 'video', 'equation', 'graph', 'linkButton'],
 		default: 'text'
 	},
 	heading : {						//heading for a text element
@@ -97,7 +97,7 @@ var ElementSchema = new Schema({
 /*
  * Project Schema
  */
- 
+
 var ProjectSchema = new Schema({
 	//_id: Schema.ObjectId,
 	created: {
