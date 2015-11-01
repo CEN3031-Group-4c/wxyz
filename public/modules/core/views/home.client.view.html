@@ -8,22 +8,26 @@
 			<div class="custom-acc">
 			<accordion close-others="true">
 				<accordion-group data-ng-repeat="project in projects.slice().reverse()" name="proj_title" data-ng-if="project.level==1" heading="{{project.title}}" data-ng-init="checkOpenInit()" ng-click="state.go('home.viewProject', {projectId:project._id})" is-open="project.isOpenAcc">
-					<div ng-if="course.level == 2 && course.parent == project._id && canView(course)" name="course_title" ng-repeat="course in projects.slice().reverse()" close="projects.splice(index,1)">
+					<div ng-if="course.level == 2 && course.parent == project._id && canView(course)" name="course_title" 
+
+					ng-class="{ 'selected': $index == selectedIndex }" ng-click="itemClicked($index)" 
+
+					ng-repeat="course in projects.slice().reverse()" close="projects.splice(index,1)">
 							
-							<div class="accStyle courseStyle"  data-ng-bind="course.title" data-ng-click="link($event, course._id)"></div>
+							<div class="accStyle courseStyle"  data-ng-bind="course.title" data-ng-click="link($event, course._id)" ng-class="{'selected':isActive(course._id)}" ng-disabled="'courseStyle':isActive(course._id)"></div>
 							<div ng-if="topic.level == 3 && topic.parent == course._id && canView(topic)" name="topic_title" ng-repeat="topic in projects.slice().reverse()" close="projects.splice(index,1)">
 									
-									<div class="accStyle topicStyle"  data-ng-click="link($event, topic._id)">{{topic.title}}</div>
+									<div class="accStyle topicStyle"  data-ng-click="link($event, topic._id)" ng-class="{'selected':isActive(topic._id)}">{{topic.title}}</div>
 									
 									<div ng-repeat="concept in projects.slice().reverse()" name="concept_title" ng-if="concept.level == 4 && concept.parent == topic._id" close="projects.splice(index,1)">
-											<div class="accStyle conceptStyle" data-ng-click="link($event, concept._id)">{{concept.title}}</div>
+											<div class="accStyle conceptStyle" data-ng-click="link($event, concept._id)" ng-class="{'selected':isActive(concept._id)}">{{concept.title}}</div>
 											<div ng-repeat="section in projects.slice().reverse()" name="section_title" ng-if="section.level == 5 && section.parent == concept._id && canView(section)" close="projects.splice(index,1)">
 													
-													<div class="accStyle sectionStyle"  data-ng-click="link($event, section._id)">{{section.title}}</div>
+													<div class="accStyle sectionStyle" ng-class="{'selected':isActive(section._id)}" data-ng-click="link($event, section._id)">{{section.title}}</div>
 													<div ng-repeat="subsection in projects.slice().reverse()" name="subsection_title" ng-if="subsection.level == 6 && subsection.parent == section._id && canView(subsection)" close="projects.splice(index,1)">
-															<div class="accStyle subsectionStyle"  data-ng-click="link($event, subsection._id)">{{subsection.title}}</div>
+															<div class="accStyle subsectionStyle" ng-class="{'selected':isActive(subsection._id)}" data-ng-click="link($event, subsection._id)">{{subsection.title}}</div>
 															<div ng-repeat="quiz in projects.slice().reverse()" name="quiz_title" ng-if="quiz.level == 7 && quiz.parent == subsection._id && canView(quiz)" close="projects.splice(index,1)">
-																<div class="accStyle quizStyle"  data-ng-click="link($event, quiz._id)">{{quiz.title}}</div>
+																<div class="accStyle quizStyle" ng-class="{'selected':isActive(quiz._id)}" data-ng-click="link($event, quiz._id)">{{quiz.title}}</div>
 																	
 														</div>
 													</div>
