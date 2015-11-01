@@ -4,6 +4,10 @@
 .content {
 	margin-top: 50px;
 }
+.spacer{
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
 .top-blue-box {
 	height: 44px;
 	text-align: center;

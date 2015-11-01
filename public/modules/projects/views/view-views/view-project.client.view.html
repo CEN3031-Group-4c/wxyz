@@ -112,7 +112,7 @@
 								</div>
 							</div><br>
 						</div>
-						<div ng-switch-when="video" ng-init="showVideo=extractShowMedia(element.value)">
+						<div class="spacer" ng-switch-when="video" ng-init="showVideo=extractShowMedia(element.value)">
 							<div class="pull-left">
 								<button class="btn btn-primary" ng-click="showVideo = !showVideo">
 									<i class="glyphicon glyphicon-facetime-video"></i></button>
@@ -128,7 +128,7 @@
 								</div>
 							</div>
 						</div>
-						<div ng-switch-when="audio" ng-init="showAudio=extractShowMedia(element.value)">
+						<div class="spacer" ng-switch-when="audio" ng-init="showAudio=extractShowMedia(element.value)">
 							<div class="pull-left">
 								<button class="btn btn-primary" ng-click="showAudio = !showAudio">
 									<i class="glyphicon glyphicon-volume-up"></i>
