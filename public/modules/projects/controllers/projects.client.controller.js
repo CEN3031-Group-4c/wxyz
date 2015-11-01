@@ -1157,7 +1157,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/project-modal.client.view.html',
 				controller: 'LinkModalController',
-				size: size,
+				size: 'lg',
 				resolve: {
 					prjId: function() {
 						return projectId;
