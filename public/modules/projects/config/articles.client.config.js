@@ -21,12 +21,12 @@ angular.module('projects').run([ 'Menus',
 		Menus.addSubMenuItem('topbar', 'view_menu', '3-pane Debug View', 'articles');
 		
 		//Create menu
-		Menus.addMenuItem('topbar', 'Create', 'create_menu', 'dropdown');
-		Menus.addSubMenuItem('topbar', 'create_menu', 'ICW Course', 'new-course', true);
-		Menus.addSubMenuItem('topbar', 'create_menu', 'ICW Archive', 'articles');
+		//Menus.addMenuItem('topbar', 'Create', 'create_menu', 'dropdown');
+		//Menus.addSubMenuItem('topbar', 'create_menu', 'ICW Course', 'new-course', true);
+		//Menus.addSubMenuItem('topbar', 'create_menu', 'ICW Archive', 'articles');
 		
 		//Compose ICW Arch menu
-		Menus.addMenuItem('topbar', 'ComposeICWArch', 'compose_menu', 'dropdown');
+		Menus.addMenuItem('topbar', 'Create', 'compose_menu', 'dropdown');
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Course', 'new-course', true);
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Topic', 'new-topic', true);
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Concept', 'new-concept',true);

@@ -75,8 +75,7 @@
 		<br data-ng-show="project.isQuiz==true" >
 		<br data-ng-show="project.isQuiz==true" >
 
-
-	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)">
+	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)" wait-until-loaded="replaceHashLinks()">
 		<div ng-switch on="element.tag">
 			<div class="row">
 				<div class="col-md-10">
