@@ -869,7 +869,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			.success( function(data, status, headers, config, statusText) {
 				console.log(data);
 				var filepath = data;
-				project.elements[$scope.activeElementIndex] = {tag: project.elements[$scope.activeElementIndex].tag, value: filepath.data.replace('public/', '')};
+				project.elements[$scope.activeElementIndex] = {tag: project.elements[$scope.activeElementIndex].tag, value: filepath.data.replace('public/', '').replace('\\', '/')};
 				project.$update(function() {
 					//$location.path('projects/' + project._id);
           			$state.go('home.viewProject',{projectId:project._id},{reload:true});
@@ -906,7 +906,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					tag_type = 'video';
 				else if(indicator === 2)
 					tag_type = 'audio';
-				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', ''), isEditing: false, index: my_index});
+				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', '').replace('\\', '/'), isEditing: false, index: my_index});
 				project.$update(function() {
 					//$location.path('projects/' + project._id);
           			$state.go('home.viewProject',{projectId:project._id});
