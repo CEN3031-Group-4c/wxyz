@@ -1,0 +1,16 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Add A Project Link</h1>
+	</div>
+	<!-- Create a textarea that is then replaced by a ckEditor configuration
+       used specifically for adding equations to the project-->
+	<div>
+		<textarea ng-model="targetProj"></textarea>
+	</div>
+
+  <!--Pushing the save button calls appendEquation() and adds to the project any
+	    equation entered in the textarea above-->
+	<div>
+		<button class="btn btn-primary" data-ng-click="appendLink('563042b0fe65a41ecc766ed3')">Save</button>
+	</div>
+</section>

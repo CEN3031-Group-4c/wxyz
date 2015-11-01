@@ -430,6 +430,21 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
+		$scope.appendLink = function(targetURL){
+			$scope.addContributer();
+			var project = $scope.project;
+			var my_index = get_insert_index(project);
+			project.elements.push({tag: 'linkButton', value: targetURL, index: my_index});
+			project.$update(function() {
+				//$location.path('projects/' + project._id);
+        		$state.go('home.viewProject', {projectId:project._id});
+				
+			},
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
 		$scope.setGraphType = function(label){
 			$scope.graphType = label;
 			$scope.drawGraphPreview();
