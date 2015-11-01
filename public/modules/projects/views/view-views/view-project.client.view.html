@@ -120,9 +120,14 @@
 								<button class="btn btn-primary" ng-click="showVideo = !showVideo">
 									<i class="glyphicon glyphicon-facetime-video"></i></button>
 							</div>
-							<video ng-show="showVideo" id='video' width="320" height="240" controls>
+							<video ng-show="showVideo && !element.isEmbedded" id='video' width="320" height="240" controls>
 								<source ng-src="{{element.value}}" type="video/mp4">
 							</video><br>
+
+							<div ng-show="showVideo && element.isEmbedded">
+								<youtube-video video-url="element.value"></youtube-video>
+						  </div>
+
 							<div data-ng-show="element.isEditing">
 								<div class="page-header">
 									<span class="btn btn-primary btn-file"> Change Video
