@@ -881,7 +881,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			);
 		};
 
-		$scope.uploadFile = function(files, indicator) {
+		$scope.uploadFile = function(files, indicator, OOL) {
 			$scope.addContributer();
 			var project = $scope.project;
 			var my_index = get_insert_index(project);
