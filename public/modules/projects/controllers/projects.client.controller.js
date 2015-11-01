@@ -15,6 +15,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
     	$scope.yTitle = '';
     	$scope.graphPoints = [];
     	$scope.chartArray = [];
+    	$scope.discrete = false;
 
 		$scope.lookup = function(id)
 		{
@@ -881,16 +882,17 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			);
 		};
 
-		$scope.uploadFile = function(files, indicator, OOL) {
+		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
 			var my_index = get_insert_index(project);
 			var fd = new FormData();
 			//Take the first selected file
+
 			fd.append('file', files[0]);
 			console.log(files[0].name);
 			console.log(files[0].type);
-
+			console.log($scope.discrete);
 			$http.post('/public/uploads', fd, {
 				withCredentials: true,
 				headers: {'Content-Type': undefined },
