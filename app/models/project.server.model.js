@@ -91,7 +91,7 @@ var ElementSchema = new Schema({
 		type: String,
 		default: 'Data'
 	},
-	graph_points : [GraphSchema], 
+	graph_points : [GraphSchema],
 });
 
 /*

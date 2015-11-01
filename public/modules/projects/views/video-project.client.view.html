@@ -7,11 +7,9 @@
 		<h1>Add Video</h1>
 	</div>
 	<div style="padding-left:20px; padding-bottom:15px">
-		<form action="demo_form.asp">
-			<input type="checkbox" ng-model="discrete"> Open on load.<br>
-		</form>
+		<input type="checkbox" ng-model="showMedia"> Open on load.<br>
 	</div>
-		{{discrete}}
+	{{this.showMedia}}
 	<span class="btn btn-primary btn-file"> Upload
 		<input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files, 1)" >
 	</span>
