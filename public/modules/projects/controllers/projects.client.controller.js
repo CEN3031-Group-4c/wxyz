@@ -2,6 +2,7 @@
 
 var myApp = angular.module('projects').controller('ProjectsController', ['$scope','$rootScope', '$http', '$stateParams', '$location', '$upload', '$modal', '$sce', 'Authentication', 'Projects','$state', '$timeout',
 	function($scope, $rootScope, $http, $stateParams, $location, $upload, $modal, $sce, Authentication, Projects, $state, $timeout) {
+
 		$scope.authentication = Authentication;
 		$scope.textToAppend = '';
     	$scope.sc = $sce;
@@ -15,6 +16,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
     	$scope.yTitle = '';
     	$scope.graphPoints = [];
     	$scope.chartArray = [];
+			$scope.videoEmbed = '';     //'https://www.youtube.com/watch?v=OPf0YbXqDm0';
 
 		$scope.lookup = function(id)
 		{
@@ -916,6 +918,28 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					});
 				}
 			);
+		};
+
+		$scope.embedFile = function(indicator) {
+			$scope.addContributer();
+			var project = $scope.project;
+			var my_index = get_insert_index(project);
+
+			var tag_type = '';
+
+			if(indicator === 0)	tag_type = 'image';
+			else if(indicator === 1) tag_type = 'video';
+			else if(indicator === 2) tag_type = 'audio';
+
+			project.elements.push({tag: tag_type, value: $scope.videoEmbed, isEditing: false, index: my_index, isEmbedded: true});
+
+			project.$update(function() {
+				$state.go('home.viewProject',{projectId:project._id});
+				$scope.textToAppend = '';
+			},
+				function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+					});
 		};
 
 		//Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy
