@@ -14,7 +14,7 @@
 
 					ng-repeat="course in projects.slice().reverse()" close="projects.splice(index,1)">
 							
-							<div class="accStyle courseStyle"  data-ng-bind="course.title" data-ng-click="link($event, course._id)" ng-class="{'selected':isActive(course._id)}" ng-disabled="'courseStyle':isActive(course._id)"></div>
+							<div class="accStyle courseStyle"  data-ng-bind="course.title" data-ng-click="link($event, course._id)" ng-class="{'selected':isActive(course._id)}"></div>
 							<div ng-if="topic.level == 3 && topic.parent == course._id && canView(topic)" name="topic_title" ng-repeat="topic in projects.slice().reverse()" close="projects.splice(index,1)">
 									
 									<div class="accStyle topicStyle"  data-ng-click="link($event, topic._id)" ng-class="{'selected':isActive(topic._id)}">{{topic.title}}</div>
