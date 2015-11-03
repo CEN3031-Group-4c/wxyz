@@ -21,7 +21,7 @@
 	<div>
 		<form name="selectSection">
 	    <label for="selectSection"> Select Section / Course </label>
-	    <select name="selectSection" id="selectSection"ng-model="userSelectSection">
+	    <select name="selectSection" id="selectSection" ng-model="userSelectSection">
 				<!-- <option value="selectID._id" ng-model="selectID.title"></option> -->
 	      <option ng-repeat="section in projects.slice().reverse()" value="{{section._id}}"ng-if="resolveTopID(section) == userSelectedProject && section.level != 1"> {{section.title}}</option>
 	    </select>
@@ -36,6 +36,6 @@
   <!--Pushing the save button calls appendEquation() and adds to the project any
 	    equation entered in the textarea above-->
 	<div>
-		<button class="btn btn-primary" data-ng-click="appendLink(userSelectedProject,userSelectSection,modalProjectTitle)">Save Project Link</button>
+		<button class="btn btn-primary" data-ng-click="appendLink(userSelectedProject,userSelectSection)">Save Project Link</button>
 	</div>
 </section>

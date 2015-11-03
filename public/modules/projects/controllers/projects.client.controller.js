@@ -461,9 +461,13 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			if(sectionID){
 				determineTarget = sectionID;
 			}
+
+			var determineProject = $scope.lookup(determineTarget);
+			var determineTitle = determineProject.title;
+			console.log(determineTitle);
 			console.log(determineTarget);
 
-			project.elements.push({tag: 'linkButton', value: determineTarget, heading:'This is a simple test', index: my_index});
+			project.elements.push({tag: 'linkButton', value: determineTarget, heading: determineTitle, index: my_index});
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
