@@ -463,13 +463,6 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			console.log(determineTarget);
 
-			var determineProject = Projects.get({
-				projectId: determineTarget
-			});
-
-			console.log(determineProject.title);
-
-
 			project.elements.push({tag: 'linkButton', value: determineTarget, heading:'This is a simple test', index: my_index});
 
 			project.$update(function() {
