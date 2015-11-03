@@ -39,7 +39,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 				'mainFrame@home': { templateUrl: 'modules/projects/views/view-article.client.view.html' }
 			}
 		})
-		
+
 		// Routing of the buttons that are under Test Page 2
 		.state('home.test2.course', {
 			url: '/course',
@@ -61,9 +61,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 				'': {templateUrl: 'modules/core/views/home.client.view.html' },
 				'columnOne@home.test2': { template: 'Dynamically insert a new lesson into the hierarchy.' }
 			}
-		
-		
-			
+
+
+
 		});
 	}
 ]);

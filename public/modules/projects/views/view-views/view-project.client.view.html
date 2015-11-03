@@ -103,7 +103,7 @@
 						</div>   <!--text end-->
 						<div ng-switch-when="linkButton">   <!--text start-->
 							<div data-ng-hide="element.isEditing">
-								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value)"> Open Project: {{element.value}} </div>
+								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value)"> Open Project:{{element.heading}} </div>
 							</div>
 							<div data-ng-show="element.isEditing">
 								<!-- Create a textarea that is then replaced by the ckEditor. Any text entered is bound

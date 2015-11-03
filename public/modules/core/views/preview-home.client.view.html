@@ -1,5 +1,5 @@
 <section data-ng-controller="HomeController" data-ng-init="find(); previewInit(); setPreviewStatus(true)">
-		
+
 	</tr>
 	<div class = "row">
 		<div class = "col-md-3 preview-side">
@@ -7,40 +7,40 @@
 			<div class="preview-h3"
 				 data-ng-bind="resolveTop(lookup(getProjectId())).title">
 			</div>
-			
-			
+
+
 			<div class="custom">
 			<accordion close-others="true">
 				<accordion-group data-ng-repeat="project in projects.slice().reverse()" name="proj_title" data-ng-if="project.level==2 && resolveTop(lookup(getProjectId()))._id == project.parent" heading="{{project.title}}" data-ng-click="preview_stuff(project)" is-open="isCourseOpen(project) && project.children.length">
 					<div ng-if="course.level == 3 && course.parent == project._id && canView(course)" name="course_title" ng-repeat="course in projects.slice().reverse()" close="projects.splice(index,1)">
-							
+
 							<div class="preview-a"><a  data-ng-bind="course.title" data-ng-href="#!/projects/{{course._id}}/preview"></a></div>
 							<div ng-if="topic.level == 4 && topic.parent == course._id && canView(topic)" name="topic_title" ng-repeat="topic in projects.slice().reverse()" close="projects.splice(index,1)">
-									
+
 									<div class="preview-a">&nbsp;&nbsp;&nbsp;<a data-ng-bind="topic.title" data-ng-href="#!/projects/{{topic._id}}/preview"></a></div>
 									<div ng-repeat="concept in projects.slice().reverse()" name="concept_title" ng-if="concept.level == 5 && concept.parent == topic._id" close="projects.splice(index,1)">
-											
+
 											<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="concept.title" data-ng-href="#!/projects/{{concept._id}}/preview"></a></div>
-											
+
 											<div ng-repeat="section in projects.slice().reverse()" name="section_title" ng-if="section.level == 6 && section.parent == concept._id && canView(section)" close="projects.splice(index,1)">
-														
+
 															<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="section.title" data-ng-href="#!/projects/{{section._id}}/preview"></a></div>
-															
+
 															<div ng-repeat="subsection in projects.slice().reverse()" name="quiz_title" ng-if="subsection.level == 7 && subsection.parent == section._id && canView(subsection)" close="projects.splice(index,1)">
-																
+
 																<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="subsection.title" data-ng-href="#!/projects/{{subsection._id}}"></a></div>
 														</div>
 													</div>
 											</div>
-										
+
 							</div>
 					</div>
 				</div>
 			</accordion-group>
-			
+
 		</accordion>
 		</div>
-		
+
 		<div class="col-md-8 preview-side">
 
 			<!--JSON printing-->
@@ -48,13 +48,13 @@
 				<h3 ng-if="projectPage()" align="center"><strong>JSON Database</strong></h3>
 				<div ui-view="mainFrame2"></div>
 			</div>
-			
+
 			<!--HTML printing-->
 			<div ng-if="frame2 == true">
 				<h3 ng-if="projectPage()" align="center"><strong>HTML View</strong></h3>
 				<div ui-view="mainFrame3"></div>
-			</div>		
-			
+			</div>
+
 			<!--Preview-->
 			<div>
 				<h3 ng-if="projectPage() && frame1 == true" align="center"><strong>Page View</strong></h3>

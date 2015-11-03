@@ -80,7 +80,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 	{
 		var projects = $scope.projects;
 		//if ($scope.foundTop) return true;
-		
+
 		var current = project;
 		while (current.parent !== undefined)
 		{
@@ -104,7 +104,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		return current;
 
 	};
-	
+
 	$scope.canView = function(project)
 	{
 		var topProject = $scope.resolveTop(project);
@@ -116,9 +116,9 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 			else return false;
 		}
 	};
-	
+
 	$scope.projectPage = function() {
-		
+
 			if (document.getElementById('view_project'))
 			{
 				var text = document.getElementById('view_project').innerHTML;
@@ -149,5 +149,5 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		$scope.state.go('home.viewProject', {projectId:id});
 	};
 	}
-	
+
 ]);

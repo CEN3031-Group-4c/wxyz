@@ -17,7 +17,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$rootScope', '
 			$scope.isCollapsed = false;
 			$scope.currentProject = $location.url().replace('/projects/', '');
 		});
-		
+
 		$scope.frames = function(title) {
 			if(title === '1-pane Canvas'){
 				$rootScope.frame1 = false;
@@ -34,6 +34,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$rootScope', '
 			var proj_path = $location.path();
 			$location.path('projects');
 		};
-		
+
 	}
 ]);
