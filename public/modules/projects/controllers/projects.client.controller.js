@@ -46,6 +46,26 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return false;
 		};
 
+		$scope.resolveTopID = function(project)
+		{
+			var projects = $scope.projects;
+			var current = project;
+
+			while(current.parent !== undefined){
+					current = $scope.lookup(current.parent);
+
+			}
+			if(current.parent === undefined){
+
+				return current._id;
+
+			}
+
+			return false;
+
+
+		}
+
 		$scope.canEdit = function()
 		{
 			var project = $scope.project;
@@ -424,6 +444,35 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				//$location.path('projects/' + project._id);
         		$state.go('home.viewProject', {projectId:project._id});
 				$scope.textToAppend = '';
+			},
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.appendLink = function(workspaceID, sectionID){
+			console.log(workspaceID);
+			console.log(sectionID);
+			$scope.addContributer();
+			var project = $scope.project;
+			var determineTarget = workspaceID;
+
+			var my_index = get_insert_index(project);
+			if(sectionID){
+				determineTarget = sectionID;
+			}
+
+			var determineProject = $scope.lookup(determineTarget);
+			var determineTitle = determineProject.title;
+			console.log(determineTitle);
+			console.log(determineTarget);
+
+			project.elements.push({tag: 'linkButton', value: determineTarget, heading: determineTitle, index: my_index});
+
+			project.$update(function() {
+				//$location.path('projects/' + project._id);
+        		$state.go('home.viewProject', {projectId:project._id});
+
 			},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -1000,7 +1049,6 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				projectId: $stateParams.projectId
 			});
 		};
-
 		$scope.findOne_report = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
@@ -1126,7 +1174,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/project-modal.client.view.html',
 				controller: 'LinkModalController',
-				size: size,
+				size: 'lg',
 				resolve: {
 					prjId: function() {
 						return projectId;

@@ -90,6 +90,12 @@ angular.module('projects').config(['$stateProvider',
 				'mainFrame': { templateUrl: 'modules/projects/views/edit-element-views/edit-file-article.client.view.html' }
 			}
 		}).
+		state('home.addLinkButton', {
+			url: 'projects/:projectId/addlinkButton',
+			views: {
+				'mainFrame': { templateUrl: 'modules/projects/views/linkButton-project.client.view.html' }
+			}
+		}).
 		state('home.videoProject', {
 			url: 'projects/:projectId/add-video',
 			views: {
