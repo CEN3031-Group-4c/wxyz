@@ -15,7 +15,6 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
     	$scope.yTitle = '';
     	$scope.graphPoints = [];
     	$scope.chartArray = [];
-    	$scope.showMedia = false;		
 
 		$scope.lookup = function(id)
 		{
@@ -881,14 +880,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-		$scope.extractFilePath = function(value){
-			var index = value.indexOf(',');
-			return value.substring(0, index);
-		};
-		$scope.extractShowMedia = function(value){
-			var index = value.indexOf(',');
-			return value.substring(index+1);
-		};
+		
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -896,18 +888,16 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			var fd = new FormData();
 			//Take the first selected file
 			fd.append('file', files[0]);
-			console.log(files[0].name);
-			console.log(files[0].type);
-			console.log($scope.showMedia);
+			//console.log(files[0].name);
+			//console.log(files[0].type);
 			$http.post('/public/uploads', fd, {
 				withCredentials: true,
 				headers: {'Content-Type': undefined },
 				transformRequest: angular.identity
 			})
 			.success( function(data, status, headers, config, statusText) {
-				console.log(data);
+				//console.log(data);
 				var filepath = data;
-				var val = filepath.data.replace('public/', '').replace('\\', '/') + ',' + $scope.showMedia;
 				var tag_type = '';
 				if(indicator === 0)
 					tag_type = 'image';
@@ -915,7 +905,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					tag_type = 'video';
 				else if(indicator === 2)
 					tag_type = 'audio';
-				project.elements.push({tag: tag_type, value: val, isEditing: false, index: my_index});
+				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', '').replace('\\', '/'), isEditing: false, index: my_index, showMedia: $scope.showMedia});
 				project.$update(function() {
 					//$location.path('projects/' + project._id);
           			$state.go('home.viewProject',{projectId:project._id});

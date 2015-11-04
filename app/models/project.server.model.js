@@ -92,6 +92,10 @@ var ElementSchema = new Schema({
 		default: 'Data'
 	},
 	graph_points : [GraphSchema],
+	showMedia: {
+		type: Boolean,
+		default: false
+	}
 });
 
 /*
