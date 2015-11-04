@@ -75,8 +75,7 @@
 		<br data-ng-show="project.isQuiz==true" >
 		<br data-ng-show="project.isQuiz==true" >
 
-
-	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)">
+	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)" wait-until-loaded="replaceHashLinks()">
 		<div ng-switch on="element.tag">
 			<div class="row">
 				<div class="col-md-10">
@@ -117,9 +116,14 @@
 								<button class="btn btn-primary" ng-click="element.showMedia = !element.showMedia">
 									<i class="glyphicon glyphicon-facetime-video"></i></button>
 							</div>
-							<video ng-show="element.showMedia" id='video' width="320" height="240" controls>
+							<video ng-show="element.showMedia" ng-if="!element.isEmbedded" id='video' width="320" height="240" controls>
 								<source ng-src="{{element.value}}" type="video/mp4">
 							</video><br>
+
+							<div ng-show="element.showMedia" ng-if="element.isEmbedded">
+								<youtube-video video-url="element.value"></youtube-video>
+						  </div>
+
 							<div data-ng-show="element.isEditing">
 								<div class="page-header">
 									<div style="padding-left:20px; padding-bottom:15px">

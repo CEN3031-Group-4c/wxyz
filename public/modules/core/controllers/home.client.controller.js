@@ -24,6 +24,15 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		}
 	};
 
+	$scope.isActive = function(id){
+		if(id === $stateParams.projectId){
+			return true;
+		}
+		else{
+			return false;
+		}
+	};
+
 	// need to move variables and delete the function
 	$scope.find = function() {
 		$scope.projects = Projects.query();

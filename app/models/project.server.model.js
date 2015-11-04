@@ -24,7 +24,7 @@ var GraphSchema = new Schema({
 	y: Number
 
 });
- 
+
  var QuestionSchema = new Schema({
 	tag: {
 		type: String,
@@ -75,6 +75,10 @@ var ElementSchema = new Schema({
 		type: Number
 		//default: 10
 	},
+	isEmbedded : {
+		type: Boolean,    //for determining if media content was uploaded or embedded
+		default: false
+	},
 	y_name: {
 		type: String,
 		default: 'Y-Axis'
@@ -101,7 +105,7 @@ var ElementSchema = new Schema({
 /*
  * Project Schema
  */
- 
+
 var ProjectSchema = new Schema({
 	//_id: Schema.ObjectId,
 	created: {

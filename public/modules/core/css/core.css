@@ -41,44 +41,48 @@
 .accStyle{
 	font-size: 14px !important;
 	margin: 2px;
-
+	cursor: pointer;
+	cursor: hand;
 }
 .accStyle:hover{
-	background-color: #dddddd!important;
+	background-color: #89b6de!important;
 	cursor: pointer;
 	cursor: hand;
 	font-weight: 900;
-	color:#000000;
+	color:#555555;
+	border-radius: 3px;
+}
+.selected{
+	background-color: #2c699e!important;
+	cursor: pointer;
+	cursor: hand;
+	font-weight: 900;
+	color:#ffffff;
+	border-radius: 3px;
 }
 .courseStyle {
 	padding: 0 5px 0 0;
 	font-weight: 900;
-	color: #23527d;
 }
 .topicStyle {
 	padding: 0 5px 0 10px;
 	font-weight: 800;
-	color: #275c8b;
 }
 .conceptStyle {
 	padding: 0 5px 0 20px;
 	font-weight: 700;
-	color: #3c6c96;
 }
 .sectionStyle {
 	padding: 0 5px 0 30px;
 	font-weight: 600;
-	color: #527ca2;
 }
 .subsectionStyle {
 	padding: 0 5px 0 40px;
 	font-weight: 500;
-	color: #678cad;
 }
 .quizStyle {
 	padding: 0 5px 0 50px;
 	font-style:italic;
-	color: #7d9db9;
 }
 
 

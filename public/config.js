@@ -5,7 +5,7 @@ var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'mean';
 	//Include dependencies here. textAngular was removed in favor of ckEditor
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'flow',  'angularFileUpload', 'ngDraggable', 'ngDialog', 'googlechart'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'flow',  'angularFileUpload', 'ngDraggable', 'ngDialog', 'googlechart', 'youtube-embed'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

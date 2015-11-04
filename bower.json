@@ -3,22 +3,23 @@
   "version": "0.3.2",
   "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
   "dependencies": {
-    "bootstrap": "~3",
     "angular": "~1.2",
-    "angular-resource": "~1.2",
     "angular-animate": "~1.2",
-    "angular-mocks": "~1.2",
     "angular-bootstrap": "~0.12.0",
-    "angular-ui-utils": "~0.1.1",
+    "angular-google-chart": "~0.0.11",
+    "angular-mocks": "~1.2",
+    "angular-resource": "~1.2",
     "angular-ui-router": "~0.2.11",
-    "ng-flow": "~2.6.0",
+    "angular-ui-utils": "~0.1.1",
+    "angular-youtube-mb": "~1.1.1",
+    "bootstrap": "~3",
+    "components-font-awesome": "~4.3.0",
     "ng-file-upload": "~3.0.7",
     "ng-file-upload-shim": "~3.0.7",
+    "ng-flow": "~2.6.0",
+    "ngDialog": "~0.3.12",
     "ngDraggable": "~0.1.2",
     "protractor": "~1.8.0",
-    "ngDialog": "~0.3.12",
-    "rangy": "~1.2.3",
-    "components-font-awesome": "~4.3.0",
-    "angular-google-chart": "~0.0.11"
+    "rangy": "~1.2.3"
   }
 }

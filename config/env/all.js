@@ -72,7 +72,8 @@ module.exports = {
 				'public/lib/jquery/dist/jquery.js',
 				'public/lib/mathquill-0.9.4/mathquill.js',
 				'public/lib/mathquill-0.9.4/mathquill-main.js',
-				'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured&dummy=.js',
+				'https://www.youtube.com/iframe_api',
+				'public/lib/angular-youtube-mb/src/angular-youtube-embed.js',     //added angular youtube embedding stuff//////////////////////
 				'public/ckeditor/*.js'
 			]
 		},

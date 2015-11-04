@@ -1,7 +1,8 @@
 'use strict';
 
-var myApp = angular.module('projects').controller('ProjectsController', ['$scope','$rootScope', '$http', '$stateParams', '$location', '$upload', '$modal', '$sce', 'Authentication', 'Projects','$state',
-	function($scope, $rootScope, $http, $stateParams, $location, $upload, $modal, $sce, Authentication, Projects, $state) {
+var myApp = angular.module('projects').controller('ProjectsController', ['$scope','$rootScope', '$http', '$stateParams', '$location', '$upload', '$modal', '$sce', 'Authentication', 'Projects','$state', '$timeout',
+	function($scope, $rootScope, $http, $stateParams, $location, $upload, $modal, $sce, Authentication, Projects, $state, $timeout) {
+
 		$scope.authentication = Authentication;
 		$scope.textToAppend = '';
     	$scope.sc = $sce;
@@ -15,6 +16,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
     	$scope.yTitle = '';
     	$scope.graphPoints = [];
     	$scope.chartArray = [];
+			$scope.videoEmbed = '';     //'https://www.youtube.com/watch?v=OPf0YbXqDm0';
 
 		$scope.lookup = function(id)
 		{
@@ -916,6 +918,29 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
+
+		$scope.embedFile = function(indicator) {
+			$scope.addContributer();
+			var project = $scope.project;
+			var my_index = get_insert_index(project);
+
+			var tag_type = '';
+
+			if(indicator === 0)	tag_type = 'image';
+			else if(indicator === 1) tag_type = 'video';
+			else if(indicator === 2) tag_type = 'audio';
+
+			project.elements.push({tag: tag_type, value: $scope.videoEmbed, isEditing: false, index: my_index, isEmbedded: true, showMedia: $scope.showMedia});
+
+			project.$update(function() {
+				$state.go('home.viewProject',{projectId:project._id});
+				$scope.textToAppend = '';
+			},
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
 		//Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy
 		//Project-1, Course-2, Topic-3, etc.
 		$scope.addLevel = function(curr_level) {
@@ -1117,6 +1142,148 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		$scope.canDrag = function(element)
 		{
 			return $scope.canEdit() && !element.isEditing;
+		};
+
+		// smoothly scrolls to a tag with the specified id
+		/*$scope.gotoId = function(id) {
+			function currentYPos() {
+				// Firefox, Chrome, Safari
+				if(document.documentElement.scrollTop) return document.documentElement.scrollTop;
+				// Internet Explorer 6, 7, 8
+				if(document.body.scrollTop) return document.body.scrollTop;
+				return 0;
+			}
+
+			function elemYPos(id) {
+				var offset = 60;  // offset for the menu bar
+				var elem = document.getElementById(id);
+				if(!elem) return 0;  // if element not found, return 0
+				var y = elem.offsetTop;
+				var node = elem;
+				while(node.offsetParent && node.offsetParent !== document.body) {
+					node = node.offsetParent;
+					y += node.offsetTop;
+				}
+				if(y - offset < 0) return 0;
+				return y - offset;
+			}
+
+			var startY = currentYPos();
+			var stopY = elemYPos(id);
+			console.log('startY: '+startY+' stopY: '+stopY);
+			var distance = stopY > startY ? stopY - startY : startY - stopY;
+			if(distance < 100) {
+				scrollTo(0, stopY);
+				return;
+			}
+			var speed = Math.round(distance / 100);
+			if(speed >= 20) speed = 20;
+			var step = Math.round(distance / 25);
+			var leapY = stopY > startY ? startY + step : startY - step;
+			var timer = 0;
+			if(stopY > startY) {
+				for(var i = startY; i < stopY; i+=step) {
+					setTimeout('window.scrollTo(0, '+leapY+')', timer * speed);
+					leapY += step;
+					if(leapY > stopY) leapY = stopY;
+					timer++;
+				}
+			} else {
+				for(var j = startY; j > stopY; j-=step) {
+					setTimeout('window.scrollTo(0, '+leapY+')', timer * speed);
+					leapY -= step;
+					if(leapY < stopY) leapY = stopY;
+					timer++;
+				}
+			}
+		};*/
+
+		// changes all hash links (<a href='#foo'></a>) to call a scroll function
+		// meant to be used with the wait-until-loaded directive
+		$scope.replaceHashLinks = function() {
+			// gotoId is used to smoothly scroll to the appropriate element id
+			// id is defined by targetHash which is set onto the anchor id
+			function gotoId(evt) {
+				var id = evt.target.targetHash;  // retrieve the id from the targetHash attribute
+
+				// find the current position on the page
+				function currentYPos() {
+					// Firefox, Chrome, Safari
+					if(document.documentElement.scrollTop) return document.documentElement.scrollTop;
+					// Internet Explorer 6, 7, 8
+					if(document.body.scrollTop) return document.body.scrollTop;
+					return 0;
+				}
+
+				// find the position of the element we want to scroll to
+				function elemYPos(id) {
+					var offset = 60;  // offset for the menu bar
+					var elem = document.getElementById(id);
+					if(!elem) return 0;  // if element not found, return 0
+					var y = elem.offsetTop;
+					var node = elem;
+					while(node.offsetParent && node.offsetParent !== document.body) {
+						node = node.offsetParent;
+						y += node.offsetTop;
+					}
+					if(y - offset < 0) return 0;
+					return y - offset;
+				}
+
+				var startY = currentYPos();
+				var stopY = elemYPos(id);
+				//console.log('startY: '+startY+' stopY: '+stopY);
+				var distance = stopY > startY ? stopY - startY : startY - stopY;
+				if(distance < 100) {
+					scrollTo(0, stopY);
+					return;
+				}
+				var speed = Math.round(distance / 100);
+				if(speed >= 20) speed = 20;
+				var step = Math.round(distance / 25);
+				var leapY = stopY > startY ? startY + step : startY - step;
+				var timer = 0;
+				if(stopY > startY) {
+					for(var i = startY; i < stopY; i+=step) {
+						setTimeout('window.scrollTo(0, '+leapY+')', timer * speed);
+						leapY += step;
+						if(leapY > stopY) leapY = stopY;
+						timer++;
+					}
+				} else {
+					for(var j = startY; j > stopY; j-=step) {
+						setTimeout('window.scrollTo(0, '+leapY+')', timer * speed);
+						leapY -= step;
+						if(leapY < stopY) leapY = stopY;
+						timer++;
+					}
+				}
+			}
+
+			// function that waits until all elements are loaded and then
+			// replaces all <a href="#foo"></a> with <a id="anchorToFoo"></a>
+			// and creates an eventListener that will execute gotoId when clicked
+			$timeout(function() {
+				var links = document.getElementsByTagName('a');  // get all links
+				for( var i = 0; i < links.length; i++ ) {
+					var str = links[i].href;
+					// check for the # sign, however skip the #!
+					if(str.indexOf('#!') === -1 && str.indexOf('#') !== -1) {
+						// extract hash name
+						str = str.substring(str.indexOf('#')+1);
+						if(str) {  // make sure it is not blank
+							// remove href attribute
+							links[i].removeAttribute('href');
+							// set the id
+							links[i].setAttribute('id', 'anchorTo_'+str);
+							// create an EventListener to run a custom scrolling function
+							links[i].addEventListener('click', gotoId, false);
+							// set the target attribute (where to scroll to)
+							links[i].targetHash = str;
+						}
+					}
+				}
+			}, 0);
 		};
 	}
 ]);
