@@ -75,6 +75,10 @@ var ElementSchema = new Schema({
 		type: Number
 		//default: 10
 	},
+	isEmbedded : {
+		type: Boolean,    //for determining if media content was uploaded or embedded
+		default: false
+	},
 	y_name: {
 		type: String,
 		default: 'Y-Axis'
@@ -91,7 +95,11 @@ var ElementSchema = new Schema({
 		type: String,
 		default: 'Data'
 	},
-	graph_points : [GraphSchema]
+	graph_points : [GraphSchema],
+	showMedia: {
+		type: Boolean,
+		default: false
+	}
 });
 
 /*

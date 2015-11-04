@@ -3,7 +3,7 @@
 // Configuring the Articles module
 angular.module('projects').run([ 'Menus',
 	function(Menus) {
-		//File menu
+		// File menu
 		Menus.addMenuItem('topbar', 'File', 'file_menu', 'dropdown');
 		Menus.addSubMenuItem('topbar', 'file_menu', 'New', 'projects/new');
 		Menus.addSubMenuItem('topbar', 'file_menu', 'Open', 'projects');
@@ -14,19 +14,14 @@ angular.module('projects').run([ 'Menus',
 		Menus.addSubMenuItem('topbar', 'file_menu', 'Preview', 'articles');
 		Menus.addSubMenuItem('topbar', 'file_menu', 'Publish', 'articles');
 
-		//View menu
+		// View menu
 		Menus.addMenuItem('topbar', 'View', 'view_menu', 'dropdown');
 		Menus.addSubMenuItem('topbar', 'view_menu', '1-pane Canvas', 'articles');
 		Menus.addSubMenuItem('topbar', 'view_menu', '2-pane IC/Display', 'articles');
 		Menus.addSubMenuItem('topbar', 'view_menu', '3-pane Debug View', 'articles');
-
-		//Create menu
-		Menus.addMenuItem('topbar', 'Create', 'create_menu', 'dropdown');
-		Menus.addSubMenuItem('topbar', 'create_menu', 'ICW Course', 'new-course', true);
-		Menus.addSubMenuItem('topbar', 'create_menu', 'ICW Archive', 'articles');
-
-		//Compose ICW Arch menu
-		Menus.addMenuItem('topbar', 'ComposeICWArch', 'compose_menu', 'dropdown');
+		
+		// Create menu
+		Menus.addMenuItem('topbar', 'Create', 'compose_menu', 'dropdown');
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Course', 'new-course', true);
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Topic', 'new-topic', true);
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Concept', 'new-concept',true);
@@ -35,7 +30,7 @@ angular.module('projects').run([ 'Menus',
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Quiz', 'new-quiz',true);
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Scoring Report', 'scoreReport', true);
 
-		//Insert Elements menu
+		// Insert Elements menu
 		Menus.addMenuItem('topbar', 'Insert Elements', 'elements_menu', 'dropdown');
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Text', 'insert/add-text', true);
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Audio', 'add-audio', true);

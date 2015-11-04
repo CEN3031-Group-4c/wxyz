@@ -6,6 +6,9 @@
 	<div class="page-header">
 		<h1>Add Audio</h1>
 	</div>
+	<div style="padding-left:20px; padding-bottom:15px">
+		<input type="checkbox" ng-model="showMedia"> Open on load.<br>
+	</div>
 	<span class="btn btn-primary btn-file"> Upload
 		<input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files, 2)" >
 	</span>
