@@ -882,7 +882,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-
+		
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -890,16 +890,15 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			var fd = new FormData();
 			//Take the first selected file
 			fd.append('file', files[0]);
-			console.log(files[0].name);
-			console.log(files[0].type);
-
+			//console.log(files[0].name);
+			//console.log(files[0].type);
 			$http.post('/public/uploads', fd, {
 				withCredentials: true,
 				headers: {'Content-Type': undefined },
 				transformRequest: angular.identity
 			})
 			.success( function(data, status, headers, config, statusText) {
-				console.log(data);
+				//console.log(data);
 				var filepath = data;
 				var tag_type = '';
 				if(indicator === 0)
@@ -908,7 +907,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					tag_type = 'video';
 				else if(indicator === 2)
 					tag_type = 'audio';
-				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', '').replace('\\', '/'), isEditing: false, index: my_index});
+				project.elements.push({tag: tag_type, value: filepath.data.replace('public/', '').replace('\\', '/'), isEditing: false, index: my_index, showMedia: $scope.showMedia});
 				project.$update(function() {
 					//$location.path('projects/' + project._id);
           			$state.go('home.viewProject',{projectId:project._id});
@@ -931,15 +930,15 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			else if(indicator === 1) tag_type = 'video';
 			else if(indicator === 2) tag_type = 'audio';
 
-			project.elements.push({tag: tag_type, value: $scope.videoEmbed, isEditing: false, index: my_index, isEmbedded: true});
+			project.elements.push({tag: tag_type, value: $scope.videoEmbed, isEditing: false, index: my_index, isEmbedded: true, showMedia: $scope.showMedia});
 
 			project.$update(function() {
 				$state.go('home.viewProject',{projectId:project._id});
 				$scope.textToAppend = '';
 			},
-				function(errorResponse) {
-					$scope.error = errorResponse.data.message;
-					});
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
 		};
 
 		//Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy

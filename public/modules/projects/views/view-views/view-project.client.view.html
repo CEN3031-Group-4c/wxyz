@@ -111,44 +111,46 @@
 								</div>
 							</div><br>
 						</div>
-						<div ng-switch-when="video">
-							<script>
-								var showVideo = false;
-							</script>
+						<div class="spacer" ng-switch-when="video">
 							<div class="pull-left">
-								<button class="btn btn-primary" ng-click="showVideo = !showVideo">
+								<button class="btn btn-primary" ng-click="element.showMedia = !element.showMedia">
 									<i class="glyphicon glyphicon-facetime-video"></i></button>
 							</div>
-							<video ng-show="showVideo && !element.isEmbedded" id='video' width="320" height="240" controls>
+							<video ng-show="element.showMedia" ng-if="!element.isEmbedded" id='video' width="320" height="240" controls>
 								<source ng-src="{{element.value}}" type="video/mp4">
 							</video><br>
 
-							<div ng-show="showVideo && element.isEmbedded">
+							<div ng-show="element.showMedia" ng-if="element.isEmbedded">
 								<youtube-video video-url="element.value"></youtube-video>
 						  </div>
 
 							<div data-ng-show="element.isEditing">
 								<div class="page-header">
+									<div style="padding-left:20px; padding-bottom:15px">
+										<input type="checkbox" ng-model="element.showMedia"> Open on load.<br>
+										<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button>
+									</div>
 									<span class="btn btn-primary btn-file"> Change Video
 										<input type="file" name="file" data-ng-click="setActiveElement(element)" onchange="angular.element(this).scope().editFile(this.files, 0)" >
 									</span>
 								</div>
 							</div>
 						</div>
-						<div ng-switch-when="audio">
-							<script>
-								var showAudio = false;
-							</script>
+						<div class="spacer" ng-switch-when="audio">
 							<div class="pull-left">
-								<button class="btn btn-primary" ng-click="showAudio = !showAudio">
+								<button class="btn btn-primary" ng-click="element.showMedia = !element.showMedia">
 									<i class="glyphicon glyphicon-volume-up"></i>
 								</button>
 							</div>
-							<audio ng-show="showAudio" id='audio' controls>
+							<audio ng-show="element.showMedia" id='audio' controls>
 							  <source ng-src="{{element.value}}" type="audio/mpeg">
 							</audio><br>
 							<div data-ng-show="element.isEditing">
 								<div class="page-header">
+									<div style="padding-left:20px; padding-bottom:15px">
+										<input type="checkbox" ng-model="element.showMedia"> Open on load.<br>
+										<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button>
+									</div>
 									<span class="btn btn-primary btn-file"> Change Audio
 										<input type="file" name="file" data-ng-click="setActiveElement(element)" onchange="angular.element(this).scope().editFile(this.files, 0)" >
 									</span>
