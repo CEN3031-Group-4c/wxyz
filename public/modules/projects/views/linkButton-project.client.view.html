@@ -1,0 +1,37 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne(); find()">
+	<div class="page-header">
+		<h1>Add A Project Link</h1>
+	</div>
+	<!--
+	<div>
+		<textarea ng-model="targetProjectID"></textarea>
+	</div>
+	-->
+
+	<div>
+	  <form name="selectProject">
+	    <label for="selectProj"> Select Project / Workspace: </label>
+	    <select name="selectProj" id="selectProj" ng-model="userSelectedProject">
+				<!-- <option value="selectID._id" ng-model="selectID.title"></option> -->
+	      <option ng-repeat="project in projects.slice().reverse()" ng-if="project.level==1" value="{{project._id}}">{{project.title}}</option>
+	    </select>
+	  </form>
+	</div>
+
+	<div>
+		<form name="selectSection">
+	    <label for="selectSection"> Select Section / Course </label>
+	    <select name="selectSection" id="selectSection" ng-model="userSelectSection">
+				<!-- <option value="selectID._id" ng-model="selectID.title"></option> -->
+	      <option ng-repeat="section in projects.slice().reverse()" value="{{section._id}}"ng-if="resolveTopID(section) == userSelectedProject && section.level != 1"> {{section.title}}</option>
+	    </select>
+	  </form>
+	</div>
+
+
+
+  <!--Pushing the save button calls appendLink() and adds the modal link to the project-->
+	<div>
+		<button class="btn btn-primary" data-ng-click="appendLink(userSelectedProject,userSelectSection)">Save Project Link</button>
+	</div>
+</section>

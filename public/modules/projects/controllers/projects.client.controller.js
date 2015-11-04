@@ -48,6 +48,26 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return false;
 		};
 
+		$scope.resolveTopID = function(project)
+		{
+			var projects = $scope.projects;
+			var current = project;
+
+			while(current.parent !== undefined){
+					current = $scope.lookup(current.parent);
+
+			}
+			if(current.parent === undefined){
+
+				return current._id;
+
+			}
+
+			return false;
+
+
+		};
+
 		$scope.canEdit = function()
 		{
 			var project = $scope.project;
@@ -426,6 +446,35 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				//$location.path('projects/' + project._id);
         		$state.go('home.viewProject', {projectId:project._id});
 				$scope.textToAppend = '';
+			},
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.appendLink = function(workspaceID, sectionID){
+			console.log(workspaceID);
+			console.log(sectionID);
+			$scope.addContributer();
+			var project = $scope.project;
+			var determineTarget = workspaceID;
+
+			var my_index = get_insert_index(project);
+			if(sectionID){
+				determineTarget = sectionID;
+			}
+
+			var determineProject = $scope.lookup(determineTarget);
+			var determineTitle = determineProject.title;
+			console.log(determineTitle);
+			console.log(determineTarget);
+
+			project.elements.push({tag: 'linkButton', value: determineTarget, heading: determineTitle, index: my_index});
+
+			project.$update(function() {
+				//$location.path('projects/' + project._id);
+        		$state.go('home.viewProject', {projectId:project._id});
+
 			},
 			function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -1023,7 +1072,6 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				projectId: $stateParams.projectId
 			});
 		};
-
 		$scope.findOne_report = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
@@ -1144,59 +1192,22 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return $scope.canEdit() && !element.isEditing;
 		};
 
-		// smoothly scrolls to a tag with the specified id
-		/*$scope.gotoId = function(id) {
-			function currentYPos() {
-				// Firefox, Chrome, Safari
-				if(document.documentElement.scrollTop) return document.documentElement.scrollTop;
-				// Internet Explorer 6, 7, 8
-				if(document.body.scrollTop) return document.body.scrollTop;
-				return 0;
-			}
-
-			function elemYPos(id) {
-				var offset = 60;  // offset for the menu bar
-				var elem = document.getElementById(id);
-				if(!elem) return 0;  // if element not found, return 0
-				var y = elem.offsetTop;
-				var node = elem;
-				while(node.offsetParent && node.offsetParent !== document.body) {
-					node = node.offsetParent;
-					y += node.offsetTop;
+		// the function with the magic
+		$scope.openProjectModal  = function (projectId, elementId, size) {
+			var modalInstance = $modal.open({
+				templateUrl: 'modules/projects/views/modals/project-modal.client.view.html',
+				controller: 'LinkModalController',
+				size: 'lg',
+				resolve: {
+					prjId: function() {
+						return projectId;
+					},
+					eleId: function() {
+						return elementId;
+					}
 				}
-				if(y - offset < 0) return 0;
-				return y - offset;
-			}
-
-			var startY = currentYPos();
-			var stopY = elemYPos(id);
-			console.log('startY: '+startY+' stopY: '+stopY);
-			var distance = stopY > startY ? stopY - startY : startY - stopY;
-			if(distance < 100) {
-				scrollTo(0, stopY);
-				return;
-			}
-			var speed = Math.round(distance / 100);
-			if(speed >= 20) speed = 20;
-			var step = Math.round(distance / 25);
-			var leapY = stopY > startY ? startY + step : startY - step;
-			var timer = 0;
-			if(stopY > startY) {
-				for(var i = startY; i < stopY; i+=step) {
-					setTimeout('window.scrollTo(0, '+leapY+')', timer * speed);
-					leapY += step;
-					if(leapY > stopY) leapY = stopY;
-					timer++;
-				}
-			} else {
-				for(var j = startY; j > stopY; j-=step) {
-					setTimeout('window.scrollTo(0, '+leapY+')', timer * speed);
-					leapY -= step;
-					if(leapY < stopY) leapY = stopY;
-					timer++;
-				}
-			}
-		};*/
+			});
+		};
 
 		// changes all hash links (<a href='#foo'></a>) to call a scroll function
 		// meant to be used with the wait-until-loaded directive

@@ -52,7 +52,7 @@ var GraphSchema = new Schema({
 var ElementSchema = new Schema({
 	tag: {
 		type: String,
-		enum: ['text', 'image', 'audio', 'video', 'equation', 'graph'],
+		enum: ['text', 'image', 'audio', 'video', 'equation', 'graph', 'linkButton'],
 		default: 'text'
 	},
 	heading : {						//heading for a text element

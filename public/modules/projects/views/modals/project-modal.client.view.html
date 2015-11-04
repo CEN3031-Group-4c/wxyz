@@ -1,0 +1,58 @@
+<!-- This is essentially view-project.client.view.html, only I took out all editing options, draggable, and quizes -->
+
+<section>
+	<div class="page-header">
+		<h1 data-ng-bind="project.title"></h1>
+		<small data-ng-bind="project.content"></small>
+	</div>
+	Project elements: {{project.elements.length}}
+	<div data-ng-repeat="element in project.elements | orderBy: 'index'">
+		<div ng-switch on="element.tag">
+			<div class="row">
+				<div class="col-md-10">
+						<div ng-switch-when="text">   <!--text start-->
+								<div ng-bind-html="sc.trustAsHtml(element.value)"></div><br>
+						</div>   <!--text end-->
+						<div ng-switch-when="graph" data-ng-init="drawGraph(element)">  <!--graph start-->
+							<div>
+								<div google-chart chart="element.graph" style="{{chart.cssStyle}}"></div>
+							</div>
+						</div>  <!--graph end-->
+						<div ng-switch-when="image">  <!--//image start//-->
+							<img id='image' alt= "what?" ng-src = "{{element.value}}"><br>
+						</div> <!--image end-->
+						<div ng-switch-when="video">
+							<script>
+								var showVideo = false;
+							</script>
+							<div class="pull-left">
+								<button class="btn btn-primary" ng-click="showVideo = !showVideo">
+									<i class="glyphicon glyphicon-facetime-video"></i></button>
+							</div>
+							<video ng-show="showVideo" id='video' width="320" height="240" controls>
+								<source ng-src="{{element.value}}" type="video/mp4">
+							</video><br>
+						</div> <!--video end-->
+						<div ng-switch-when="audio">
+							<script>
+								var showAudio = false;
+							</script>
+							<div class="pull-left">
+								<button class="btn btn-primary" ng-click="showAudio = !showAudio">
+									<i class="glyphicon glyphicon-volume-up"></i>
+								</button>
+							</div>
+							<audio ng-show="showAudio" id='audio' controls>
+							  <source ng-src="{{element.value}}" type="audio/mpeg">
+							</audio><br>
+						</div> <!--audio end-->
+						<div ng-switch-when="equation">  <!--//equation start//-->
+							<div data-ng-hide="element.isEditing">
+								<div ng-bind-html="sc.trustAsHtml(element.value)"></div><br>
+							</div><br>
+						</div>  <!--equation end-->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
