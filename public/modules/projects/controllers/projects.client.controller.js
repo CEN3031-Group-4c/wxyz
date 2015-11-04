@@ -64,7 +64,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return false;
 
 
-		}
+		};
 
 		$scope.canEdit = function()
 		{

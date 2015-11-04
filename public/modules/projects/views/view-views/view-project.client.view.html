@@ -75,11 +75,6 @@
 		<br data-ng-show="project.isQuiz==true" >
 		<br data-ng-show="project.isQuiz==true" >
 
-	<!-- **********************************************
-		 Temporary link to open the modal, which has a hardcoded link; second parameter is unused for now
-	-->
-
-	<!-- ********************************************** -->
 	<div data-ng-repeat="element in project.elements | orderBy: 'index'" ng-drop="true" ng-drop-success="onDropComplete($data, element, $event)">
 		<div ng-switch on="element.tag">
 			<div class="row">
@@ -103,12 +98,9 @@
 						</div>   <!--text end-->
 						<div ng-switch-when="linkButton">   <!--text start-->
 							<div data-ng-hide="element.isEditing">
-								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value)"> Open Project:{{element.heading}} </div>
+								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value)"> Open {{element.heading}} </div>
 							</div>
-							<div data-ng-show="element.isEditing">
-								<!-- Create a textarea that is then replaced by the ckEditor. Any text entered is bound
-							       to element.value, which is then used to edit existing project content.-->
-							</div>
+							<!--<div data-ng-show="element.isEditing"></div>-->
 								<!--<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button> -->
 						</div>
 
