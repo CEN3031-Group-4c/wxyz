@@ -20,18 +20,21 @@
 									<div class="preview-a">&nbsp;&nbsp;&nbsp;<a data-ng-bind="topic.title" data-ng-href="#!/projects/{{topic._id}}/preview"></a></div>
 									<div ng-repeat="concept in projects.slice().reverse()" name="concept_title" ng-if="concept.level == 5 && concept.parent == topic._id" close="projects.splice(index,1)">
 
-											<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="concept.title" data-ng-href="#!/projects/{{concept._id}}/preview"></a></div>
+										<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="concept.title" data-ng-href="#!/projects/{{concept._id}}/preview"></a>
+										</div>
 
-											<div ng-repeat="section in projects.slice().reverse()" name="section_title" ng-if="section.level == 6 && section.parent == concept._id && canView(section)" close="projects.splice(index,1)">
+										<div ng-repeat="section in projects.slice().reverse()" name="section_title" ng-if="section.level == 6 && section.parent == concept._id && canView(section)" close="projects.splice(index,1)">
 
-															<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="section.title" data-ng-href="#!/projects/{{section._id}}/preview"></a></div>
-
-															<div ng-repeat="subsection in projects.slice().reverse()" name="quiz_title" ng-if="subsection.level == 7 && subsection.parent == section._id && canView(subsection)" close="projects.splice(index,1)">
-
-																<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="subsection.title" data-ng-href="#!/projects/{{subsection._id}}"></a></div>
-														</div>
-													</div>
+											<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="section.title" data-ng-href="#!/projects/{{section._id}}/preview"></a>
 											</div>
+
+											<div ng-repeat="subsection in projects.slice().reverse()" name="quiz_title" ng-if="subsection.level == 7 && subsection.parent == section._id && canView(subsection)" close="projects.splice(index,1)">
+
+												<div class="preview-a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-bind="subsection.title" data-ng-href="#!/projects/{{subsection._id}}"></a>
+												</div>
+											</div>
+										</div>
+									</div>
 
 							</div>
 					</div>

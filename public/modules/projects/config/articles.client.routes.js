@@ -169,6 +169,7 @@ angular.module('projects').config(['$stateProvider',
 		.state('home.previewProject', {
 			url: 'projects/:projectId/preview',
 			views: {
+				'@':{templateUrl: 'modules/core/views/preview-home.client.view.html'},
 				'mainFrame': { templateUrl: 'modules/projects/views/view-views/view-project.client.view.html' }
 			}
 		});
