@@ -53,22 +53,22 @@
 	padding: 15px 10px;
 }
 .preview-courseStyle {
-	padding: 0 5px 0 0;
-}
-.preview-topicStyle {
 	padding: 0 5px 0 10px;
 }
-.preview-conceptStyle {
+.preview-topicStyle {
 	padding: 0 5px 0 20px;
 }
-.preview-sectionStyle {
+.preview-conceptStyle {
 	padding: 0 5px 0 30px;
 }
-.preview-subsectionStyle {
+.preview-sectionStyle {
 	padding: 0 5px 0 40px;
 }
-.preview-quizStyle {
+.preview-subsectionStyle {
 	padding: 0 5px 0 50px;
+}
+.preview-quizStyle {
+	padding: 0 5px 0 60px;
 }
 
 .accStyle{
@@ -94,27 +94,27 @@
 	border-radius: 3px;
 }
 .courseStyle {
-	padding: 0 5px 0 0;
+	padding: 0 5px 0 10px;
 	font-weight: 900;
 }
 .topicStyle {
-	padding: 0 5px 0 10px;
+	padding: 0 5px 0 20px;
 	font-weight: 800;
 }
 .conceptStyle {
-	padding: 0 5px 0 20px;
+	padding: 0 5px 0 30px;
 	font-weight: 700;
 }
 .sectionStyle {
-	padding: 0 5px 0 30px;
+	padding: 0 5px 0 40px;
 	font-weight: 600;
 }
 .subsectionStyle {
-	padding: 0 5px 0 40px;
+	padding: 0 5px 0 50px;
 	font-weight: 500;
 }
 .quizStyle {
-	padding: 0 5px 0 50px;
+	padding: 0 5px 0 60px;
 	font-style:italic;
 }
 
