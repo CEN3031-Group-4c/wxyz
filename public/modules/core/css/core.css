@@ -25,19 +25,36 @@
 .custom-nav-element {
 	color: #000000;
 }
+.preview-a {
+	background-color: #dddddd!important;
+	font-size: 14px !important;
+	margin: 2px;
+}
 .preview-h3 {
 	color: #000000!important;
 	font-size: 20px !important;
 	font-weight: bold;
 	padding: 15px 10px;
 }
-
-.preview-a {
-	background-color: #dddddd!important;
-	font-size: 14px !important;
-	padding: 0 5px;
-	margin: 2px;
+.preview-courseStyle {
+	padding: 0 5px 0 0;
 }
+.preview-topicStyle {
+	padding: 0 5px 0 10px;
+}
+.preview-conceptStyle {
+	padding: 0 5px 0 20px;
+}
+.preview-sectionStyle {
+	padding: 0 5px 0 30px;
+}
+.preview-subsectionStyle {
+	padding: 0 5px 0 40px;
+}
+.preview-quizStyle {
+	padding: 0 5px 0 50px;
+}
+
 .accStyle{
 	font-size: 14px !important;
 	margin: 2px;
