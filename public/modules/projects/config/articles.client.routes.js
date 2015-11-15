@@ -96,6 +96,12 @@ angular.module('projects').config(['$stateProvider',
 				'mainFrame': { templateUrl: 'modules/projects/views/linkButton-project.client.view.html' }
 			}
 		}).
+		state('home.tableProject', {                 //state for creating/inserting table elements.
+			url: 'projects/:projectId/tableProject',
+			views: {
+				'mainFrame': { templateUrl: 'modules/projects/views/table-project.client.view.html' }
+			}
+		}).
 		state('home.videoProject', {
 			url: 'projects/:projectId/add-video',
 			views: {

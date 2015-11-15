@@ -19,7 +19,7 @@ angular.module('projects').run([ 'Menus',
 		Menus.addSubMenuItem('topbar', 'view_menu', '1-pane Canvas', 'articles');
 		Menus.addSubMenuItem('topbar', 'view_menu', '2-pane IC/Display', 'articles');
 		Menus.addSubMenuItem('topbar', 'view_menu', '3-pane Debug View', 'articles');
-		
+
 		// Create menu
 		Menus.addMenuItem('topbar', 'Create', 'compose_menu', 'dropdown');
 		Menus.addSubMenuItem('topbar', 'compose_menu', 'Course', 'new-course', true);
@@ -36,6 +36,7 @@ angular.module('projects').run([ 'Menus',
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Audio', 'add-audio', true);
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Video', 'add-video', true);
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Equation', 'add-equation', true);
+		Menus.addSubMenuItem('topbar', 'elements_menu', 'Table', 'tableProject', true);         //Add the table insertion option to the menu.
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Animation', 'add-animation', true);
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Static Graph', 'add-graph', true);
 		Menus.addSubMenuItem('topbar', 'elements_menu', 'Static Image', 'add-image', true);

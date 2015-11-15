@@ -452,6 +452,24 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
+		$scope.appendTable = function() {
+			$scope.addContributer();
+			var project = $scope.project;
+
+			var my_index = get_insert_index(project);
+
+			project.elements.push({tag: 'table', value: $scope.textToAppend, index: my_index});
+
+			project.$update(function() {
+				//$location.path('projects/' + project._id);
+        		$state.go('home.viewProject', {projectId:project._id});
+				$scope.textToAppend = '';
+			},
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
 		$scope.appendLink = function(workspaceID, sectionID){
 			console.log(workspaceID);
 			console.log(sectionID);
@@ -931,7 +949,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-		
+
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
