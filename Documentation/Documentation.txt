@@ -2,7 +2,62 @@ WXYZ
 
 
 public
-
+        ckeditor
+	(Folder which contains text editor ckeditor)
+          adapters
+              jquery.js
+	  lang
+              en.js
+          plugins
+              a11yhelp
+              about
+              clipboard
+              colordialog
+              dialog
+              div
+              eqneditor
+              find
+              flash
+              font
+              forms
+              iframe
+              image
+              link
+              liststyle
+              magicline
+              pagebreak
+              pastefromword
+              preview
+              scayt
+              showblocks
+              smiley
+              specialchar
+              table
+              tabletools
+              templates
+              wsc
+              icons.png
+              icons_hidpi.png
+              
+              
+          samples
+              css
+              img
+              js
+              old
+              toolbarconfiguration
+              index.html
+          skins
+              moono
+          build-config.js
+          CHANGES.md
+          ckeditor.js
+          config.js
+	  contents.md
+          LICENSE.md
+          README.md
+          styles.js
+         
 	dist
 	  application.js
 		(should be separated into different files.Deals with everything involving the strucutre on the webiste inlcude, menus,creating new menus,routes, user authentication etc.)
