@@ -16,7 +16,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
     	$scope.yTitle = '';
     	$scope.graphPoints = [];
     	$scope.chartArray = [];
-			$scope.videoEmbed = '';     //'https://www.youtube.com/watch?v=OPf0YbXqDm0';
+			$scope.videoEmbed = '';
+			$scope.elementsOfCurrentProject = [];
 
 		$scope.lookup = function(id)
 		{
@@ -46,6 +47,13 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				return true;
 			}
 			return false;
+		};
+
+
+
+		$scope.setScopeProjectElementsArray = function(id)
+		{
+				$scope.elementsOfCurrentProject = $scope.lookup(id).elements;
 		};
 
 		$scope.resolveTopID = function(project)
@@ -452,7 +460,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
-		$scope.appendLink = function(workspaceID, sectionID){
+		$scope.appendLink = function(workspaceID, sectionID, elementID){
 			console.log(workspaceID);
 			console.log(sectionID);
 			$scope.addContributer();
@@ -468,8 +476,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			var determineTitle = determineProject.title;
 			console.log(determineTitle);
 			console.log(determineTarget);
-
-			project.elements.push({tag: 'linkButton', value: determineTarget, heading: determineTitle, index: my_index});
+			//data title is used by graph element, we will use dataTitle to test if we can actually pass elementID
+			project.elements.push({tag: 'linkButton', value: determineTarget, heading: determineTitle, index: my_index, dataTitle: elementID});
 
 			project.$update(function() {
 				//$location.path('projects/' + project._id);
@@ -931,7 +939,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-		
+
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -1065,12 +1073,14 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 		$scope.find = function() {
 			$scope.projects = Projects.query();
+
 		};
 
 		$scope.findOne = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
+
 		};
 		$scope.findOne_report = function() {
 			$scope.project = Projects.get({

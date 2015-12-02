@@ -11,7 +11,7 @@
 	<div>
 	  <form name="selectProject">
 	    <label for="selectProj"> Select Project / Workspace: </label>
-	    <select name="selectProj" id="selectProj" ng-model="userSelectedProject">
+	    <select ng-change="setScopeProjectElementsArray(userSelectedProject)" name="selectProj" id="selectProj" ng-model="userSelectedProject">
 				<!-- <option value="selectID._id" ng-model="selectID.title"></option> -->
 	      <option ng-repeat="project in projects.slice().reverse()" ng-if="project.level==1" value="{{project._id}}">{{project.title}}</option>
 	    </select>
@@ -21,17 +21,28 @@
 	<div>
 		<form name="selectSection">
 	    <label for="selectSection"> Select Section / Course </label>
-	    <select name="selectSection" id="selectSection" ng-model="userSelectSection">
+	    <select ng-change="setScopeProjectElementsArray(userSelectSection)" name="selectSection" id="selectSection" ng-model="userSelectSection">
 				<!-- <option value="selectID._id" ng-model="selectID.title"></option> -->
 	      <option ng-repeat="section in projects.slice().reverse()" value="{{section._id}}"ng-if="resolveTopID(section) == userSelectedProject && section.level != 1"> {{section.title}}</option>
 	    </select>
 	  </form>
 	</div>
 
+	<div>
+			<form name="selectElement">
+				<label for="selectElement"> Select Element </label>
+				<select name="selectElement" id="selectElement" ng-model="userSelectedElement">
+				<option ng-repeat="element in elementsOfCurrentProject" value="{{element._id}}">{{element.tag}}</option>
+			</select>
+			</form>
+
+
+	</div>
+
 
 
   <!--Pushing the save button calls appendLink() and adds the modal link to the project-->
 	<div>
-		<button class="btn btn-primary" data-ng-click="appendLink(userSelectedProject,userSelectSection)">Save Project Link</button>
+		<button class="btn btn-primary" data-ng-click="appendLink(userSelectedProject,userSelectSection,userSelectedElement)">Save Project Link</button>
 	</div>
 </section>
