@@ -632,7 +632,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
         };
 
-
+          //gets the index of the element that is going to be inserted
 		function get_insert_index (project)
 		{
 			var elements = project.elements;
@@ -649,7 +649,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return max_index + 1;
 		}
 
-
+		  //allows the user to insert a question
 		$scope.insertQuestion = function() {
 			var project = $scope.project;
 			var questionType;
@@ -746,7 +746,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		  //allows user to delete a question
 		$scope.deleteQuestion = function(question) {
 			var project = $scope.project;
 			project.questions.splice(project.questions.indexOf(question),1);
@@ -759,7 +759,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		  //allows the user to set the answer to the question
 		$scope.setAnswer = function(selection, question) {
 			question.responses = [selection];
 			if(selection === question.answers[0]){
@@ -771,7 +771,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = false;
 			question.checked = true;
 		};
-
+		  //allows the user to set multiple answers to the question
 		$scope.setMultipleAnswer = function(selection, question) {
 			for(var i = 0; i < question.responses.length; ++i){
 				if(question.responses[i] === selection){
@@ -799,7 +799,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = false;
 			question.checked = true;
 		};
-
+		  //compares the answer recorded to the correct answer
 		function compareAnswers(arr1, arr2){
 			arr1.sort();
 			arr2.sort();
@@ -811,7 +811,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return true;
 		}
-
+		  //checks the answer recorded to see if it is correct
 		$scope.checkAnswer = function(question) {
 			var proj = $scope.project;
 			var tally = 0;
@@ -831,7 +831,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = true;
 			$scope.displayFeedback = true;
 		};
-
+		  //the function to see whether or not the answer is correct
 		$scope.displayFeedbackFunc = function(){
 			var proj = $scope.project;
 			for(var i = 0; i < proj.questions.length; ++i){
@@ -848,7 +848,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			$scope.displayFeedback = true;
 			$scope.displayScore = true;
 		};
-
+		  //shows the feedback about whether or not the answer is correct
 		$scope.showFeedback = function(question, i) {
 			for(var j = 0; j < question.responses.length; ++j){
 				if(question.responses[j] === question.choices[i]){
@@ -858,7 +858,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return false;
 		};
-
+		  //allows user to edit an equation
 		$scope.appendEquation = function() {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -875,11 +875,11 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		  //records the type of question selected
 		$scope.questionTypeSelected = function(type) {
 			$scope.questionType = type;
 		};
-
+		  //records the number of solutions in multiple choice question
 		$scope.numberMultipleChoices = function(num) {
 			$scope.numChoices = num;
 			$scope.pickedMC = true;
@@ -889,7 +889,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		/*$scope.getNumChoices = function(num) {
 		    return numChoices;
 		};*/
-
+		  //records the number of solutions in multiple selections question
 		$scope.numberMultipleSelections = function(num) {
 			$scope.numSelections = num;
 			$scope.pickedMS = true;
@@ -900,7 +900,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		$scope.getNumber = function(num) {
 		    return new Array(num);
 		};
-
+		  //allows user to edit a file
 		$scope.editFile = function(files) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -931,7 +931,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-		
+		  //allows user to upload a file
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -967,7 +967,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-
+		  //allows user to embed a file
 		$scope.embedFile = function(indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -1033,7 +1033,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 			});
 		};
-
+		  //returns the hierachy name
 		function get_hierarchy_name(level){
 			if(level === 1)
 				return 'Project';
@@ -1050,7 +1050,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			else if(level === 7)
 				return 'Quiz';
 		}
-
+		  //updates the project
 		$scope.update = function() {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -1062,22 +1062,23 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		  //finds list of the projects
 		$scope.find = function() {
 			$scope.projects = Projects.query();
 		};
-
+		  //looks for a single project 
 		$scope.findOne = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
 		};
+		//looks for a single project
 		$scope.findOne_report = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
 		};
-
+		  //returns a certain type of user
 		$scope.getUniqueUsers = function(report){
 			var ret = [report[0].student];
 			for(var i = 1; i < report.length; ++i){
@@ -1092,16 +1093,16 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return ret;
 		};
-
+		  //find an element in the project
 		$scope.findElement = function() {
 			var url = $location.path();
 			$scope.activeElementIndex = url.substring(url.lastIndexOf('/') + 1, url.length);
 		};
-
+		  //converts it to a string
 		$scope.to_string = function(proj){
 			return JSON.stringify(proj, null, 2);
 		};
-
+		  //displays the answers
 		$scope.printAnswers = function(answers){
 			var ret = answers[0];
 			for(var i = 1; i < answers.length; ++i){
@@ -1110,14 +1111,14 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return ret;
 		};
-
+		  //shows whether or not the result is correct
 		$scope.printResult = function(result){
 			if(result)
 				return 'Correct';
 			else
 				return 'Incorrect';
 		};
-
+		  //when element is dropped it is updated and checked to see if it is in a correct place
 		$scope.onDropComplete = function (start_element, end_element, evt) {
 
 			//console.log(start_element);
@@ -1173,7 +1174,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			console.log(elements[0].value + ' :: index: ' + elements[0].index);
 			console.log(elements[1].value + ' :: index: ' + elements[1].index);
 		};
-
+		  //returns the element selected
 		function get_element(elements, index)
 		{
 			var length = elements.length;
@@ -1186,7 +1187,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			return false;
 		}
-
+		  //allows user to drag an element
 		$scope.canDrag = function(element)
 		{
 			return $scope.canEdit() && !element.isEditing;
