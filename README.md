@@ -1,6 +1,5 @@
 #WXYZ Project
 
-###SQUAD
 Member  | GitHub Account | Role
 ------------- | ------------- | -------------
 David Campbell  | John12341234 | Dev Team
@@ -25,5 +24,3 @@ MEAN.js  | [Website](http://meanjs.org/)
 Bootstrap  | [Website](http://getbootstrap.com/)
 ckEditor  | [Website](http://ckeditor.com/)
 Angular Youtube Embedded  | [GitHub](https://github.com/brandly/angular-youtube-embed)
-
-MEAN.js, Bootstrap, ckEditor, youtube thingy
