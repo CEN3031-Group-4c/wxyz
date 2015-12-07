@@ -37,11 +37,11 @@ Feature  | Screenshot
 ---
 ####HOW TO RUN THE PROJECT LOCALLY
 
-- Download project zip file and unzip
-- In command line, navigate to the project file and run ``npm install``
-- In a separate command line run ``mongod``
-- Run ``grunt``
-- Open up a web browser and navigate to ``localhost:3000``
+1. Download project zip file and unzip
+2. In command line, navigate to the project file and run ``npm install``
+3. In a separate command line run ``mongod``
+4. Run ``grunt``
+5. Open up a web browser and navigate to ``localhost:3000``
 
 ---
 ####UPDATE DATABASE AND SERVER CONNECTIONS
