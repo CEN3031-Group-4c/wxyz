@@ -1,4 +1,6 @@
 #WXYZ Project
+---
+####SQUAD
 
 Member  | GitHub Account | Role
 ------------- | ------------- | -------------
@@ -14,7 +16,8 @@ User stories were logged using Pivotal Tracker and can be found [here](https://w
 
 The deployed site can be found at: [http://icw.cise.ufl.edu/](http://icw.cise.ufl.edu/)
 
-#####Giving Credit Where Credit Is Due
+---
+####GIVING CREDIT WHERE CREDIT IS DUE
 
 All listed software was integrated into the project. Original source code can be at the listed links.
 
@@ -24,3 +27,14 @@ MEAN.js  | [Website](http://meanjs.org/)
 Bootstrap  | [Website](http://getbootstrap.com/)
 ckEditor  | [Website](http://ckeditor.com/)
 Angular Youtube Embedded  | [GitHub](https://github.com/brandly/angular-youtube-embed)
+---
+####FEATURES IMPLEMENTED
+Feature  | Screenshot
+-------------------------------- | --------------------------------
+"Feature"  | ![Feature 1](/tests/test_elements/cat_pic.jpg)
+"Feature"  | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+
+---
+####HOW TO RUN THE PROJECT LOCALLY
+---
+####UPDATE DATABASE AND SERVER CONNECTIONS
