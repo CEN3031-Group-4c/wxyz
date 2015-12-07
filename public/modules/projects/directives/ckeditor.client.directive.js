@@ -1,9 +1,10 @@
 'use strict';
 
 //ckEditor custom directive. Allows for using ck-editor to replace
-//a textarea with the nice rich text editor. Still need to figure
-//out how to customize the type of buttons available on the editor
-//so we can reuse this for the equations editor as well.
+//a textarea with the nice rich text editor. This directive gives
+//us the "main" editor, which has many included features. Other
+//directives wil customize the toolbar to limit features to
+//specific desired things such as equations, tables, etc.
 angular.module('projects').directive('ckEditor', function() {
     return {
         require : '?ngModel',
