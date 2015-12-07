@@ -23,10 +23,10 @@ All listed software was integrated into the project. Original source code can be
 
 Software  | Link
 ------------- | -------------
-MEAN.js  | [Website](http://meanjs.org/)
-Bootstrap  | [Website](http://getbootstrap.com/)
-ckEditor  | [Website](http://ckeditor.com/)
-Angular Youtube Embedded  | [GitHub](https://github.com/brandly/angular-youtube-embed)
+MEAN.js  | [Link](http://meanjs.org/)
+Bootstrap  | [Link](http://getbootstrap.com/)
+ckEditor  | [Link](http://ckeditor.com/)
+Angular Youtube Embedded  | [Link](https://github.com/brandly/angular-youtube-embed)
 ---
 ####FEATURES IMPLEMENTED
 Feature  | Screenshot
