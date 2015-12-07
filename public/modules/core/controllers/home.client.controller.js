@@ -157,6 +157,10 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		$event.stopPropagation();
 		$scope.state.go('home.viewProject', {projectId:id});
 	};
+	$scope.link_prev = function($event, id){
+		$event.stopPropagation();
+		$location.path('projects/'+id+'/preview');
+	};
 	}
 
 ]);
