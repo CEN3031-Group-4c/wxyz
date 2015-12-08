@@ -91,7 +91,8 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		}
 		return false;
 	};
-	
+
+	//displays the parent project of the project the user is currently in
 	$scope.resolveTop = function(project)
 	{
 		var projects = $scope.projects;
@@ -108,7 +109,8 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		}
 		return false;
 	};
-	
+
+	//displays the parent of the course the user is currently in 
 	$scope.resolveCourse = function(project)
 	{
 		var projects = $scope.projects;
@@ -121,7 +123,8 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		return current;
 
 	};
-     
+
+	//checks to see if the user has permission to view a project
 	$scope.canView = function(project)
 	{
 		var topProject = $scope.resolveTop(project);
@@ -133,7 +136,8 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 			else return false;
 		}
 	};
-     
+
+	//displays the current project that the user is in 
 	$scope.projectPage = function() {
 
 			if (document.getElementById('view_project'))
@@ -158,14 +162,20 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 			else
 				return true;
 	};
-	
+
+	//previews the project that the user is in 
 	$scope.previewInit = function() {
 		$scope.previewTop = $scope.resolveTop($scope.lookup($scope.getProjectId()));
 	};
-	
+
+	//links to the home project
 	$scope.link = function($event, id) {
 		$event.stopPropagation();
 		$scope.state.go('home.viewProject', {projectId:id});
+	};
+	$scope.link_prev = function($event, id){
+		$event.stopPropagation();
+		$location.path('projects/'+id+'/preview');
 	};
 	}
 
