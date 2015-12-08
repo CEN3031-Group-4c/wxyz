@@ -452,6 +452,24 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
+		$scope.appendTable = function() {
+			$scope.addContributer();
+			var project = $scope.project;
+
+			var my_index = get_insert_index(project);
+
+			project.elements.push({tag: 'table', value: $scope.textToAppend, index: my_index});
+
+			project.$update(function() {
+				//$location.path('projects/' + project._id);
+        		$state.go('home.viewProject', {projectId:project._id});
+				$scope.textToAppend = '';
+			},
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
 		$scope.appendLink = function(workspaceID, sectionID){
 			console.log(workspaceID);
 			console.log(sectionID);
@@ -931,7 +949,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-		  //allows user to upload a file
+
+		// allows user to upload a file
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -967,7 +986,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-		  //allows user to embed a file
+		
+		// allows user to embed a file
 		$scope.embedFile = function(indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -990,8 +1010,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
-		//Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy
-		//Project-1, Course-2, Topic-3, etc.
+		// Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy
+		// Project-1, Course-2, Topic-3, etc.
 		$scope.addLevel = function(curr_level) {
 			$scope.addContributer();
 			var parent_proj = $scope.project;
@@ -1033,7 +1053,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 			});
 		};
-		  //returns the hierachy name
+		
+		// returns the hierachy name
 		function get_hierarchy_name(level){
 			if(level === 1)
 				return 'Project';
@@ -1050,7 +1071,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			else if(level === 7)
 				return 'Quiz';
 		}
-		  //updates the project
+		
+		// updates the project
 		$scope.update = function() {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -1062,23 +1084,27 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		  //finds list of the projects
+		
+		// finds list of the projects
 		$scope.find = function() {
 			$scope.projects = Projects.query();
 		};
-		  //looks for a single project 
+		
+		// looks for a single project 
 		$scope.findOne = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
 		};
-		//looks for a single project
+
+		// looks for a single project
 		$scope.findOne_report = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
 		};
-		  //returns a certain type of user
+
+		// returns a certain type of user
 		$scope.getUniqueUsers = function(report){
 			var ret = [report[0].student];
 			for(var i = 1; i < report.length; ++i){
@@ -1093,16 +1119,19 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return ret;
 		};
-		  //find an element in the project
+
+		// find an element in the project
 		$scope.findElement = function() {
 			var url = $location.path();
 			$scope.activeElementIndex = url.substring(url.lastIndexOf('/') + 1, url.length);
 		};
-		  //converts it to a string
+
+		// converts it to a string
 		$scope.to_string = function(proj){
 			return JSON.stringify(proj, null, 2);
 		};
-		  //displays the answers
+
+		// displays the answers
 		$scope.printAnswers = function(answers){
 			var ret = answers[0];
 			for(var i = 1; i < answers.length; ++i){
@@ -1111,14 +1140,16 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return ret;
 		};
-		  //shows whether or not the result is correct
+
+		// shows whether or not the result is correct
 		$scope.printResult = function(result){
 			if(result)
 				return 'Correct';
 			else
 				return 'Incorrect';
 		};
-		  //when element is dropped it is updated and checked to see if it is in a correct place
+
+		// when element is dropped it is updated and checked to see if it is in a correct place
 		$scope.onDropComplete = function (start_element, end_element, evt) {
 
 			//console.log(start_element);
@@ -1174,7 +1205,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			console.log(elements[0].value + ' :: index: ' + elements[0].index);
 			console.log(elements[1].value + ' :: index: ' + elements[1].index);
 		};
-		  //returns the element selected
+
+		// returns the element selected
 		function get_element(elements, index)
 		{
 			var length = elements.length;

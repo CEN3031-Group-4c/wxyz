@@ -1,0 +1,18 @@
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Add Table</h1>
+		<h4>Click the table icon to insert table cells,
+			  then use the other toolbar features to format
+				font the way you like. </h4>
+	</div>
+
+  <!-- Create a textarea that is then replaced by the ckEditor. There is a custom
+	     configuration of ckeditor specifically for inserting tables.-->
+	<div>
+		<textarea tbl-editor ng-model="textToAppend"></textarea>
+	</div>
+
+  <!--Pushing the save button calls appendTable() and adds the table to the project-->
+	<button class="btn btn-default" name="submit" data-ng-click="appendTable()">Save</button>
+
+</section>
