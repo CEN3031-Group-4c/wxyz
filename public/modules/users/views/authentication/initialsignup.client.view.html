@@ -1,5 +1,5 @@
 <section class="row" data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">For security, a current user must create an account for a new user.</h3>
+	<h3 class="col-md-12 text-center">Enter the Default user ID and password to enable sign-up</h3>
 	<!--<h3 class="col-md-12 text-center">Sign up using your social accounts</h3>-->
 	<!--<div class="col-md-12 text-center">-->
 	<!--<a href="/auth/facebook" class="undecorated-link">-->
@@ -19,26 +19,37 @@
 	<!--</a>-->
 	<!--</div>-->
 	<!--<h3 class="col-md-12 text-center">Or with your email</h3>-->
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2" ng-show="userLoggedIn()">
-		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
+	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+		<form name="userForm" data-ng-submit="initialsignup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<fieldset>
 				<div class="form-group">
+					<label for="username">Default Username</label>
+					<input type="text" id="initialusername" name="username" class="form-control" data-ng-model="initialusername" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<label for="password">Default Password</label>
+					<input type="password" id="initialpassword" name="password" class="form-control" data-ng-model="initialpassword" placeholder="Password">
+				</div>
+				<br/>
+
+				<h3 class="col-md-12 text-center" ng-show="validLogin()">New User:</h3>
+				<div class="form-group" ng-show="validLogin()">
 					<label for="firstName">First Name</label>
-					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
+					<input type="text" required id="firstName" name="firstName" class="form-control" value="none" data-ng-model="credentials.firstName" placeholder="First Name">
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-show="validLogin()">
 					<label for="lastName">Last Name</label>
-					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">
+					<input type="text" id="lastName" name="lastName" class="form-control" value="none" data-ng-model="credentials.lastName" placeholder="Last Name">
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-show="validLogin()">
 					<label for="email">Email</label>
-					<input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
+					<input type="email" id="email" name="email" class="form-control" value="none@none.com" data-ng-model="credentials.email" placeholder="Email">
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-show="validLogin()">
 					<label for="username">Username</label>
 					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-show="validLogin()">
 					<label for="password">Password</label>
 					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
 				</div>
@@ -46,7 +57,7 @@
 				<!--<label for="isAdmin">Admin?</label> -->
 				<!--<input type="checkbox" id="isAdmin" name="isAdmin" class="form-control" data-ng-model="credentials.isAdmin">			-->
 				<!--</div>-->
-				<div class="text-center form-group">
+				<div class="text-center form-group" ng-show="validLogin()">
 					<button type="submit" name="signUpSubmit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;
 					<a href="/#!/signin" class="show-signup">Sign in</a>
 				</div>

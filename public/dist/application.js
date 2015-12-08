@@ -423,6 +423,10 @@ angular.module('users').config(['$stateProvider',
 			url: '/signup',
 			templateUrl: 'modules/users/views/authentication/signup.client.view.html'
 		}).
+	state('initialsignup', {
+		url: '/initialsignup',
+		templateUrl: 'modules/users/views/authentication/initialsignup.client.view.html'
+		}).
 		state('signin', {
 			url: '/signin',
 			templateUrl: 'modules/users/views/authentication/signin.client.view.html'
