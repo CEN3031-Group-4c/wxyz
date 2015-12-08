@@ -2,6 +2,7 @@ describe('WXYZ - Course Authoring System', function() {
 	var path = require('path');
 	var absolutePath = '';
 	var fileToUpload = '';
+	var last_element;
 	
 	it('Start the browser', function(){
 		browser.get('http://localhost:3000/');
@@ -51,54 +52,69 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(19)).click();
 		browser.sleep(2000);
 		
+		var edit = $('span[role="application"]');
+		console.log(edit.length);
+		var editor = element(by.css('.cke'));
+		console.log(editor.length);
+		expect(editor.isPresent()).toBe(true);
+		//var toolbar = editor.element.all(by.css('.cke_toolgroup'));
+		//toolbar[3].element.all(by.css('.cke_button'));
+		//element.all(by.css('.cke_button'));
+		
 		browser.switchTo().frame(0);
 		browser.driver.findElement(by.tagName('body')).click();
 		browser.driver.findElement(by.tagName('body')).sendKeys('Text 1');
 		browser.driver.switchTo().defaultContent();
 		browser.waitForAngular();
 		
-		//var editor = element(by.css('.cke_top'));
-		//var toolbar = editor.element.all(by.css('.cke_toolgroup'));
-		//toolbar[3].element.all(by.css('.cke_button'));
-		//element.all(by.css('.cke_button'));
 		//element(by.name('submit')).click();
-		browser.sleep(2000);
+		//browser.sleep(2000);
 		
-		//var last_element = element.all(by.repeater('element in project.elements')).last();
-		//console.log(last_element.element(by.css('ng-binding')).getInnerHtml());
-		
+		//last_element = element.all(by.repeater('element in project.elements')).last();
+		//expect(last_element.element(by.css('.ng-binding')).getInnerHtml()).toBe('<p>Text 1</p>\n');
 		/*
 		//audio
-		element(by.repeater('item in menu.items').row(4)).click();
-		element.all(by.repeater('subitem in item.items').row(21)).click();
+		element(by.repeater('item in menu.items').row(3)).click();
+		element.all(by.repeater('subitem in item.items').row(23)).click();
 		fileToUpload = '../test_elements/audio_test.mp3';
 		absolutePath = path.resolve(__dirname, fileToUpload);
-		browser.sleep(2000);
 		$('input[type="file"]').sendKeys(absolutePath);
 		browser.sleep(500);
+		last_element = element.all(by.repeater('element in project.elements')).last();
+		expect(last_element.element(by.tagName('audio')).isPresent()).toBe(true);
 		
 		//video
-		element(by.repeater('item in menu.items').row(4)).click();
-		element.all(by.repeater('subitem in item.items').row(22)).click();
+		element(by.repeater('item in menu.items').row(3)).click();
+		element.all(by.repeater('subitem in item.items').row(20)).click();
 		fileToUpload = '../test_elements/video_test.mp4';
 		absolutePath = path.resolve(__dirname, fileToUpload);
+		element(by.model('showMedia')).click();
 		$('input[type="file"]').sendKeys(absolutePath);
-		browser.sleep(300);
+		browser.sleep(500);
+		last_element = element.all(by.repeater('element in project.elements')).last();
+		expect(last_element.element(by.tagName('video')).isPresent()).toBe(true);
 		
 		//static image (jpg)
-		element(by.repeater('item in menu.items').row(4)).click();
-		element.all(by.repeater('subitem in item.items').row(26)).click();
+		element(by.repeater('item in menu.items').row(3)).click();
+		element.all(by.repeater('subitem in item.items').row(25)).click();
 		fileToUpload = '../test_elements/dog_pic.jpg';
 		absolutePath = path.resolve(__dirname, fileToUpload);
 		$('input[type="file"]').sendKeys(absolutePath);
-		browser.sleep(300);
+		browser.sleep(500);
+		
+		last_element = element.all(by.repeater('element in project.elements')).last();
+		expect(last_element.element(by.tagName('img')).isPresent()).toBe(true);
 		
 		//static image (gif)
-		element(by.repeater('item in menu.items').row(4)).click();
-		element.all(by.repeater('subitem in item.items').row(26)).click();
+		element(by.repeater('item in menu.items').row(3)).click();
+		element.all(by.repeater('subitem in item.items').row(25)).click();
 		fileToUpload = '../test_elements/gif_test.gif';
 		absolutePath = path.resolve(__dirname, fileToUpload);
 		$('input[type="file"]').sendKeys(absolutePath);
+		browser.sleep(500);
+		
+		last_element = element.all(by.repeater('element in project.elements')).last();
+		expect(last_element.element(by.tagName('img')).isPresent()).toBe(true);
 		*/
 	});
 });
