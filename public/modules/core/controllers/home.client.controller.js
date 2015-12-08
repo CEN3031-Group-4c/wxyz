@@ -23,7 +23,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 			}
 		}
 	};
-
+    //Checks to see if we are still active in a certain project
 	$scope.isActive = function(id){
 		if(id === $stateParams.projectId){
 			return true;
@@ -34,6 +34,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 	};
 
 	// need to move variables and delete the function
+	//Finds a specific project
 	$scope.find = function() {
 		$scope.projects = Projects.query();
 		$scope.frame1 = $rootScope.frame1;
@@ -45,14 +46,17 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		$location.path('projects/' + project._id);
 	};
 	*/
+	//Allows the user to preview  the current project they are in
 	$scope.preview_stuff = function(project)
 	{
 		$location.path('projects/' + project._id + '/preview');
 	};
+	//Checks the preview status of the project
 	$scope.setPreviewStatus = function(status)
 	{
 		$rootScope.inPreview = status;
 	};
+	//Gets the id of the projet the user is currently in
 	$scope.getProjectId = function()
 	{
 		var full_path = $location.path();
@@ -69,6 +73,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		return false;
 	};*/
 	// need to look into this function
+	//Checks to see whether the current course is open
 	$scope.isCourseOpen = function(project)
 	{
 		if (!$scope.getProjectId()) return false;
@@ -76,6 +81,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		if (top._id === project._id) return true;
 		return false;
 	};
+	//Allows the user to look up a certain course
 	$scope.lookup = function(id)
 	{
 		var projects = $scope.projects;
@@ -85,6 +91,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		}
 		return false;
 	};
+
 	//displays the parent project of the project the user is currently in
 	$scope.resolveTop = function(project)
 	{
@@ -102,6 +109,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		}
 		return false;
 	};
+
 	//displays the parent of the course the user is currently in 
 	$scope.resolveCourse = function(project)
 	{
@@ -115,6 +123,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 		return current;
 
 	};
+
 	//checks to see if the user has permission to view a project
 	$scope.canView = function(project)
 	{
@@ -127,6 +136,7 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 			else return false;
 		}
 	};
+
 	//displays the current project that the user is in 
 	$scope.projectPage = function() {
 
@@ -152,10 +162,12 @@ angular.module('core').controller('HomeController', ['$scope', '$rootScope', 'Au
 			else
 				return true;
 	};
+
 	//previews the project that the user is in 
 	$scope.previewInit = function() {
 		$scope.previewTop = $scope.resolveTop($scope.lookup($scope.getProjectId()));
 	};
+
 	//links to the home project
 	$scope.link = function($event, id) {
 		$event.stopPropagation();
