@@ -5,8 +5,8 @@
 		<h1 data-ng-bind="project.title"></h1>
 		<small data-ng-bind="project.content"></small>
 	</div>
-	Project elements: {{lookupElement().length}}
-	<div data-ng-repeat="element in lookupElement() | orderBy: 'index'">
+	//Project elements: {{lookupElement().length}}
+	<div data-ng-repeat="element in lookupElement()">
 		<div ng-switch on="element.tag">
 			<div class="row">
 				<div class="col-md-10">

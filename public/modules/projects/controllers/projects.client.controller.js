@@ -1203,7 +1203,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		};
 
 		// the function with the magic
-		$scope.openProjectModal  = function (projectId, elementId, size) {
+		$scope.openProjectModal  = function (projectId, elementId) {
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/project-modal.client.view.html',
 				controller: 'LinkModalController',

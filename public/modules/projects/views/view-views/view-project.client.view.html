@@ -98,7 +98,7 @@
 						</div>   <!--text end-->
 						<div ng-switch-when="linkButton">   <!--text start-->
 							<div data-ng-hide="element.isEditing">
-								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value, '')"> Open {{element.heading}} </div>
+								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value,element.dataTitle)"> Open {{element.heading}} </div>
 							</div>
 							<!--<div data-ng-show="element.isEditing"></div>-->
 								<!--<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button> -->
