@@ -3,6 +3,14 @@ describe('WXYZ - Course Authoring System', function() {
 	var absolutePath = '';
 	var fileToUpload = '';
 	var last_element;
+	var clickButton = function(toolbar_count, button_count) {
+		element.all(by.css('.cke_toolbar')).then(function(toolbar) {
+			//toolbar.row(0).count().then(function(ret) { console.log(ret) });
+			//toolbar.row(toolbar_count).element.all(by.css('.cke_button')).then(function(button) {
+			//	button.row(button_count).click();
+			//});
+		});
+	};
 	
 	it('Start the browser', function(){
 		browser.get('http://localhost:3000/');
@@ -44,8 +52,8 @@ describe('WXYZ - Course Authoring System', function() {
 		element(by.name('submitButton')).click();
 	});*/
 	
+	
 	it('Add Elements', function(){
-		/*
 		element.all(by.repeater('project in projects.slice().reverse()')).last().click();
 		
 		// text
@@ -53,12 +61,14 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(19)).click();
 		browser.sleep(2000);
 		
+		clickButton(3, 6);
+		
 		browser.switchTo().frame(0);
 		browser.driver.findElement(by.tagName('body')).click();
 		browser.driver.findElement(by.tagName('body')).sendKeys('Text 1');
 		browser.driver.switchTo().defaultContent();
 		browser.waitForAngular();
-		
+		/*
 		element(by.name('submit')).click();
 		browser.sleep(2000);
 		
@@ -110,13 +120,24 @@ describe('WXYZ - Course Authoring System', function() {
 		*/
 	});
 	
-	it('Remove Elements', function(){
-		//var numOfElem = element.all(by.repeater('element in project.elements'));
-		//console.log(numOfElem.length);
+	/*
+	it('Remove an Element', function(){
+		// delete the last element
+		// open the last project
 		element.all(by.repeater('project in projects.slice().reverse()')).last().click();
-		last_element = element.all(by.repeater('element in project.elements')).last();
-		last_element.element(by.name('elementDeleteButton')).click();
-		//var newNumOfElem = element.all(by.repeater('element in project.elements'));
-		//expect(newNumOfElem.length).toBe(numOfElem.length - 1);
+		// get number of elements and subtract one
+		element.all(by.repeater('element in project.elements')).count().then(function(oldCount) {
+			// find the last element
+			last_element = element.all(by.repeater('element in project.elements')).last();
+			// click delete and confirm
+			last_element.element(by.name('elementDeleteButton')).click();
+			element(by.name('confirmDeleteButton')).click();
+			browser.sleep(300);
+			// get the new number of elements
+			element.all(by.repeater('element in project.elements')).count().then(function(newCount) {
+				expect(newCount).toBe(oldCount-1);
+			});
+		});
 	});
+	*/
 });
