@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies.  
  */
 var _ = require('lodash'),
 	errorHandler = require('../errors.server.controller'),
@@ -10,7 +10,7 @@ var _ = require('lodash'),
 	User = mongoose.model('User');
 
 /**
- * Signup
+ * Signup  
  */
 exports.initialsignup = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
