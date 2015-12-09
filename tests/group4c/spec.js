@@ -3,12 +3,9 @@ describe('WXYZ - Course Authoring System', function() {
 	var absolutePath = '';
 	var fileToUpload = '';
 	var last_element;
-	var clickButton = function(toolbar_count, button_count) {
-		element.all(by.css('.cke_toolbar')).then(function(toolbar) {
-			//toolbar.row(0).count().then(function(ret) { console.log(ret) });
-			//toolbar.row(toolbar_count).element.all(by.css('.cke_button')).then(function(button) {
-			//	button.row(button_count).click();
-			//});
+	var ckEditorButton = function(button) {
+		element.all(by.css('.cke_button')).then(function(btn) {
+			btn[button].click();
 		});
 	};
 	
@@ -18,18 +15,33 @@ describe('WXYZ - Course Authoring System', function() {
         browser.sleep(500);
 	});
 	
-	it('Sign In', function(){
-		element(by.name('signInButton')).click();
-		element(by.name('username')).sendKeys('igor');
-		element(by.name('password')).sendKeys('tiramisu');
-		
-		expect(element(by.name('username')).getAttribute('value')).toEqual('igor');
-		expect(element(by.name('password')).getAttribute('value')).toEqual('tiramisu');
-		
-		element(by.name('signIn')).click();
+	it('Create a user account using the default signin', function() {
+		element(by.name('signUpButton')).click(); // click the signup button
+		element(by.id('initialusername')).sendKeys('Admin'); // type the default username
+		element(by.id('initialpassword')).sendKeys('12341234'); // type the default password
+		element(by.name('firstName')).sendKeys('Igor11'); // type the first name
+		element(by.name('lastName')).sendKeys('Igor11'); // type the last name
+		element(by.name('email')).sendKeys('igor11@email.com'); // type the email
+		element(by.id('username')).sendKeys('igor11'); // type the username
+		element(by.id('password')).sendKeys('tiramisu'); // type the password
+		browser.sleep(500);
+		element(by.name('signUpSubmit')).click(); // click signup button
 	});
 	
-	/*it('Create Project', function(){
+	/*
+	it('Sign In', function(){
+		var user = '';
+		var password = '';
+		element(by.name('signInButton')).click(); // click the signin button
+		element(by.name('username')).sendKeys(user); // type the username
+		element(by.name('password')).sendKeys(password); // type the password
+		expect(element(by.name('username')).getAttribute('value')).toEqual(user); // check the username
+		expect(element(by.name('password')).getAttribute('value')).toEqual(password); // check the password
+		element(by.name('signIn')).click(); // click signin button
+	});*/
+	
+	
+	it('Create Project', function(){
 		element.all(by.repeater('item in menu.items').row(0)).click();
 		element.all(by.repeater('subitem in item.items').row(0)).click();
 		element(by.name('title')).sendKeys('Project 1');
@@ -40,8 +52,8 @@ describe('WXYZ - Course Authoring System', function() {
 		element(by.name('submitButton')).click();
 		
 		expect(element.all(by.repeater('project in projects.slice().reverse()')).last().getAttribute('heading')).toEqual('Project 1');
-	});*/
-	/*
+	});
+	
 	it('Create Course', function(){
 		element.all(by.repeater('project in projects.slice().reverse()')).last().click();
 		element.all(by.repeater('item in menu.items').row(2)).click();
@@ -50,7 +62,7 @@ describe('WXYZ - Course Authoring System', function() {
 		
 		expect(element(by.name('title')).getAttribute('value')).toEqual('Course 1');
 		element(by.name('submitButton')).click();
-	});*/
+	});
 	
 	
 	it('Add Elements', function(){
@@ -61,19 +73,20 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(19)).click();
 		browser.sleep(2000);
 		
-		clickButton(3, 6);
+		ckEditorButton(20); // center
 		
 		browser.switchTo().frame(0);
 		browser.driver.findElement(by.tagName('body')).click();
 		browser.driver.findElement(by.tagName('body')).sendKeys('Text 1');
 		browser.driver.switchTo().defaultContent();
 		browser.waitForAngular();
-		/*
+		
 		element(by.name('submit')).click();
 		browser.sleep(2000);
 		
 		last_element = element.all(by.repeater('element in project.elements')).last();
-		expect(last_element.element(by.css('.ng-binding')).getInnerHtml()).toBe('<p>Text 1</p>\n');
+		expect(last_element.element(by.css('.ng-binding')).getInnerHtml()).
+			toBe('<p style="text-align:center">Text 1</p>\n');
 		
 		//audio
 		element(by.repeater('item in menu.items').row(3)).click();
@@ -96,6 +109,17 @@ describe('WXYZ - Course Authoring System', function() {
 		last_element = element.all(by.repeater('element in project.elements')).last();
 		expect(last_element.element(by.tagName('video')).isPresent()).toBe(true);
 		
+		// youtube
+		element(by.repeater('item in menu.items').row(3)).click();
+		element.all(by.repeater('subitem in item.items').row(20)).click();
+		element(by.model('showMedia')).click();
+		element(by.model('videoEmbed')).sendKeys('https://www.youtube.com/watch?v=rlVwJvE3C5A');
+		expect(element(by.model('videoEmbed'))).toBe('https://www.youtube.com/watch?v=rlVwJvE3C5A');
+		element(by.name('submit')).click();
+		browser.sleep(500);
+		last_element = element.all(by.repeater('element in project.elements')).last();
+		expect(last_element.element(by.tagName('iframe')).isPresent()).toBe(true);
+		
 		//static image (jpg)
 		element(by.repeater('item in menu.items').row(3)).click();
 		element.all(by.repeater('subitem in item.items').row(25)).click();
@@ -117,10 +141,9 @@ describe('WXYZ - Course Authoring System', function() {
 		
 		last_element = element.all(by.repeater('element in project.elements')).last();
 		expect(last_element.element(by.tagName('img')).isPresent()).toBe(true);
-		*/
+		
 	});
 	
-	/*
 	it('Remove an Element', function(){
 		// delete the last element
 		// open the last project
@@ -139,5 +162,4 @@ describe('WXYZ - Course Authoring System', function() {
 			});
 		});
 	});
-	*/
 });
