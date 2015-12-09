@@ -6,39 +6,37 @@ angular.module('projects').controller('LinkModalController', ['$scope', '$modalI
 	$scope.sc = $sce;  // html security for ckeditor text
 	  // find project in the database
 	$scope.elementId = eleId;  // save element id (index)
-	$scope.ranOnce = false;
+	$scope.projectTest = 'this is the project test';
+
 	$scope.resultArray = false;
 	$scope.lookupElement = function(){
 		var result;
 		console.log('got into the function');
 		console.log('the value of projectId is:');
 		console.log(prjId);
-		var project = Projects.get({ projectId: prjId },function(){
-			console.log($scope.ranOnce);
-			
-
-				$scope.ranOnce = true;
-				console.log('Did we crash?');
-				console.log(project.elements.length);
+		$scope.projectTest = Projects.get({ projectId: prjId },function(){
+				$scope.project = $scope.projectTest;
+				console.log($scope.projectTest.elements.length);
 				if(!eleId) {
 					console.log('EleId undefined');
-					console.log(project);
-					$scope.resultArray = project.elements;
-					return project.elements;
+					$scope.resultArray = 	$scope.projectTest.elements;
+					console.log($scope.resultArray);
+					return $scope.projectTest.elements;
 				} else {
-					for(var i=0; i < project.elements.length; i++ )
+					for(var i=0; i < $scope.projectTest.elements.length; i++ )
 					{
-						if( project.elements[i]._id === $scope.elementId ){
-								console.log('Crashing at element selection');
-								$scope.resultArray = project.elements[i];
-								return project.elements[i];
+						if($scope.projectTest.elements[i]._id === $scope.elementId ){
+
+								$scope.resultArray = 	$scope.projectTest.elements[i];
+								console.log($scope.resultArray);
+								return 	$scope.projectTest.elements[i];
 
 						}
 					}
 				}
 
-				$scope.resultArray = false;
-				return false;
+				//$scope.resultArray = false;
+				//return false;
 
 
 
@@ -49,6 +47,15 @@ angular.module('projects').controller('LinkModalController', ['$scope', '$modalI
 
 
 	}; // ends lookupElement
+
+
+	$scope.helloWorld = function(){
+
+			console.log('hello world, lets see if this comes before the inner workings of the function');
+
+	};
+
+
 
 	//$scope.targetElement = $scope.lookupElement();
 
