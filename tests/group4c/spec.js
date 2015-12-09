@@ -30,16 +30,13 @@ describe('WXYZ - Course Authoring System', function() {
 	
 	/*
 	it('Sign In', function(){
-		var user = '';
-		var password = '';
 		element(by.name('signInButton')).click(); // click the signin button
-		element(by.name('username')).sendKeys(user); // type the username
-		element(by.name('password')).sendKeys(password); // type the password
-		expect(element(by.name('username')).getAttribute('value')).toEqual(user); // check the username
-		expect(element(by.name('password')).getAttribute('value')).toEqual(password); // check the password
+		element(by.name('username')).sendKeys('igor'); // type the username
+		element(by.name('password')).sendKeys('tiramisu'); // type the password
+		expect(element(by.name('username')).getAttribute('value')).toEqual('igor'); // check the username
+		expect(element(by.name('password')).getAttribute('value')).toEqual('tiramisu'); // check the password
 		element(by.name('signIn')).click(); // click signin button
 	});*/
-	
 	
 	it('Create Project', function(){
 		element.all(by.repeater('item in menu.items').row(0)).click();
@@ -63,7 +60,6 @@ describe('WXYZ - Course Authoring System', function() {
 		expect(element(by.name('title')).getAttribute('value')).toEqual('Course 1');
 		element(by.name('submitButton')).click();
 	});
-	
 	
 	it('Add Elements', function(){
 		element.all(by.repeater('project in projects.slice().reverse()')).last().click();
@@ -114,7 +110,6 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(20)).click();
 		element(by.model('showMedia')).click();
 		element(by.model('videoEmbed')).sendKeys('https://www.youtube.com/watch?v=rlVwJvE3C5A');
-		expect(element(by.model('videoEmbed'))).toBe('https://www.youtube.com/watch?v=rlVwJvE3C5A');
 		element(by.name('submit')).click();
 		browser.sleep(500);
 		last_element = element.all(by.repeater('element in project.elements')).last();
@@ -131,6 +126,7 @@ describe('WXYZ - Course Authoring System', function() {
 		last_element = element.all(by.repeater('element in project.elements')).last();
 		expect(last_element.element(by.tagName('img')).isPresent()).toBe(true);
 		
+		
 		//static image (gif)
 		element(by.repeater('item in menu.items').row(3)).click();
 		element.all(by.repeater('subitem in item.items').row(25)).click();
@@ -141,7 +137,6 @@ describe('WXYZ - Course Authoring System', function() {
 		
 		last_element = element.all(by.repeater('element in project.elements')).last();
 		expect(last_element.element(by.tagName('img')).isPresent()).toBe(true);
-		
 	});
 	
 	it('Remove an Element', function(){
