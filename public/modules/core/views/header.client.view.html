@@ -4,7 +4,7 @@
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>  
 		</button>
 		<a href="/#!/" class="navbar-brand">WXYZ</a>
 	</div>
@@ -26,9 +26,12 @@
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
-			<li ui-route="/signup" name="signUpButton" ng-class="{active: $uiRoute}">
-				<a href="/#!/signup">Sign Up</a>
-			</li
+			<!--<li ui-route="/signup" name="signUpButton" ng-class="{active: $uiRoute}">-->
+			<!--<a href="/#!/signup">Sign Up</a>-->
+			<!--</li>-->
+			<li ui-route="/initialsignup" name="signUpButton" ng-class="{active: $uiRoute}">
+				<a href="/#!/initialsignup">Initial Sign Up</a>
+			</li>
 			<li class="divider-vertical"></li>
 			<li ui-route="/signin" name="signInButton" ng-class="{active: $uiRoute}">
 				<a href="/#!/signin">Sign In</a>
@@ -40,6 +43,9 @@
 					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
+					<li>
+						<a href="/#!/signup">Add Another User</a>
+					</li>
 					<li>
 						<a href="/#!/settings/profile">Edit Profile</a>
 					</li>
