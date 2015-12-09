@@ -7,6 +7,7 @@ angular.module('projects').controller('LinkModalController', ['$scope', '$modalI
 	  // find project in the database
 	$scope.elementId = eleId;  // save element id (index)
 	$scope.ranOnce = false;
+	$scope.resultArray = false;
 	$scope.lookupElement = function(){
 		var result;
 		console.log('got into the function');
@@ -14,7 +15,7 @@ angular.module('projects').controller('LinkModalController', ['$scope', '$modalI
 		console.log(prjId);
 		var project = Projects.get({ projectId: prjId },function(){
 			console.log($scope.ranOnce);
-			if($scope.ranOnce === false){
+			
 
 				$scope.ranOnce = true;
 				console.log('Did we crash?');
@@ -22,23 +23,25 @@ angular.module('projects').controller('LinkModalController', ['$scope', '$modalI
 				if(!eleId) {
 					console.log('EleId undefined');
 					console.log(project);
+					$scope.resultArray = project.elements;
 					return project.elements;
 				} else {
 					for(var i=0; i < project.elements.length; i++ )
 					{
 						if( project.elements[i]._id === $scope.elementId ){
 								console.log('Crashing at element selection');
+								$scope.resultArray = project.elements[i];
 								return project.elements[i];
 
 						}
 					}
 				}
 
-
+				$scope.resultArray = false;
 				return false;
 
 
-			} // ends if statement
+
 
 
 		}); // ends Project.get
