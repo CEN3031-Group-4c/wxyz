@@ -26,11 +26,13 @@ angular.module('projects').controller('LinkModalController', ['$scope', '$modalI
 					for(var i=0; i < $scope.projectTest.elements.length; i++ )
 					{
 						if($scope.projectTest.elements[i]._id === $scope.elementId ){
+								var newArray = [$scope.projectTest.elements[i]];
+								$scope.resultArray = 	newArray;
 
-								$scope.resultArray = 	$scope.projectTest.elements[i];
-								console.log($scope.resultArray);
 								return 	$scope.projectTest.elements[i];
 
+						}else{
+								console.log('No result was found');
 						}
 					}
 				}

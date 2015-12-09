@@ -1,12 +1,11 @@
 <!-- This is essentially view-project.client.view.html, only I took out all editing options, draggable, and quizes -->
-<p>This is sample text</p>
-<p> ProjectID is current {{projectTest}} </p>
 <section ng-init="lookupElement(); helloWorld()">
+
 	<div class="page-header">
 		<h1 data-ng-bind="project.title"></h1>
 		<small data-ng-bind="project.content"></small>
 	</div>
-	<div data-ng-repeat="element in $scope.resultArray">
+	<div data-ng-repeat="element in resultArray">
 		<div ng-switch on="element.tag">
 			<div class="row">
 				<div class="col-md-10">
