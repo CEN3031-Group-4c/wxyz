@@ -46,9 +46,12 @@ describe('WXYZ - Course Authoring System', function() {
 		
 		expect(element(by.name('title')).getAttribute('value')).toEqual('Project 1');
 		expect(element(by.name('content')).getAttribute('value')).toEqual('This is an automated test of project creation.');
+		browser.sleep(4000);
 		element(by.name('submitButton')).click();
 		
 		expect(element.all(by.repeater('project in projects.slice().reverse()')).last().getAttribute('heading')).toEqual('Project 1');
+		
+		browser.sleep(4000);
 	});
 	
 	it('Create Course', function(){
@@ -56,9 +59,11 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('item in menu.items').row(2)).click();
 		element.all(by.repeater('subitem in item.items').row(11)).click();
 		element(by.name('title')).sendKeys('Course 1');
-		
+		browser.sleep(4000);
 		expect(element(by.name('title')).getAttribute('value')).toEqual('Course 1');
 		element(by.name('submitButton')).click();
+		
+		browser.sleep(4000);
 	});
 	
 	it('Add Elements', function(){
@@ -76,7 +81,7 @@ describe('WXYZ - Course Authoring System', function() {
 		browser.driver.findElement(by.tagName('body')).sendKeys('Text 1');
 		browser.driver.switchTo().defaultContent();
 		browser.waitForAngular();
-		
+		browser.sleep(4000);
 		element(by.name('submit')).click();
 		browser.sleep(2000);
 		
@@ -89,6 +94,7 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(23)).click();
 		fileToUpload = '../test_elements/audio_test.mp3';
 		absolutePath = path.resolve(__dirname, fileToUpload);
+		browser.sleep(4000);
 		$('input[type="file"]').sendKeys(absolutePath);
 		browser.sleep(500);
 		last_element = element.all(by.repeater('element in project.elements')).last();
@@ -100,6 +106,7 @@ describe('WXYZ - Course Authoring System', function() {
 		fileToUpload = '../test_elements/video_test.mp4';
 		absolutePath = path.resolve(__dirname, fileToUpload);
 		element(by.model('showMedia')).click();
+		browser.sleep(4000);
 		$('input[type="file"]').sendKeys(absolutePath);
 		browser.sleep(500);
 		last_element = element.all(by.repeater('element in project.elements')).last();
@@ -110,6 +117,7 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(20)).click();
 		element(by.model('showMedia')).click();
 		element(by.model('videoEmbed')).sendKeys('https://www.youtube.com/watch?v=rlVwJvE3C5A');
+		browser.sleep(4000);
 		element(by.name('submit')).click();
 		browser.sleep(500);
 		last_element = element.all(by.repeater('element in project.elements')).last();
@@ -120,6 +128,7 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(25)).click();
 		fileToUpload = '../test_elements/dog_pic.jpg';
 		absolutePath = path.resolve(__dirname, fileToUpload);
+		browser.sleep(4000);
 		$('input[type="file"]').sendKeys(absolutePath);
 		browser.sleep(500);
 		
@@ -132,6 +141,7 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(25)).click();
 		fileToUpload = '../test_elements/gif_test.gif';
 		absolutePath = path.resolve(__dirname, fileToUpload);
+		browser.sleep(4000);
 		$('input[type="file"]').sendKeys(absolutePath);
 		browser.sleep(500);
 		
@@ -147,8 +157,10 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('element in project.elements')).count().then(function(oldCount) {
 			// find the last element
 			last_element = element.all(by.repeater('element in project.elements')).last();
+			browser.sleep(4000);
 			// click delete and confirm
 			last_element.element(by.name('elementDeleteButton')).click();
+			browser.sleep(4000);
 			element(by.name('confirmDeleteButton')).click();
 			browser.sleep(300);
 			// get the new number of elements
