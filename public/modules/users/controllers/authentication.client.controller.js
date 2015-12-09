@@ -11,12 +11,12 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			else {
 				return false;
 			}
-		}
+		};
 
 		$scope.userLoggedIn = function() {
 			if ($scope.authentication.user) return true;
 			else return false;
-		}
+		};
 
 		$scope.initialsignup = function() {
 			$http.post('/auth/initialsignup', $scope.credentials).success(function(response) {
