@@ -61,9 +61,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 				'': {templateUrl: 'modules/core/views/home.client.view.html' },
 				'columnOne@home.test2': { template: 'Dynamically insert a new lesson into the hierarchy.' }
 			}
-
-
-
 		});
 	}
 ]);

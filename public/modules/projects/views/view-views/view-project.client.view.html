@@ -96,16 +96,26 @@
 							</div>
 
 						</div>   <!--text end-->
-						<div ng-switch-when="linkButton">   <!--text start-->
+						<div ng-switch-when="table">   <!--table start-->
+							<div data-ng-hide="element.isEditing">
+								<div ng-bind-html="sc.trustAsHtml(element.value)"></div><br>
+							</div>
+							<div data-ng-show="element.isEditing">
+								<!-- Create a textarea that is then replaced by the ckEditor which can edit the table element.-->
+								<div>
+									<textarea tbl-editor ng-model="element.value"></textarea>
+								</div><br>
+								<!--Pushing the save button calls update() and adds/edits to the table-->
+								<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button>
+							</div>
+						</div>   <!--table end-->
+						<div ng-switch-when="linkButton">   <!--link start-->
 							<div data-ng-hide="element.isEditing">
 								<div class='btn btn-primary' data-ng-click="openProjectModal(element.value,element.dataTitle)"> Open {{element.heading}} </div>
 							</div>
 							<!--<div data-ng-show="element.isEditing"></div>-->
 								<!--<button class = "btn btn-primary" tooltip="Save Text" data-ng-click="toggleEdit(element); update();">Save</button> -->
 						</div>
-
-
-
 						<div ng-switch-when="graph" data-ng-init="drawGraph(element)">  <!--graph start-->
 							<div>
 								<div google-chart chart="element.graph" style="{{chart.cssStyle}}"></div>

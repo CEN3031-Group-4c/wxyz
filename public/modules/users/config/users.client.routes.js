@@ -8,7 +8,7 @@ angular.module('users').config(['$stateProvider',
 		state('profile', {
 			url: '/settings/profile',
 			templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'
-		}).
+		}).  
 		state('password', {
 			url: '/settings/password',
 			templateUrl: 'modules/users/views/settings/change-password.client.view.html'
@@ -20,6 +20,10 @@ angular.module('users').config(['$stateProvider',
 		state('signup', {
 			url: '/signup',
 			templateUrl: 'modules/users/views/authentication/signup.client.view.html'
+		}).
+	state('initialsignup', {
+			url: '/initialsignup',
+			templateUrl: 'modules/users/views/authentication/initialsignup.client.view.html'
 		}).
 		state('signin', {
 			url: '/signin',

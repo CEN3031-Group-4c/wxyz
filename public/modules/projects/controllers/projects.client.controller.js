@@ -19,6 +19,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			$scope.videoEmbed = '';
 			$scope.elementsOfCurrentProject = [];
 
+        //Looks up the project id 
 		$scope.lookup = function(id)
 		{
 			var projects = $scope.projects;
@@ -28,6 +29,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return false;
 		};
+
+		//Finds the top level(project) of the current project we're in
 		$scope.resolveTop = function(project)
 		{
 			//var project = $scope.project;
@@ -49,13 +52,12 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return false;
 		};
 
-
-
 		$scope.setScopeProjectElementsArray = function(id)
 		{
 				$scope.elementsOfCurrentProject = $scope.lookup(id).elements;
 		};
-
+         
+         //Finds the ID for the top level project
 		$scope.resolveTopID = function(project)
 		{
 			var projects = $scope.projects;
@@ -76,6 +78,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 		};
 
+         // Checks to see if the user has permissions to edit the project
 		$scope.canEdit = function()
 		{
 			var project = $scope.project;
@@ -93,6 +96,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				else return false;
 			}
 		};
+
+		//Checks to see if the user has permissions to view the project
 		$scope.canView = function(project)
 		{
 			if ($scope.resolveTop(project))
@@ -104,6 +109,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				else return false;
 			}
 		};
+		//Adds a user who can contribute to a project
 		$scope.addViewContributer = function (email) {
 			var project = $scope.project;
 			if (project.viewContributers.indexOf(email) === -1)
@@ -111,6 +117,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				project.viewContributers.push(email);
 			}
 		};
+        //Adds a user who can contribute to a project 
 		$scope.addEditContributer = function (email) {
 			var project = $scope.project;
 			if (project.editContributers.indexOf(email) === -1)
@@ -118,6 +125,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				project.editContributers.push(email);
 			}
 		};
+
+		//Opens Modal of every contributor who can view the project
 		$scope.openViewContributorsModal  = function (isView, msg, size) {
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/view-contributors.modal.client.html',
@@ -141,6 +150,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
+
+		//Opens Modal of every contributor who can add to the project
 		$scope.openAddContributorsModal = function (isView, msg, size) {
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/add-contributors.modal.client.html',
@@ -185,6 +196,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
+		//Opens Modal of every contributor who can remove from the project
 		$scope.openRemoveContributorsModal = function (isView, msg, size) {
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/remove-contributors.modal.client.html',
@@ -235,7 +247,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
-
+         //changes the permission of the person viewing the project
 		$scope.changePermission = function (permission, state)
 		{
 			var project = $scope.project;
@@ -256,7 +268,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
-
+         //Adds a contibutor to a project
 		$scope.addContributer = function () {
 			var project = $scope.project;
 			if (project.contributers.indexOf($scope.authentication.user._id) === -1)
@@ -264,7 +276,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				project.contributers.push($scope.authentication.user._id);
 			}
 		};
-
+         
+         //checks to see if the person is a contributor to a project
 		$scope.isContributer = function (project) {
 			if (project.contributers.indexOf(Authentication.user._id) !== -1)
 			{
@@ -308,7 +321,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 					console.log('Modal dismissed at: ' + new Date());
 				});
 		};
-
+          //This will open a delete question modal
 		$scope.openDeleteQuestionModal = function (question, msg, size) {
 			var modalInstance = $modal.open({
 				templateUrl: 'modules/projects/views/modals/confirmation-modal.client.view.html',
@@ -331,19 +344,19 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				});
 		};
 
-
+        //closes and opens the editing feature
 		$scope.toggleEdit = function(element){
 			element.isEditing = !element.isEditing;
 		};
-
+        //cancels the edit feature
 		$scope.cancelEdit = function(element) {
 			$scope.findOne();
 		};
-
+        //Initiates element 
 		$scope.setActiveElement = function(element) {
 			$scope.activeElementIndex = $scope.project.elements.indexOf(element);
 		};
-
+        //creates a new project
 		$scope.create_project = function() {
 			var project = new Projects({
 				title: this.title,
@@ -361,7 +374,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
-
+         //deletes an element in a project
 		$scope.deleteElement = function(element) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -377,7 +390,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
-		//this is a legacy function. Can remove if you want
+		//this is a legacy function. Can remove if you want. 
+		//Allows the user to edit an element
 		$scope.edit_element = function(element) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -395,13 +409,13 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
         		$state.go('home.editFileProject', {projectId:project._id, elementIndex:project.elements.indexOf(element)},{reload:true});
 			}
 		};
-
+        //Allows the user to remove a project
 		function removeProjects() {
 			$scope.project.$remove(function() {
 				$state.go('home.viewProject', {}, {reload:true});
 			});
 		}
-
+         //Allows the user to remove a certain element
 		$scope.remove = function() {
 			$scope.addContributer();
 			var proj = $scope.project;
@@ -441,7 +455,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			}
 		}
-
+         //Adds text to a certain element
 		$scope.appendText = function() {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -460,6 +474,26 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
+		// Adds the table structure to the element
+		$scope.appendTable = function() {
+			$scope.addContributer();
+			var project = $scope.project;
+
+			var my_index = get_insert_index(project);
+
+			project.elements.push({tag: 'table', value: $scope.textToAppend, index: my_index});
+
+			project.$update(function() {
+				//$location.path('projects/' + project._id);
+        		$state.go('home.viewProject', {projectId:project._id});
+				$scope.textToAppend = '';
+			},
+			function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		//Adds a link to a element
 		$scope.appendLink = function(workspaceID, sectionID, elementID){
 			console.log(workspaceID);
 			console.log(sectionID);
@@ -488,19 +522,19 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+        //Sets a graph to certain type
 		$scope.setGraphType = function(label){
 			$scope.graphType = label;
 			$scope.drawGraphPreview();
 		};
-
+        //Gets the index number of the graph
         $scope.getGraphIndex = function(element){
             for(var i = 0; i< element.length; i++){
                 if(element.heading === $scope.chartArray.options.title) return i;
             }
             return -1;
         };
-
+        //Adds a point to the graph
         $scope.addGraphPoint = function(){
 			var points = $scope.graphPoints;
 			var x = $scope.xToAppend;
@@ -526,7 +560,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
             $scope.drawGraphPreview();
 
         };
-
+        //Adds a graph to an element
         $scope.appendGraph = function(){
             $scope.addContributer();
             var project = $scope.project;
@@ -552,7 +586,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
         };
 
-
+        //Gives you a preview of a graph that was drawn
         $scope.drawGraphPreview = function(){
             console.log('In draw graph');
             //console.log(element.x_name);
@@ -597,7 +631,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
         };
 
-
+        // Creates an element which allows the user to draw a graph
         $scope.drawGraph = function(element){
             console.log('In draw graph');
             //console.log(element.x_name);
@@ -640,7 +674,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
         };
 
-
+          //gets the index of the element that is going to be inserted
 		function get_insert_index (project)
 		{
 			var elements = project.elements;
@@ -657,7 +691,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return max_index + 1;
 		}
 
-
+		  //allows the user to insert a question
 		$scope.insertQuestion = function() {
 			var project = $scope.project;
 			var questionType;
@@ -754,7 +788,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		  //allows user to delete a question
 		$scope.deleteQuestion = function(question) {
 			var project = $scope.project;
 			project.questions.splice(project.questions.indexOf(question),1);
@@ -767,7 +801,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		  //allows the user to set the answer to the question
 		$scope.setAnswer = function(selection, question) {
 			question.responses = [selection];
 			if(selection === question.answers[0]){
@@ -779,7 +813,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = false;
 			question.checked = true;
 		};
-
+		  //allows the user to set multiple answers to the question
 		$scope.setMultipleAnswer = function(selection, question) {
 			for(var i = 0; i < question.responses.length; ++i){
 				if(question.responses[i] === selection){
@@ -807,7 +841,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = false;
 			question.checked = true;
 		};
-
+		  //compares the answer recorded to the correct answer
 		function compareAnswers(arr1, arr2){
 			arr1.sort();
 			arr2.sort();
@@ -819,7 +853,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return true;
 		}
-
+		  //checks the answer recorded to see if it is correct
 		$scope.checkAnswer = function(question) {
 			var proj = $scope.project;
 			var tally = 0;
@@ -839,7 +873,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			question.answered = true;
 			$scope.displayFeedback = true;
 		};
-
+		  //the function to see whether or not the answer is correct
 		$scope.displayFeedbackFunc = function(){
 			var proj = $scope.project;
 			for(var i = 0; i < proj.questions.length; ++i){
@@ -856,7 +890,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			$scope.displayFeedback = true;
 			$scope.displayScore = true;
 		};
-
+		  //shows the feedback about whether or not the answer is correct
 		$scope.showFeedback = function(question, i) {
 			for(var j = 0; j < question.responses.length; ++j){
 				if(question.responses[j] === question.choices[i]){
@@ -866,7 +900,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			}
 			return false;
 		};
-
+		  //allows user to edit an equation
 		$scope.appendEquation = function() {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -883,11 +917,11 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		  //records the type of question selected
 		$scope.questionTypeSelected = function(type) {
 			$scope.questionType = type;
 		};
-
+		  //records the number of solutions in multiple choice question
 		$scope.numberMultipleChoices = function(num) {
 			$scope.numChoices = num;
 			$scope.pickedMC = true;
@@ -897,7 +931,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		/*$scope.getNumChoices = function(num) {
 		    return numChoices;
 		};*/
-
+		  //records the number of solutions in multiple selections question
 		$scope.numberMultipleSelections = function(num) {
 			$scope.numSelections = num;
 			$scope.pickedMS = true;
@@ -908,7 +942,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 		$scope.getNumber = function(num) {
 		    return new Array(num);
 		};
-
+		  //allows user to edit a file
 		$scope.editFile = function(files) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -940,6 +974,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			);
 		};
 
+		// allows user to upload a file
 		$scope.uploadFile = function(files, indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -975,7 +1010,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			);
 		};
-
+		
+		// allows user to embed a file
 		$scope.embedFile = function(indicator) {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -998,8 +1034,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 		};
 
-		//Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy
-		//Project-1, Course-2, Topic-3, etc.
+		// Adds a level to the hierarchy. curr_level corresponds to the level of the hierarchy
+		// Project-1, Course-2, Topic-3, etc.
 		$scope.addLevel = function(curr_level) {
 			$scope.addContributer();
 			var parent_proj = $scope.project;
@@ -1041,7 +1077,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			});
 			});
 		};
-
+		
+		// returns the hierachy name
 		function get_hierarchy_name(level){
 			if(level === 1)
 				return 'Project';
@@ -1058,7 +1095,8 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			else if(level === 7)
 				return 'Quiz';
 		}
-
+		
+		// updates the project
 		$scope.update = function() {
 			$scope.addContributer();
 			var project = $scope.project;
@@ -1070,24 +1108,29 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+		
+		// finds list of the projects
 		$scope.find = function() {
 			$scope.projects = Projects.query();
 
 		};
-
+		
+		// looks for a single project 
 		$scope.findOne = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
 
 		};
+
+		// looks for a single project
 		$scope.findOne_report = function() {
 			$scope.project = Projects.get({
 				projectId: $stateParams.projectId
 			});
 		};
 
+		// returns a certain type of user
 		$scope.getUniqueUsers = function(report){
 			var ret = [report[0].student];
 			for(var i = 1; i < report.length; ++i){
@@ -1103,15 +1146,18 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return ret;
 		};
 
+		// find an element in the project
 		$scope.findElement = function() {
 			var url = $location.path();
 			$scope.activeElementIndex = url.substring(url.lastIndexOf('/') + 1, url.length);
 		};
 
+		// converts it to a string
 		$scope.to_string = function(proj){
 			return JSON.stringify(proj, null, 2);
 		};
 
+		// displays the answers
 		$scope.printAnswers = function(answers){
 			var ret = answers[0];
 			for(var i = 1; i < answers.length; ++i){
@@ -1121,6 +1167,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			return ret;
 		};
 
+		// shows whether or not the result is correct
 		$scope.printResult = function(result){
 			if(result)
 				return 'Correct';
@@ -1128,6 +1175,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				return 'Incorrect';
 		};
 
+		// when element is dropped it is updated and checked to see if it is in a correct place
 		$scope.onDropComplete = function (start_element, end_element, evt) {
 
 			//console.log(start_element);
@@ -1184,6 +1232,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 			console.log(elements[1].value + ' :: index: ' + elements[1].index);
 		};
 
+		// returns the element selected
 		function get_element(elements, index)
 		{
 			var length = elements.length;
@@ -1196,7 +1245,7 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 
 			return false;
 		}
-
+		  //allows user to drag an element
 		$scope.canDrag = function(element)
 		{
 			return $scope.canEdit() && !element.isEditing;
