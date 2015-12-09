@@ -93,7 +93,7 @@ var ElementSchema = new Schema({
 	},
 	dataTitle:{
 		type: String,
-		default: 'Data'
+		
 	},
 	graph_points : [GraphSchema],
 	showMedia: {

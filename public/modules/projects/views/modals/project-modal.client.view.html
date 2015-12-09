@@ -1,12 +1,11 @@
 <!-- This is essentially view-project.client.view.html, only I took out all editing options, draggable, and quizes -->
+<section ng-init="lookupElement(); helloWorld()">
 
-<section>
 	<div class="page-header">
 		<h1 data-ng-bind="project.title"></h1>
 		<small data-ng-bind="project.content"></small>
 	</div>
-	Project elements: {{project.elements.length}}
-	<div data-ng-repeat="element in project.elements | orderBy: 'index'">
+	<div data-ng-repeat="element in resultArray">
 		<div ng-switch on="element.tag">
 			<div class="row">
 				<div class="col-md-10">
