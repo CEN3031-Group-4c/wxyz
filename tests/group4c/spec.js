@@ -45,6 +45,7 @@ describe('WXYZ - Course Authoring System', function() {
 	});*/
 	
 	it('Add Elements', function(){
+		/*
 		element.all(by.repeater('project in projects.slice().reverse()')).last().click();
 		
 		// text
@@ -52,27 +53,18 @@ describe('WXYZ - Course Authoring System', function() {
 		element.all(by.repeater('subitem in item.items').row(19)).click();
 		browser.sleep(2000);
 		
-		var edit = $('span[role="application"]');
-		console.log(edit.length);
-		var editor = element(by.css('.cke'));
-		console.log(editor.length);
-		expect(editor.isPresent()).toBe(true);
-		//var toolbar = editor.element.all(by.css('.cke_toolgroup'));
-		//toolbar[3].element.all(by.css('.cke_button'));
-		//element.all(by.css('.cke_button'));
-		
 		browser.switchTo().frame(0);
 		browser.driver.findElement(by.tagName('body')).click();
 		browser.driver.findElement(by.tagName('body')).sendKeys('Text 1');
 		browser.driver.switchTo().defaultContent();
 		browser.waitForAngular();
 		
-		//element(by.name('submit')).click();
-		//browser.sleep(2000);
+		element(by.name('submit')).click();
+		browser.sleep(2000);
 		
-		//last_element = element.all(by.repeater('element in project.elements')).last();
-		//expect(last_element.element(by.css('.ng-binding')).getInnerHtml()).toBe('<p>Text 1</p>\n');
-		/*
+		last_element = element.all(by.repeater('element in project.elements')).last();
+		expect(last_element.element(by.css('.ng-binding')).getInnerHtml()).toBe('<p>Text 1</p>\n');
+		
 		//audio
 		element(by.repeater('item in menu.items').row(3)).click();
 		element.all(by.repeater('subitem in item.items').row(23)).click();
@@ -116,5 +108,15 @@ describe('WXYZ - Course Authoring System', function() {
 		last_element = element.all(by.repeater('element in project.elements')).last();
 		expect(last_element.element(by.tagName('img')).isPresent()).toBe(true);
 		*/
+	});
+	
+	it('Remove Elements', function(){
+		//var numOfElem = element.all(by.repeater('element in project.elements'));
+		//console.log(numOfElem.length);
+		element.all(by.repeater('project in projects.slice().reverse()')).last().click();
+		last_element = element.all(by.repeater('element in project.elements')).last();
+		last_element.element(by.name('elementDeleteButton')).click();
+		//var newNumOfElem = element.all(by.repeater('element in project.elements'));
+		//expect(newNumOfElem.length).toBe(numOfElem.length - 1);
 	});
 });
