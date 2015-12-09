@@ -1,5 +1,43 @@
 WXYZ
 
+app
+   controllers
+      users
+	 users.authentication.server.controller
+	     (#! in path)
+	 users.authorization.server.controller
+	     (#! in path)
+	 users.password.server.controller
+	 users.profile.server.controller
+      articles.server.controller
+      core.server.controller
+      errors.server.controller
+      projects.server.controller
+      users.server.controller
+   models
+      article.server.model
+	 (File that has 5 different schemas, needs to be broken up.)
+      project.server.model
+      user.server.model
+   routes
+      articles.server.routes
+      core.server.routes
+      projects.server.routes
+      users.server.routes
+   tests
+      article.server.model.test
+      article.server.routes.test
+      project.server.model.test
+      project.server.routes.test
+      user.server.model.test
+   views (html files)
+      templates
+	 reset-password-confirm-email.server.view
+	 reset-password-email.server.view
+      404.server.view
+      500.server.view
+      index.server.view
+      layout.server.view
 
 public
         ckeditor
@@ -317,4 +355,3 @@ public
 	 config.js
 	 humans.txt
 	 robots.txt
-	
