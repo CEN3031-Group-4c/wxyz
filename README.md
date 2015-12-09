@@ -29,10 +29,17 @@ ckEditor  | [Link](http://ckeditor.com/)
 Angular Youtube Embedded  | [Link](https://github.com/brandly/angular-youtube-embed)
 ---
 ####FEATURES IMPLEMENTED
-Feature  | Screenshot
--------------------------------- | --------------------------------
-"Feature"  | ![Feature 1](/tests/test_elements/cat_pic.jpg)
-"Feature"  | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+Feature  | Description | Screenshot
+----------------------------------------- | ----------------------------------------- | -----------------------------------------
+*Rich Text Editor*  | Powerful editor that allows lots of style in text formatting. |![Feature 1](/tests/test_elements/cat_pic.jpg)
+*UI Improvement*  | Added menu highlighting for easy user navigation | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+*Collapsable multi-media*  | Toggles the display for media elements | ![Feature 1](/tests/test_elements/cat_pic.jpg)
+*Cross site linking element*  | Allows the user to view a different project or a specific element | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+*Anchoring to project elements* | Allows you to scroll to a particular element in a project | ![Feature 1](/tests/test_elements/cat_pic.jpg)
+*Equation Elements* | Allows for mathematical equations to be inserted to projects | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+*Table Element* | Inserted table into projects | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+*Preview* | Displays the website using CSS of the parent site | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+*User Documentation* | Detailed instructions for features in the website | ![Feature 2](/tests/test_elements/dog_pic.jpg)
 
 ---
 ####HOW TO RUN THE PROJECT LOCALLY
