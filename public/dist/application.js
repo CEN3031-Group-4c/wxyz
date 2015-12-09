@@ -1,5 +1,5 @@
 'use strict';
-
+ 
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
@@ -422,6 +422,10 @@ angular.module('users').config(['$stateProvider',
 		state('signup', {
 			url: '/signup',
 			templateUrl: 'modules/users/views/authentication/signup.client.view.html'
+		}).
+	state('initialsignup', {
+		url: '/initialsignup',
+		templateUrl: 'modules/users/views/authentication/initialsignup.client.view.html'
 		}).
 		state('signin', {
 			url: '/signin',
