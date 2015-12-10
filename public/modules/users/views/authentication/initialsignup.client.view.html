@@ -53,10 +53,10 @@
 					<label for="password">Password</label>
 					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
 				</div>
-				<!--<div class="form-group" ng-show="validLogin()">-->
-					<!--<label for="isAdmin">Admin?</label>-->
-					<!--<input type="checkbox" id="isAdmin" name="isAdmin" class="form-control" ng-show="validLogin()" ng-checked="true" ng-init="checked=true" data-ng-model="credentials.isAdmin">-->
-				<!--</div>-->
+				<div class="form-group" ng-show="validLogin()">
+					<label for="isAdmin">Admin?</label>
+					<input type="checkbox" id="isAdmin" name="isAdmin" class="form-control" data-ng-model="credentials.isAdmin">
+				</div>
 				<div class="text-center form-group" ng-show="validLogin()">
 					<button type="submit" name="signUpSubmit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;
 					<a href="/#!/signin" class="show-signup">Sign in</a>

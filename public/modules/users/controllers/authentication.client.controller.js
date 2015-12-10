@@ -22,7 +22,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			$http.post('/auth/initialsignup', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
-				$scope.authentication.user.isAdmin = true;
 
 				// And redirect to the index page
 				$location.path('/');
@@ -36,7 +35,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
-				$scope.authentication.user.isAdmin = true;
 
 				// And redirect to the index page
 				$location.path('/');
@@ -52,7 +50,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			$http.post('/auth/signin', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
-				$scope.authentication.user.isAdmin = true;
 
 				// And redirect to the index page
 				$location.path('/');
