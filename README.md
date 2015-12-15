@@ -15,6 +15,7 @@ Igor Vakulenko  | neonizator | Scrum Master
 User stories were logged using Pivotal Tracker and can be found [here](https://www.pivotaltracker.com/n/projects/1430644).
 
 The deployed site can be found at: [http://icw.cise.ufl.edu/](http://icw.cise.ufl.edu/)
+![Landing Page](/Feature ScreenShots/LandingPage.PNG)
 
 ---
 ####GIVING CREDIT WHERE CREDIT IS DUE
