@@ -1355,5 +1355,99 @@ var myApp = angular.module('projects').controller('ProjectsController', ['$scope
 				}
 			}, 0);
 		};
+
+		// export function
+		// elements supported: text, equation, table, image, video, audio
+		// multimedia is referenced from localhost:3000
+		$scope.saveHTML = function()
+		{
+			// get the project
+			var project = Projects.get({ projectId: $stateParams.projectId }, function() {
+				// create savedHTML that will store the exported HTML of the course
+				$scope.savedHTML =	'<!DOCTYPE html>\n' + 
+									'<html lang="en" xmlns="http://www.w3.org/1999/xhtml">\n' + 
+									'<head>\n' +
+									'  <title>' + project.title + '</title>\n' +
+									'  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">\n' + 
+									'  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">\n\n' + 
+									'</head>\n' + 
+									'<body>\n' + 
+									'<section class="container">\n' + 
+								 	'  <div class="page-header">\n' + 
+								 	'    <h1>' + project.title + '</h1>\n' +
+								 	'    <small>' + project.content + '</small>\n' + 
+								 	'  </div>\n' + 
+								 	'  <div class="row">\n' + 
+								 	'    <div class="col-md-10">\n';
+
+				// add elements
+				// supported elements: text, images (relative to host), videos (relative to host and youtube), audio (relative to host), 
+				// 					   equations, and tables
+				var mediaHost = 'http://localhost:3000/';
+				var tabs = '        '; // used to for multi-line elements to keep spacing the same
+				for(var i = 0; i < project.elements.length; i++) {
+					$scope.savedHTML += '      <div>\n        ';
+					switch(project.elements[i].tag) {
+						case 'text':	
+						case 'equation':
+						case 'table':
+										$scope.savedHTML += project.elements[i].value;
+										break;
+						case 'image':	$scope.savedHTML += '<img class="img-responsive" size="100%" src = "' + mediaHost + project.elements[i].value + '">\n' + 
+															'<br>';
+										break;
+						case 'video':	/*$scope.savedHTML += '<div class="pull-left">\n' + 
+													   tabs + '  <button class="btn btn-primary">\n' + 
+													   tabs + '    <i class="glyphicon glyphicon-facetime-video"></i>\n' + 
+													   tabs + '  </button>\n' +
+													   tabs + '</div>\n';*/
+										$scope.savedHTML += '<br>\n';
+										if(project.elements[i].isEmbedded) {
+											var path = project.elements[i].value.substring(project.elements[i].value.indexOf('v=') + 2);
+											$scope.savedHTML += tabs + '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + path + '" frameborder="0" allowfullscreen></iframe>\n' + 
+																tabs + '<br><br>';
+										} else {
+											$scope.savedHTML += tabs + '<video class="video" width="320" height="240" controls>\n' + 
+																tabs + '  <source src="' + mediaHost + project.elements[i].value + '" type="video/mp4">\n' + 
+																tabs + '</video>\n' + 
+																tabs + '<br><br>\n';
+										}
+										break;
+						case 'audio':	$scope.savedHTML += '<audio class="audio" controls>\n' + 
+							  						 tabs + '  <source src="' + mediaHost + project.elements[i].value + '" type="audio/mpeg">\n' + 
+													 tabs + '</audio>';
+										break;
+					}
+					$scope.savedHTML += '\n      </div>\n';
+				}
+				$scope.savedHTML +=	'    </div>\n' + 
+									'  </div>\n' + 
+									'</section>\n' + 
+									'</body>\n' + 
+									'</html>\n';
+
+				// create blob and then serve it as a file download
+				var filename = 'exported_course.html';
+				var blob = new Blob([ $scope.savedHTML ], { type: 'text/plain' });
+				// if IE call its function
+				if(/\bMSIE\b|\bTrident\b|\bEdge\b/.test(navigator.userAgent)) {
+					window.navigator.msSaveOrOpenBlob(blob, filename);
+				} else {
+					// if not IE, create an anchor tag and click it
+					var link = document.createElement('a');
+					var url = (window.URL || window.webkitURL).createObjectURL( blob );
+					link.href = $scope.sc.trustAsResourceUrl( url );
+					link.download = filename;
+					link.click();
+					(window.URL || window.webkitURL).revokeObjectURL( blob );
+				}
+
+				// remove topbar
+				var element = document.getElementsByTagName('header');
+				element[0].parentNode.removeChild(element[0]);
+				element = document.getElementsByTagName('section');
+				element[0].className = '';
+			});
+		};
 	}
 ]);

@@ -12,7 +12,7 @@ angular.module('projects').run([ 'Menus',
 		Menus.addSubMenuItem('topbar', 'file_menu', 'Edit', 'editProject', true);
 		Menus.addSubMenuItem('topbar', 'file_menu', 'Recent', 'recent');
 		Menus.addSubMenuItem('topbar', 'file_menu', 'Preview', 'articles');
-		Menus.addSubMenuItem('topbar', 'file_menu', 'Publish', 'articles');
+		Menus.addSubMenuItem('topbar', 'file_menu', 'Publish', 'publish', true);
 
 		// View menu
 		Menus.addMenuItem('topbar', 'View', 'view_menu', 'dropdown');

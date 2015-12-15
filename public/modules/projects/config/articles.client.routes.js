@@ -167,6 +167,13 @@ angular.module('projects').config(['$stateProvider',
 			views: {
 				'mainFrame': { templateUrl: 'modules/projects/views/view-views/scoreReport_students.client.view.html' }
 			}
+		}).
+		state('home.publish', {
+			url: 'projects/:projectId/publish',
+			views: {
+				'@': { templateUrl: 'modules/projects/views/publish-project.client.view.html' }//,
+				//'mainFrame@home.publish': {  }
+			}
 		})
 		//state('dragDropTest', {
 			//url: '/dragdrop',
