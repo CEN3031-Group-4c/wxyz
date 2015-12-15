@@ -23,10 +23,10 @@ All listed software was integrated into the project. Original source code can be
 
 Software  | Link
 ------------- | -------------
-MEAN.js  | [Link](http://meanjs.org/)
-Bootstrap  | [Link](http://getbootstrap.com/)
-ckEditor  | [Link](http://ckeditor.com/)
-Angular Youtube Embedded  | [Link](https://github.com/brandly/angular-youtube-embed)
+MEAN.js  | [meanjs.org](http://meanjs.org/)
+Bootstrap  | [getbootstrap.com](http://getbootstrap.com/)
+ckEditor  | [ckeditor.com](http://ckeditor.com/)
+Angular Youtube Embedded  | [github.com/brandly/angular-youtube-embed](https://github.com/brandly/angular-youtube-embed)
 ---
 ####FEATURES IMPLEMENTED
 Feature  | Description | Screenshot
@@ -43,12 +43,13 @@ Feature  | Description | Screenshot
 
 ---
 ####HOW TO RUN THE PROJECT LOCALLY
-
-1. Download project zip file and unzip
-2. In command line, navigate to the project file and run ``npm install``
-3. In a separate command line run ``mongod``
-4. Run ``grunt``
-5. Open up a web browser and navigate to ``localhost:3000``
+1. Make sure you have MeanJS installed and functioning.
+2. Download project zip file from the github repository and unzip
+3. In command line, navigate to the project file and run ``npm install``
+4. In a separate command line run ``mongod``
+5. Run ``grunt``
+6. Open up a web browser and navigate to ``localhost:3000``
 
 ---
 ####UPDATE DATABASE AND SERVER CONNECTIONS
+This project does not require a database with persistent data. For development we used local databases on each developer's computer to avoid having database errors that could hinder other developers' work. Simply running mongod should start an empty database which can then be populated with users and projects from the website.
