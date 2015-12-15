@@ -31,15 +31,15 @@ Angular Youtube Embedded  | [github.com/brandly/angular-youtube-embed](https://g
 ####FEATURES IMPLEMENTED
 Feature  | Description | Screenshot
 ----------------------------------------- | ----------------------------------------- | -----------------------------------------
-*Rich Text Editor*  | Powerful editor that allows lots of style in text formatting. |![Feature 1](/tests/test_elements/cat_pic.jpg)
-*UI Improvement*  | Added menu highlighting for easy user navigation | ![Feature 2](/tests/test_elements/dog_pic.jpg)
-*Collapsable multi-media*  | Toggles the display for media elements | ![Feature 1](/tests/test_elements/cat_pic.jpg)
-*Cross site linking element*  | Allows the user to view a different project or a specific element | ![Feature 2](/tests/test_elements/dog_pic.jpg)
-*Anchoring to project elements* | Allows you to scroll to a particular element in a project | ![Feature 1](/tests/test_elements/cat_pic.jpg)
-*Equation Elements* | Allows for mathematical equations to be inserted to projects | ![Feature 2](/tests/test_elements/dog_pic.jpg)
-*Table Element* | Inserted table into projects | ![Feature 2](/tests/test_elements/dog_pic.jpg)
-*Preview* | Displays the website using CSS of the parent site | ![Feature 2](/tests/test_elements/dog_pic.jpg)
-*User Documentation* | Detailed instructions for features in the website | ![Feature 2](/tests/test_elements/dog_pic.jpg)
+*Rich Text Editor*  | Powerful editor that allows lots of style in text formatting. |![Feature 1](/Feature ScreenShots/Feature1.PNG)
+*UI Improvement*  | Added menu highlighting for easy user navigation | ![Feature 2](/Feature ScreenShots/Feature2.PNG)
+*Collapsable multi-media*  | Toggles the display for media elements | ![Feature 3](/Feature ScreenShots/Feature3.PNG)
+*Cross site linking element*  | Allows the user to view a different project or a specific element | ![Feature 4](/Feature ScreenShots/Feature4.PNG)
+*Anchoring to project elements* | Allows you to scroll to a particular element in a project | ![Feature 51](/Feature ScreenShots/Feature5.PNG)
+*Equation Elements* | Allows for mathematical equations to be inserted to projects | ![Feature 6](/Feature ScreenShots/Feature6.PNG)
+*Table Element* | Inserted table into projects | ![Feature 7](/Feature ScreenShots/Feature7.PNG)
+*Preview* | Displays the website using CSS of the parent site | ![Feature 8](/Feature ScreenShots/Feature8.PNG)
+*User Documentation* | Detailed instructions for features in the website | ![Feature 9](/Feature ScreenShots/Feature9.PNG)
 
 ---
 ####HOW TO RUN THE PROJECT LOCALLY
